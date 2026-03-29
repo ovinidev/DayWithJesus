@@ -1,0 +1,12 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-primary: #fff;
+  --color-lilac: #c4b5fd;
+  --color-lilac-light: #ede9fe;
+  --font-sans: 'Inter', sans-serif;
+}
+
+body {
+  @apply bg-lilac min-h-screen font-sans;
+}
