@@ -20,9 +20,14 @@
     gospel: Gospel
   }>()
 
+  const withVerseNumbers = (text: string) =>
+    text.replace(
+      /(\d+)(\s?)(?=[A-Za-zÀ-ú])/g,
+      '<sup class="text-xs font-light opacity-50 align-super">$1</sup> '
+    )
+
   const lines = computed((): Line[] => {
-    const clean = gospel.texto.replace(/\d+(?=[A-Za-zÀ-ú])/g, '')
-    return clean
+    return gospel.texto
       .split('\n')
       .map((line): Line => {
         const dialogMatch = line.match(/^([A-ZÀ-Ú])\s+\(([^)]+)\):\s*(.*)/)
@@ -51,15 +56,15 @@
     <p class="font-bold leading-relaxed text-black/70">
       {{ gospel.referencia }}
     </p>
-    <p class="font-bold leading-relaxed text-black/70">
-      {{ gospel.titulo }}
-    </p>
+    <p class="font-bold leading-relaxed text-black/70">{{ gospel.titulo }}</p>
 
     <div v-if="isDialog" class="flex flex-col gap-2">
       <div v-for="(line, i) in lines" :key="i">
-        <p v-if="line.type === 'narrative'" class="leading-relaxed text-black">
-          {{ line.content }}
-        </p>
+        <p
+          v-if="line.type === 'narrative'"
+          class="leading-relaxed text-black"
+          v-html="withVerseNumbers(line.content)"
+        />
         <p v-else-if="line.type === 'stage'" class="italic text-black/50">
           ({{ line.content }})
         </p>
@@ -71,13 +76,18 @@
           >
             {{ line.role }}
           </span>
-          <p class="leading-relaxed text-black">{{ line.content }}</p>
+          <p
+            class="leading-relaxed text-black"
+            v-html="withVerseNumbers(line.content)"
+          />
         </div>
       </div>
     </div>
 
-    <p v-else class="leading-relaxed text-black">
-      {{ lines.map((l) => l.content).join(' ') }}
-    </p>
+    <p
+      v-else
+      class="leading-relaxed text-black"
+      v-html="withVerseNumbers(lines.map((l) => l.content).join(' '))"
+    />
   </div>
 </template>

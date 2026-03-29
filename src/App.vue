@@ -13,10 +13,10 @@
 
 <template>
   <div
-    class="flex min-h-screen bg-[var(--color-lilac-light)] items-center justify-center p-4"
+    class="flex min-h-screen bg-[var(--color-lilac-light)] items-center justify-center"
   >
     <div
-      class="flex w-full max-w-sm flex-col gap-4 rounded-3xl p-4 md:max-w-xl md:p-8"
+      class="flex w-full max-w-sm flex-col gap-8 rounded-3xl p-2 md:max-w-xl md:p-8"
     >
       <Title />
       <TodayDate v-if="data" :date-str="data.data" />
