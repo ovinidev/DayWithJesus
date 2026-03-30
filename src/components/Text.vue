@@ -20,11 +20,8 @@
     gospel: Gospel
   }>()
 
-  const withVerseNumbers = (text: string) =>
-    text.replace(
-      /(\d+)(\s?)(?=[A-Za-zÀ-ú])/g,
-      '<sup class="text-xs font-light opacity-50 align-super">$1</sup> '
-    )
+  const stripVerseNumbers = (text: string) =>
+    text.replace(/\d+\s*(?=[\u201C\u201D\u00AB\u00BB"'A-Za-zÀ-ú])/g, '')
 
   const lines = computed((): Line[] => {
     return gospel.texto
@@ -52,20 +49,20 @@
 </script>
 
 <template>
-  <div class="flex flex-col gap-3 text-xl">
-    <p class="font-bold leading-relaxed text-black/70">
+  <div class="mt-2 flex flex-col gap-3 text-xl">
+    <p class="leading-relaxed font-bold text-black/70">
       {{ gospel.referencia }}
     </p>
-    <p class="font-bold leading-relaxed text-black/70">{{ gospel.titulo }}</p>
+    <p class="leading-relaxed text-black/70">{{ gospel.titulo }}</p>
 
     <div v-if="isDialog" class="flex flex-col gap-2">
       <div v-for="(line, i) in lines" :key="i">
         <p
           v-if="line.type === 'narrative'"
           class="leading-relaxed text-black"
-          v-html="withVerseNumbers(line.content)"
+          v-html="stripVerseNumbers(line.content)"
         />
-        <p v-else-if="line.type === 'stage'" class="italic text-black/50">
+        <p v-else-if="line.type === 'stage'" class="text-black/50 italic">
           ({{ line.content }})
         </p>
         <div v-else-if="line.type === 'dialog'" class="flex gap-2">
@@ -78,7 +75,7 @@
           </span>
           <p
             class="leading-relaxed text-black"
-            v-html="withVerseNumbers(line.content)"
+            v-html="stripVerseNumbers(line.content)"
           />
         </div>
       </div>
@@ -86,8 +83,8 @@
 
     <p
       v-else
-      class="leading-relaxed text-black"
-      v-html="withVerseNumbers(lines.map((l) => l.content).join(' '))"
+      class="mt-1 leading-relaxed"
+      v-html="stripVerseNumbers(lines.map((l) => l.content).join(' '))"
     />
   </div>
 </template>

@@ -3,8 +3,8 @@
 @theme {
   --color-primary: #fff;
   --color-lilac: #c4b5fd;
-  --color-lilac-light: #ede9fe;
-  --font-sans: 'Inter', sans-serif;
+  --color-lilac-light: #faf9f7;
+  --font-sans: 'Montserrat', sans-serif;
 }
 
 body {
