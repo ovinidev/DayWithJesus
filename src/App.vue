@@ -18,7 +18,7 @@
     <div
       class="flex w-full max-w-sm flex-col gap-8 rounded-3xl p-4 md:max-w-xl md:p-8"
     >
-      <Title />
+      <Title title="Evangelho do dia" />
       <TodayDate v-if="data" :date-str="data.data" />
 
       <p v-if="isLoading" class="py-8 text-center text-sm text-black/50">
