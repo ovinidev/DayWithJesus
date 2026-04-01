@@ -8,8 +8,7 @@ export const useGetGospelSummary = (gospelText: Ref<string>) => {
   const query = useQuery({
     queryKey: ['gospelSummary', gospelText.value],
     queryFn: () => getGospelSummary(gospelText.value),
-    enabled,
-    retry: 3
+    enabled
   })
 
   const generate = () => {
