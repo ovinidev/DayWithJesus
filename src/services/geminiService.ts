@@ -8,27 +8,35 @@ const ai = new GoogleGenAI({
 })
 
 export const getGospelSummary = async (gospelText: string): Promise<string> => {
-  const response = await ai.models.generateContent({
-    model: 'gemini-3-flash-preview',
-    contents: `${PROMPT}\n\nEvangelho:\n${gospelText}`
-  })
+  try {
+    const response = await ai.models.generateContent({
+      model: 'gemini-3-flash-preview',
+      contents: `${PROMPT}\n\nEvangelho:\n${gospelText}`
+    })
 
-  const candidates = response?.candidates
-  if (!candidates || candidates.length === 0) {
-    throw new Error('No candidates returned from AI model')
+    const candidates = response?.candidates
+    if (!candidates || candidates.length === 0) {
+      throw new Error('No candidates returned from AI model')
+    }
+
+    const parts = candidates[0]?.content?.parts
+    if (!parts || parts.length === 0) {
+      throw new Error('No content parts returned from AI model response')
+    }
+
+    const text = parts[0]?.text
+    if (text === undefined) {
+      throw new Error(
+        'No text found in the first content part of AI model response'
+      )
+    }
+
+    return text
+  } catch (error: any) {
+    if (error?.status === 429) {
+      throw new Error('Limite de uso atingido')
+    }
+
+    throw new Error('Erro ao gerar resumo')
   }
-
-  const parts = candidates[0]?.content?.parts
-  if (!parts || parts.length === 0) {
-    throw new Error('No content parts returned from AI model response')
-  }
-
-  const text = parts[0]?.text
-  if (text === undefined) {
-    throw new Error(
-      'No text found in the first content part of AI model response'
-    )
-  }
-
-  return text
 }

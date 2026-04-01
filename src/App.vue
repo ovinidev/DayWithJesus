@@ -21,6 +21,7 @@
     data: gospelSummary,
     isLoading: isGospelLoading,
     isError: isGospelError,
+    errorMessage: gospelErrorMessage,
     generate
   } = useGetGospelSummary(gospelText)
 </script>
@@ -60,6 +61,7 @@
           :summary="gospelSummary"
           :is-loading="isGospelLoading"
           :is-error="isGospelError"
+          :error-message="gospelErrorMessage"
           :generate="generate"
         />
       </div>

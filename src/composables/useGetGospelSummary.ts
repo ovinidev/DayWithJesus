@@ -1,4 +1,4 @@
-import { ref, type Ref } from 'vue'
+import { computed, ref, type Ref } from 'vue'
 import { useQuery } from '@tanstack/vue-query'
 import { getGospelSummary } from '@/services/geminiService'
 
@@ -18,5 +18,9 @@ export const useGetGospelSummary = (gospelText: Ref<string>) => {
     enabled.value = true
   }
 
-  return { ...query, generate }
+  const errorMessage = computed(() =>
+    query.error.value instanceof Error ? query.error.value.message : undefined
+  )
+
+  return { ...query, generate, errorMessage }
 }

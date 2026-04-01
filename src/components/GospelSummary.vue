@@ -4,6 +4,7 @@
     summary?: string
     isLoading?: boolean
     isError?: boolean
+    errorMessage?: string
     generate: () => void
   }>()
 </script>
@@ -37,7 +38,7 @@
     </p>
 
     <p v-if="props.isError" class="text-md text-red-500">
-      Erro ao gerar o resumo. Verifique sua chave de API.
+      {{ props.errorMessage }}
     </p>
 
     <div
