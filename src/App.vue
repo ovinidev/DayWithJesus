@@ -4,12 +4,25 @@
   import Title from '@/components/Title.vue'
   import TodayDate from '@/components/TodayDate.vue'
   import Text from '@/components/Text.vue'
+  import GospelSummary from '@/components/GospelSummary.vue'
   import { useGetHomilyDiary } from '@/composables/useGetHomilyDiary'
   import { dayColor } from '@/constants/dayColors'
+  import { useGetGospelSummary } from './composables/useGetGospelSummary'
 
   const { data, isLoading, isError } = useGetHomilyDiary()
 
   const gospel = computed(() => data.value?.leituras.evangelho)
+
+  const gospelText = computed(
+    () => gospel.value?.map((g) => `${g.titulo}\n${g.texto}`).join('\n\n') ?? ''
+  )
+
+  const {
+    data: gospelSummary,
+    isLoading: isGospelLoading,
+    isError: isGospelError,
+    generate
+  } = useGetGospelSummary(gospelText)
 </script>
 
 <template>
@@ -41,6 +54,14 @@
         <p class="text-xl">Liturgia: {{ data.liturgia }}</p>
 
         <Text v-for="(item, index) in gospel" :key="index" :gospel="item" />
+
+        <GospelSummary
+          v-if="gospel"
+          :summary="gospelSummary"
+          :is-loading="isGospelLoading"
+          :is-error="isGospelError"
+          :generate="generate"
+        />
       </div>
     </div>
   </div>

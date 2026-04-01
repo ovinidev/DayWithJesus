@@ -12,6 +12,7 @@
     "test:watch": "vitest"
   },
   "dependencies": {
+    "@google/genai": "^1.48.0",
     "@tailwindcss/oxide-darwin-arm64": "^4.2.2",
     "@tailwindcss/postcss": "^4.2.2",
     "@tanstack/vue-query": "^5.28.0",
