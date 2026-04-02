@@ -1,10 +1,13 @@
 import { computed, ref, watch, type Ref } from 'vue'
 import { useQuery } from '@tanstack/vue-query'
 import { getGospelSummary } from '@/services/geminiService'
+import { storageKey } from '@/constants/storageKeys'
+import { formatDate } from '@/utils/formateDate'
 
-const storageKey = 'gospelSummary'
-
-export const useGetGospelSummary = (gospelText: Ref<string>) => {
+export const useGetGospelSummary = (
+  gospelText: Ref<string>,
+  gospelDay: Ref<string | undefined>
+) => {
   const enabled = ref(false)
   const cachedSummary = ref<string | null>(localStorage.getItem(storageKey))
 
@@ -20,6 +23,19 @@ export const useGetGospelSummary = (gospelText: Ref<string>) => {
       cachedSummary.value = value
     }
   })
+
+  watch(
+    gospelDay,
+    (day) => {
+      if (!day) return
+
+      if (day !== formatDate(new Date())) {
+        localStorage.removeItem(storageKey)
+        cachedSummary.value = null
+      }
+    },
+    { immediate: true }
+  )
 
   const generate = () => {
     if (cachedSummary.value || query.data.value) return

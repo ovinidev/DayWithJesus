@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { computed } from 'vue'
+  import { computed, ref } from 'vue'
   import { VueQueryDevtools } from '@tanstack/vue-query-devtools'
   import Title from '@/components/Title.vue'
   import TodayDate from '@/components/TodayDate.vue'
@@ -12,7 +12,7 @@
   const { data, isLoading, isError } = useGetHomilyDiary()
 
   const gospel = computed(() => data.value?.leituras.evangelho)
-
+  const gospelDay = computed(() => data.value?.data)
   const gospelText = computed(
     () => gospel.value?.map((g) => `${g.titulo}\n${g.texto}`).join('\n\n') ?? ''
   )
@@ -23,7 +23,7 @@
     isError: isGospelError,
     errorMessage: gospelErrorMessage,
     generate
-  } = useGetGospelSummary(gospelText)
+  } = useGetGospelSummary(gospelText, gospelDay)
 </script>
 
 <template>
