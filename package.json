@@ -12,6 +12,7 @@
     "test:watch": "vitest"
   },
   "dependencies": {
+    "@flagsmith/flagsmith": "^11.0.0",
     "@google/genai": "^1.48.0",
     "@tailwindcss/oxide-darwin-arm64": "^4.2.2",
     "@tailwindcss/postcss": "^4.2.2",
@@ -19,6 +20,7 @@
     "@tanstack/vue-query-devtools": "^6.1.10",
     "@vercel/analytics": "^2.0.1",
     "axios": "^1.6.7",
+    "flagsmith-vue": "^3.0.0",
     "vue": "^3.4.19"
   },
   "devDependencies": {

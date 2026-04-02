@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@flagsmith/flagsmith':
+        specifier: ^11.0.0
+        version: 11.0.0
       '@google/genai':
         specifier: ^1.48.0
         version: 1.48.0
@@ -29,6 +32,9 @@ importers:
       axios:
         specifier: ^1.6.7
         version: 1.13.6
+      flagsmith-vue:
+        specifier: ^3.0.0
+        version: 3.0.0(@flagsmith/flagsmith@11.0.0)(vue@3.5.31(typescript@5.9.3))
       vue:
         specifier: ^3.4.19
         version: 3.5.31(typescript@5.9.3)
@@ -754,6 +760,9 @@ packages:
     engines: {node: '>=12'}
     cpu: [x64]
     os: [win32]
+
+  '@flagsmith/flagsmith@11.0.0':
+    resolution: {integrity: sha512-jJB+1O/ctU7TCoIBsV2lgYAUOpShjcSqHkH4nlyqUGeQCGC0ZHto8IvGf+nZwpFAF5Czaphn/anm9MDoZIS3rw==}
 
   '@google/genai@1.48.0':
     resolution: {integrity: sha512-plonYK4ML2PrxsRD9SeqmFt76eREWkQdPCglOA6aYDzL1AAbE+7PUnT54SvpWGfws13L0AZEqGSpL7+1IPnTxQ==}
@@ -1643,6 +1652,12 @@ packages:
 
   filelist@1.0.6:
     resolution: {integrity: sha512-5giy2PkLYY1cP39p17Ech+2xlpTRL9HLspOfEgm0L6CwBXBTgsK5ou0JtzYuepxkaQ/tvhCFIJ5uXo0OrM2DxA==}
+
+  flagsmith-vue@3.0.0:
+    resolution: {integrity: sha512-QlUll7pIKOhqIEhR8EpY/29F5tzrh6tm/pPriNCvosmMbSzh/uA6Vp6LbnIZZ1gNeN78P7hhUnPjOKH5j9hO2A==}
+    peerDependencies:
+      '@flagsmith/flagsmith': ^11
+      vue: ^2.7 || ^3
 
   follow-redirects@1.15.11:
     resolution: {integrity: sha512-deG2P0JfjrTxl50XGCDyfI97ZGVCxIpfKYmfyrQ54n5FO/0gfIES8C/Psl6kWVDolizcaaxZJnTS0QSMxvnsBQ==}
@@ -3732,6 +3747,8 @@ snapshots:
   '@esbuild/win32-x64@0.21.5':
     optional: true
 
+  '@flagsmith/flagsmith@11.0.0': {}
+
   '@google/genai@1.48.0':
     dependencies:
       google-auth-library: 10.6.2
@@ -4635,6 +4652,11 @@ snapshots:
   filelist@1.0.6:
     dependencies:
       minimatch: 5.1.9
+
+  flagsmith-vue@3.0.0(@flagsmith/flagsmith@11.0.0)(vue@3.5.31(typescript@5.9.3)):
+    dependencies:
+      '@flagsmith/flagsmith': 11.0.0
+      vue: 3.5.31(typescript@5.9.3)
 
   follow-redirects@1.15.11: {}
 

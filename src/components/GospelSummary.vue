@@ -1,4 +1,6 @@
 <script setup lang="ts">
+  import { useFeatureFlagActive } from '@/composables/useFeatureFlagActive'
+
   const props = defineProps<{
     gospelText?: string
     summary?: string
@@ -7,12 +9,19 @@
     errorMessage?: string
     generate: () => void
   }>()
+
+  const { isFeatureFlagActive } = useFeatureFlagActive('ai_button')
 </script>
 
 <template>
   <div class="flex flex-col gap-4">
     <button
-      v-if="!props.summary && !props.isLoading && !props.errorMessage"
+      v-if="
+        isFeatureFlagActive &&
+        !props.summary &&
+        !props.isLoading &&
+        !props.errorMessage
+      "
       class="my-2 flex items-center justify-center gap-2 rounded-2xl bg-violet-600 px-4 py-3 font-semibold text-white transition hover:bg-violet-700 active:scale-95"
       @click="$props.generate()"
     >
