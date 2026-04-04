@@ -21,7 +21,7 @@ export const useGetGospelSummary = (
   const query = useQuery({
     queryKey: ['gospelSummary', gospelText],
     queryFn: () => getGospelSummary(gospelText.value),
-    enabled: enabled.value && gospelText.value.trim() !== ''
+    enabled: computed(() => enabled.value && gospelText.value.trim() !== '')
   })
 
   watch(query.data, (value) => {
@@ -41,7 +41,7 @@ export const useGetGospelSummary = (
   })
 
   watch(
-    () => gospelDay.value,
+    () => cachedSummary.value?.date,
     (day) => {
       if (!day) return
 
