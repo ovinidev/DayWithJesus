@@ -14,9 +14,21 @@ export const useGetGospelSummary = (
   gospelDay: Ref<string>
 ) => {
   const enabled = ref(false)
-  const cachedSummary = ref<CachedSummary | null>(
-    JSON.parse(localStorage.getItem(storageKey) || 'null')
-  )
+  const loadCache = (): CachedSummary | null => {
+    try {
+      const stored = JSON.parse(localStorage.getItem(storageKey) || 'null')
+      if (!stored.date) {
+        localStorage.removeItem(storageKey)
+        return null
+      }
+      return stored
+    } catch {
+      localStorage.removeItem(storageKey)
+      return null
+    }
+  }
+
+  const cachedSummary = ref<CachedSummary | null>(loadCache())
 
   const query = useQuery({
     queryKey: ['gospelSummary', gospelText],
@@ -42,16 +54,10 @@ export const useGetGospelSummary = (
 
   watch(
     () => cachedSummary.value?.date,
-    (day) => {
-      if (!day) return
+    (cacheDay) => {
+      if (!cacheDay) return
 
-      if (!cachedSummary.value?.date) {
-        localStorage.removeItem(storageKey)
-        cachedSummary.value = null
-        return
-      }
-
-      if (day !== formatDate(new Date())) {
+      if (cacheDay !== formatDate(new Date())) {
         localStorage.removeItem(storageKey)
         cachedSummary.value = null
       }
