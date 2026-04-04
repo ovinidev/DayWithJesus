@@ -45,6 +45,12 @@ export const useGetGospelSummary = (
     (day) => {
       if (!day) return
 
+      if (!cachedSummary.value?.date) {
+        localStorage.removeItem(storageKey)
+        cachedSummary.value = null
+        return
+      }
+
       if (day !== formatDate(new Date())) {
         localStorage.removeItem(storageKey)
         cachedSummary.value = null
