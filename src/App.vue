@@ -12,7 +12,7 @@
   const { data, isLoading, isError } = useGetHomilyDiary()
 
   const gospel = computed(() => data.value?.leituras.evangelho)
-  const gospelDay = computed(() => data.value?.data)
+  const gospelDay = computed(() => data.value?.data ?? '')
   const gospelText = computed(
     () => gospel.value?.map((g) => `${g.titulo}\n${g.texto}`).join('\n\n') ?? ''
   )

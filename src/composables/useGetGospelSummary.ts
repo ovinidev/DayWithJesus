@@ -4,28 +4,44 @@ import { getGospelSummary } from '@/services/geminiService'
 import { storageKey } from '@/constants/storageKeys'
 import { formatDate } from '@/utils/formateDate'
 
+interface CachedSummary {
+  summary: string
+  date: string
+}
+
 export const useGetGospelSummary = (
   gospelText: Ref<string>,
-  gospelDay: Ref<string | undefined>
+  gospelDay: Ref<string>
 ) => {
   const enabled = ref(false)
-  const cachedSummary = ref<string | null>(localStorage.getItem(storageKey))
+  const cachedSummary = ref<CachedSummary | null>(
+    JSON.parse(localStorage.getItem(storageKey) || 'null')
+  )
 
   const query = useQuery({
     queryKey: ['gospelSummary', gospelText],
     queryFn: () => getGospelSummary(gospelText.value),
-    enabled
+    enabled: enabled.value && gospelText.value.trim() !== ''
   })
 
   watch(query.data, (value) => {
     if (value) {
-      localStorage.setItem(storageKey, value)
-      cachedSummary.value = value
+      localStorage.setItem(
+        storageKey,
+        JSON.stringify({
+          summary: value,
+          date: gospelDay.value
+        })
+      )
+      cachedSummary.value = {
+        summary: value,
+        date: gospelDay.value
+      }
     }
   })
 
   watch(
-    gospelDay,
+    () => gospelDay.value,
     (day) => {
       if (!day) return
 
@@ -42,7 +58,7 @@ export const useGetGospelSummary = (
     enabled.value = true
   }
 
-  const data = computed(() => cachedSummary.value ?? query.data.value)
+  const data = computed(() => cachedSummary.value?.summary ?? query.data.value)
 
   const errorMessage = computed(() =>
     query.error.value instanceof Error ? query.error.value.message : undefined
