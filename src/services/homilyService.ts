@@ -1,8 +1,8 @@
 import { api } from '@/services/api'
-import type { HomilyDiary } from '@/types'
+import type { LiturgyResponse } from '@/types'
 
-export const getHomilyDiary = async (): Promise<HomilyDiary> => {
-  const { data } = await api.get<HomilyDiary>('/')
+export const getHomilyDiary = async (): Promise<LiturgyResponse> => {
+  const { data } = await api.get<LiturgyResponse>('/')
 
   return data
 }
