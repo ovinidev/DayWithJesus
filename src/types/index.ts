@@ -1,10 +1,16 @@
 export interface Gospel {
-  referencia: string
-  titulo: string
-  texto: string
+  title: string
+  text: string
+  reference: string
+}
+export interface Liturgy {
+  date: string
+  color: string
+  liturgy: string
+  gospel: Gospel[]
 }
 
-export interface HomilyDiary {
+export interface LiturgyResponse {
   data: string
   liturgia: string
   cor: string
@@ -18,7 +24,11 @@ export interface HomilyDiary {
     primeiraLeitura: { referencia: string; titulo: string; texto: string }[]
     segundaLeitura: { referencia: string; titulo: string; texto: string }[]
     salmo: { referencia: string; refrao: string; texto: string }[]
-    evangelho: Gospel[]
+    evangelho: {
+      referencia: string
+      titulo: string
+      texto: string
+    }[]
     extras: string[]
   }
   antifonas: {

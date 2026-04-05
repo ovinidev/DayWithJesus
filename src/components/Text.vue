@@ -24,7 +24,7 @@
     text.replace(/\d+\s*(?=[\u201C\u201D\u00AB\u00BB"'A-Za-zÀ-ú])/g, '')
 
   const lines = computed((): Line[] => {
-    return gospel.texto
+    return gospel.text
       .split('\n')
       .map((line): Line => {
         const dialogMatch = line.match(/^([A-ZÀ-Ú])\s+\(([^)]+)\):\s*(.*)/)
@@ -51,9 +51,9 @@
 <template>
   <div class="mt-2 flex flex-col gap-3 text-xl">
     <p class="leading-relaxed font-bold text-black/70">
-      {{ gospel.referencia }}
+      {{ gospel.reference }}
     </p>
-    <p class="leading-relaxed text-black/70">{{ gospel.titulo }}</p>
+    <p class="leading-relaxed text-black/70">{{ gospel.title }}</p>
 
     <div v-if="isDialog" class="flex flex-col gap-2">
       <div v-for="(line, i) in lines" :key="i">

@@ -11,10 +11,10 @@
 
   const { data, isLoading, isError } = useGetHomilyDiary()
 
-  const gospel = computed(() => data.value?.leituras.evangelho)
-  const gospelDay = computed(() => data.value?.data ?? '')
+  const gospel = computed(() => data.value?.gospel)
+  const gospelDay = computed(() => data.value?.date ?? '')
   const gospelText = computed(
-    () => gospel.value?.map((g) => `${g.titulo}\n${g.texto}`).join('\n\n') ?? ''
+    () => gospel.value?.map((g) => `${g.title}\n${g.text}`).join('\n\n') ?? ''
   )
 
   const {
@@ -44,15 +44,15 @@
       </p>
 
       <div v-if="data" class="flex flex-col gap-2 text-black/70">
-        <TodayDate v-if="data" :date-str="data.data" />
+        <TodayDate v-if="data" :date-str="data.date" />
 
         <p class="text-xl">
           Cor:
-          <span class="font-bold" :style="{ color: dayColor[data.cor] }">{{
-            data?.cor
+          <span class="font-bold" :style="{ color: dayColor[data.color] }">{{
+            data?.color
           }}</span>
         </p>
-        <p class="text-xl">Liturgia: {{ data.liturgia }}</p>
+        <p class="text-xl">Liturgia: {{ data.liturgy }}</p>
 
         <Text v-for="(item, index) in gospel" :key="index" :gospel="item" />
 
