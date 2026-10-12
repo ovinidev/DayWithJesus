@@ -12,7 +12,7 @@
 
 <template>
   <h1
-    class="mt-8 text-center text-3xl font-semibold tracking-wide text-black md:text-3xl"
+    class="mt-2 text-center text-2xl font-semibold tracking-tight text-[#292723] md:text-3xl"
     @click="openYoutubeSearch"
   >
     {{ title }}

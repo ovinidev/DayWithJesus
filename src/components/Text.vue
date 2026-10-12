@@ -49,17 +49,17 @@
 </script>
 
 <template>
-  <div class="mt-2 flex flex-col gap-3 text-xl">
-    <p class="leading-relaxed font-bold text-black/70">
+  <div class="gospel-text flex flex-col gap-3 text-base sm:text-[1.05rem]">
+    <p class="leading-relaxed font-bold text-[#443d34]">
       {{ gospel.reference }}
     </p>
-    <p class="leading-relaxed text-black/70">{{ gospel.title }}</p>
+    <p class="leading-relaxed text-[#63594d]">{{ gospel.title }}</p>
 
     <div v-if="isDialog" class="flex flex-col gap-2">
       <div v-for="(line, i) in lines" :key="i">
         <p
           v-if="line.type === 'narrative'"
-          class="leading-relaxed text-black"
+          class="leading-[1.85] text-[#393632]"
           v-html="stripVerseNumbers(line.content)"
         />
         <p v-else-if="line.type === 'stage'" class="text-black/50 italic">
@@ -74,7 +74,7 @@
             {{ line.role }}
           </span>
           <p
-            class="leading-relaxed text-black"
+          class="leading-[1.85] text-[#393632]"
             v-html="stripVerseNumbers(line.content)"
           />
         </div>
@@ -83,7 +83,7 @@
 
     <p
       v-else
-      class="mt-1 leading-relaxed"
+      class="mt-1 leading-[1.85] text-[#393632]"
       v-html="stripVerseNumbers(lines.map((l) => l.content).join(' '))"
     />
   </div>

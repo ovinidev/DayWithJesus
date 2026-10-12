@@ -19,5 +19,5 @@
 </script>
 
 <template>
-  <p class="text-xl capitalize md:text-xl">{{ formatted }}</p>
+  <p class="text-base font-medium capitalize tracking-wide text-[#49443d]">{{ formatted }}</p>
 </template>

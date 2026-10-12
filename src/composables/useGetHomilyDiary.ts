@@ -1,12 +1,12 @@
-import { computed } from 'vue'
+import { computed, type Ref } from 'vue'
 import { useQuery } from '@tanstack/vue-query'
 import { getHomilyDiary } from '@/services/homilyService'
 import { gospelMapper } from '@/utils/gospelMapper'
 
-export const useGetHomilyDiary = () => {
+export const useGetHomilyDiary = (date: Ref<string>) => {
   const query = useQuery({
-    queryKey: ['homilyDiary'],
-    queryFn: getHomilyDiary
+    queryKey: computed(() => ['homilyDiary', date.value]),
+    queryFn: () => getHomilyDiary(date.value)
   })
 
   const data = computed(() =>

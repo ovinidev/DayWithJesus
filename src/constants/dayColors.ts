@@ -3,5 +3,5 @@ export const dayColor: Record<string, string> = {
   Vermelho: '#ef4444',
   Roxo: '#a855f7',
   Rosa: '#ec4899',
-  Branco: '#ffffff'
+  Branco: '#786448'
 } as const

@@ -1,9 +1,11 @@
 <script setup lang="ts">
+  import { computed } from 'vue'
   import { useFeatureFlagActive } from '@/composables/useFeatureFlagActive'
 
   const props = defineProps<{
     gospelText?: string
     summary?: string
+    fontScale: number
     isLoading?: boolean
     isError?: boolean
     errorMessage?: string
@@ -11,6 +13,32 @@
   }>()
 
   const { isFeatureFlagActive } = useFeatureFlagActive('ai_button')
+
+  const summarySections = computed(() => {
+    if (!props.summary) return []
+
+    const lines = props.summary.split('\n')
+    const sections: { title: string; paragraphs: string[] }[] = []
+    const headingPattern = /^(Resumo do Evangelho|O que o Evangelho nos traz|Ensinamentos(?: principais)?)(?::)?$/i
+
+    for (const rawLine of lines) {
+      const line = rawLine.trim()
+      if (!line) continue
+
+      const heading = line.match(headingPattern)
+      if (heading) {
+        sections.push({ title: heading[1], paragraphs: [] })
+        continue
+      }
+
+      if (sections.length === 0) {
+        sections.push({ title: 'Resumo do Evangelho', paragraphs: [] })
+      }
+      sections[sections.length - 1].paragraphs.push(line)
+    }
+
+    return sections
+  })
 </script>
 
 <template>
@@ -22,7 +50,7 @@
         !props.isLoading &&
         !props.errorMessage
       "
-      class="my-2 flex items-center justify-center gap-2 rounded-2xl bg-violet-600 px-4 py-3 font-semibold text-white transition hover:bg-violet-700 active:scale-95"
+      class="summary-button my-2 flex items-center justify-center gap-2 rounded-xl px-5 py-3 font-semibold transition active:scale-[0.98]"
       @click="$props.generate()"
     >
       <svg
@@ -42,21 +70,37 @@
       Entender evangelho
     </button>
 
-    <p v-if="props.isLoading" class="text-md text-center text-black/50">
+    <p v-if="props.isLoading" class="summary-loading">
+      <span class="loading-mark" aria-hidden="true">✦</span>
       Gerando resumo...
     </p>
 
-    <p v-if="props.isError" class="text-md text-red-500">
+    <p v-if="props.isError" class="summary-error">
       {{ props.errorMessage }}
     </p>
 
-    <div
-      v-if="props.summary"
-      class="rounded-2xl border border-violet-200 bg-violet-50 p-4"
-    >
-      <p class="text-lg leading-relaxed whitespace-pre-wrap text-black/70">
-        {{ props.summary }}
-      </p>
-    </div>
+    <Transition name="summary-reveal">
+      <section v-if="props.summary" class="summary-card" aria-label="Resumo do Evangelho">
+        <header class="summary-header">
+          <span class="summary-emblem" aria-hidden="true">✦</span>
+          <div>
+            <span class="summary-kicker">PARA REFLETIR</span>
+            <h2>Resumo do Evangelho</h2>
+          </div>
+        </header>
+
+      <div
+        class="summary-sections"
+        :style="{ '--gospel-font-size': `${props.fontScale}rem` }"
+      >
+          <section v-for="(section, index) in summarySections" :key="index" class="summary-section">
+            <h3 v-if="index > 0 || section.title !== 'Resumo do Evangelho'">{{ section.title }}</h3>
+            <p v-for="(paragraph, paragraphIndex) in section.paragraphs" :key="paragraphIndex">
+              {{ paragraph }}
+            </p>
+          </section>
+        </div>
+      </section>
+    </Transition>
   </div>
 </template>

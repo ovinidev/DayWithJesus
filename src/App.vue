@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { computed } from 'vue'
+  import { computed, ref, watch } from 'vue'
   import { VueQueryDevtools } from '@tanstack/vue-query-devtools'
   import Title from '@/components/Title.vue'
   import TodayDate from '@/components/TodayDate.vue'
@@ -9,10 +9,69 @@
   import { dayColor } from '@/constants/dayColors'
   import { useGetGospelSummary } from './composables/useGetGospelSummary'
 
-  const { data, isLoading, isError } = useGetHomilyDiary()
+  const toDateInputValue = (date: Date) => {
+    const year = date.getFullYear()
+    const month = String(date.getMonth() + 1).padStart(2, '0')
+    const day = String(date.getDate()).padStart(2, '0')
+    return `${year}-${month}-${day}`
+  }
+
+  const todayDate = toDateInputValue(new Date())
+  const selectedDate = ref(todayDate)
+  const isTodaySelected = computed(() => selectedDate.value === todayDate)
+  const returnToToday = () => {
+    selectedDate.value = todayDate
+  }
+
+  const { data, isLoading, isError } = useGetHomilyDiary(selectedDate)
+
+  const storedFontScale = Number(localStorage.getItem('gospel-font-scale'))
+  const gospelFontScale = ref(
+    Math.min(1.5, Math.max(0.85, storedFontScale || 1))
+  )
+  const storedSummaryFontScale = Number(
+    localStorage.getItem('gospel-summary-font-scale')
+  )
+  const summaryFontScale = ref(
+    Math.min(1.5, Math.max(0.85, storedSummaryFontScale || storedFontScale || 1))
+  )
+
+  watch(gospelFontScale, (scale) => {
+    localStorage.setItem('gospel-font-scale', String(scale))
+  })
+
+  watch(summaryFontScale, (scale) => {
+    localStorage.setItem('gospel-summary-font-scale', String(scale))
+  })
+
+  const decreaseGospelFont = () => {
+    gospelFontScale.value = Math.max(
+      0.85,
+      Number((gospelFontScale.value - 0.1).toFixed(2))
+    )
+  }
+
+  const increaseGospelFont = () => {
+    gospelFontScale.value = Math.min(
+      1.5,
+      Number((gospelFontScale.value + 0.1).toFixed(2))
+    )
+    summaryFontScale.value = Math.min(
+      1.5,
+      Number((summaryFontScale.value + 0.1).toFixed(2))
+    )
+  }
 
   const gospel = computed(() => data.value?.gospel)
   const gospelDay = computed(() => data.value?.date ?? '')
+  const homilySearchUrl = computed(() => {
+    const [day, month, year] = gospelDay.value.split('/')
+    const date = day && month && year ? `${day}-${month}-${year}` : ''
+    const query = ['Padre Adriano Zandoná', 'homilia diária', date]
+      .filter(Boolean)
+      .join(' ')
+    return `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`
+  })
   const gospelText = computed(
     () => gospel.value?.map((g) => `${g.title}\n${g.text}`).join('\n\n') ?? ''
   )
@@ -27,46 +86,126 @@
 </script>
 
 <template>
-  <div
-    class="flex min-h-screen items-center justify-center bg-[var(--color-lilac-light)]"
-  >
-    <div
-      class="flex w-full max-w-sm flex-col gap-8 rounded-3xl p-4 md:max-w-xl md:p-8"
-    >
-      <Title title="Evangelho do dia" />
+  <main class="page-shell">
+    <article class="reading-card">
+      <header class="page-header">
+        <span class="eyebrow">PALAVRA DE DEUS</span>
+        <Title title="Evangelho do dia" />
+        <span class="header-rule" aria-hidden="true"></span>
+        <div class="date-picker">
+          <label for="reading-date">Ver leitura de outra data</label>
+          <div class="date-picker-controls">
+            <input id="reading-date" v-model="selectedDate" type="date" />
+            <button
+              type="button"
+              :disabled="isTodaySelected"
+              @click="returnToToday"
+            >
+              Hoje
+            </button>
+          </div>
+        </div>
+      </header>
 
-      <p v-if="isLoading" class="py-8 text-center text-sm text-black/50">
+      <p v-if="isLoading" class="status-message">
         Carregando...
       </p>
 
-      <p v-else-if="isError" class="py-8 text-center text-sm text-red-500">
+      <p v-else-if="isError" class="status-message error-message">
         Erro ao carregar o evangelho.
       </p>
 
-      <div v-if="data" class="flex flex-col gap-2 text-black/70">
-        <TodayDate v-if="data" :date-str="data.date" />
+      <Transition name="daily-reveal">
+        <div v-if="data" class="reading-content">
+        <section class="day-details" aria-label="Informações do dia">
+          <TodayDate :date-str="data.date" />
+          <div class="detail-row">
+            <span class="detail-label">Cor litúrgica</span>
+            <span class="color-value" :style="{ color: dayColor[data.color] }">{{ data?.color }}</span>
+          </div>
+          <p class="liturgy"><span class="detail-label">Liturgia</span>{{ data.liturgy }}</p>
+        </section>
 
-        <p class="text-xl">
-          Cor:
-          <span class="font-bold" :style="{ color: dayColor[data.color] }">{{
-            data?.color
-          }}</span>
-        </p>
-        <p class="text-xl">Liturgia: {{ data.liturgy }}</p>
+        <div class="section-divider" aria-hidden="true"><span>✦</span></div>
 
-        <Text v-for="(item, index) in gospel" :key="index" :gospel="item" />
+        <section
+          class="gospel-reading"
+          :style="{ '--gospel-font-size': `${gospelFontScale}rem` }"
+        >
+          <div class="reading-tools">
+            <span class="reading-tools-label">Texto do Evangelho</span>
+            <div class="font-controls" role="group" aria-label="Tamanho do texto">
+              <button
+                type="button"
+                aria-label="Diminuir tamanho do texto"
+                :disabled="gospelFontScale <= 0.85"
+                @click="decreaseGospelFont"
+              >
+                A−
+              </button>
+              <span class="font-scale" aria-live="polite">{{ Math.round(gospelFontScale * 100) }}%</span>
+              <button
+                type="button"
+                aria-label="Aumentar tamanho do texto"
+                :disabled="gospelFontScale >= 1.5"
+                @click="increaseGospelFont"
+              >
+                A+
+              </button>
+              <button
+                type="button"
+                class="font-reset"
+                aria-label="Redefinir tamanho do texto"
+                :disabled="gospelFontScale === 1"
+                @click="gospelFontScale = 1"
+              >
+                Redefinir
+              </button>
+            </div>
+          </div>
+          <Text v-for="(item, index) in gospel" :key="index" :gospel="item" />
+        </section>
+
+        <section class="video-section" aria-labelledby="video-heading">
+          <div class="video-heading-row">
+            <span class="video-kicker">ASSISTA</span>
+            <h2 id="video-heading">Homilia diária</h2>
+          </div>
+          <a
+            class="video-search-link"
+            :href="homilySearchUrl"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="play-icon" aria-hidden="true">▶</span>
+            <span>
+              <strong>Buscar a homilia de hoje do Padre Adriano</strong>
+              <small>Resultados do canal do Padre Adriano Zandoná no YouTube</small>
+            </span>
+            <span class="external-icon" aria-hidden="true">↗</span>
+          </a>
+        </section>
 
         <GospelSummary
           v-if="gospel"
           :summary="gospelSummary"
+          :font-scale="summaryFontScale"
           :is-loading="isGospelLoading"
           :is-error="isGospelError"
           :error-message="gospelErrorMessage"
           :generate="generate"
         />
-      </div>
-    </div>
-  </div>
+        </div>
+      </Transition>
+
+      <footer class="page-credit">
+        Feito com amor por
+        <a href="https://github.com/ovinidev" target="_blank" rel="noopener noreferrer">
+          @ovinidev
+        </a>
+      </footer>
+    </article>
+  </main>
 
   <VueQueryDevtools button-position="bottom-right" />
 </template>

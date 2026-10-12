@@ -2,7 +2,6 @@ import { computed, ref, watch, type Ref } from 'vue'
 import { useQuery } from '@tanstack/vue-query'
 import { getGospelSummary } from '@/services/geminiService'
 import { storageKey } from '@/constants/storageKeys'
-import { formatDate } from '@/utils/formateDate'
 
 interface CachedSummary {
   summary: string
@@ -31,13 +30,21 @@ export const useGetGospelSummary = (
   const cachedSummary = ref<CachedSummary | null>(loadCache())
 
   const query = useQuery({
-    queryKey: ['gospelSummary', gospelText],
+    queryKey: computed(() => [
+      'gospelSummary',
+      gospelDay.value,
+      gospelText.value
+    ]),
     queryFn: () => getGospelSummary(gospelText.value),
     enabled: computed(() => enabled.value && gospelText.value.trim() !== '')
   })
 
+  watch([gospelText, gospelDay], () => {
+    enabled.value = false
+  })
+
   watch(query.data, (value) => {
-    if (value) {
+    if (value && enabled.value) {
       localStorage.setItem(
         storageKey,
         JSON.stringify({
@@ -52,25 +59,16 @@ export const useGetGospelSummary = (
     }
   })
 
-  watch(
-    () => cachedSummary.value?.date,
-    (cacheDay) => {
-      if (!cacheDay) return
-
-      if (cacheDay !== formatDate(new Date())) {
-        localStorage.removeItem(storageKey)
-        cachedSummary.value = null
-      }
-    },
-    { immediate: true }
-  )
-
   const generate = () => {
-    if (cachedSummary.value || query.data.value) return
+    if (cachedSummary.value?.date === gospelDay.value || query.data.value) return
     enabled.value = true
   }
 
-  const data = computed(() => cachedSummary.value?.summary ?? query.data.value)
+  const data = computed(() =>
+    cachedSummary.value?.date === gospelDay.value
+      ? cachedSummary.value.summary
+      : query.data.value
+  )
 
   const errorMessage = computed(() =>
     query.error.value instanceof Error ? query.error.value.message : undefined
