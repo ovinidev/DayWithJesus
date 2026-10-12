@@ -126,7 +126,9 @@ body {
   font-size: 0.8rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 150ms ease, border-color 150ms ease;
+  transition:
+    background 150ms ease,
+    border-color 150ms ease;
 }
 
 .date-picker-controls button:hover:not(:disabled) {
@@ -137,6 +139,78 @@ body {
 .date-picker-controls button:disabled {
   cursor: default;
   opacity: 0.5;
+}
+
+.week-navigator {
+  display: grid;
+  gap: 0.75rem;
+  margin: -0.5rem 0 1.5rem;
+  padding: 1rem;
+  border: 1px solid #eee6da;
+  border-radius: 1rem;
+  background: #fbf8f2;
+}
+
+.week-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.week-caption {
+  color: #81796e;
+  font-size: 0.74rem;
+}
+
+.week-days {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 0.4rem;
+}
+
+.week-days button {
+  display: grid;
+  min-width: 0;
+  min-height: 3.6rem;
+  place-content: center;
+  gap: 0.2rem;
+  border: 1px solid transparent;
+  border-radius: 0.7rem;
+  color: #746a5c;
+  background: transparent;
+  cursor: pointer;
+  transition:
+    border-color 150ms ease,
+    background 150ms ease,
+    color 150ms ease;
+}
+
+.week-days button span {
+  font-size: 0.67rem;
+  text-transform: capitalize;
+}
+
+.week-days button strong {
+  font-size: 0.9rem;
+  font-weight: 650;
+}
+
+.week-days button:hover {
+  border-color: #e6dccd;
+  background: #fffefa;
+}
+
+.week-days button.is-selected {
+  border-color: #806747;
+  color: #fffefa;
+  background: #806747;
+  box-shadow: 0 4px 10px rgba(93, 71, 42, 0.15);
+}
+
+.week-days button:focus-visible {
+  outline: 2px solid #b89561;
+  outline-offset: 2px;
 }
 
 .reading-content {
@@ -190,7 +264,9 @@ body {
   font-size: 0.78rem;
   font-weight: 650;
   cursor: pointer;
-  transition: background 150ms ease, border-color 150ms ease;
+  transition:
+    background 150ms ease,
+    border-color 150ms ease;
 }
 
 .font-controls button:hover:not(:disabled) {
@@ -221,6 +297,130 @@ body {
   text-align: center;
   font-size: 0.7rem;
   font-variant-numeric: tabular-nums;
+}
+
+.reading-accordions {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.reading-accordion,
+.liturgy-accordion {
+  overflow: hidden;
+  border: 1px solid #e8ded0;
+  border-radius: 0.9rem;
+  background: #fffefa;
+}
+
+.reading-accordion > summary,
+.liturgy-accordion > summary {
+  position: relative;
+  padding: 0.9rem 2.7rem 0.9rem 1rem;
+  color: #594a36;
+  background: #fbf8f2;
+  font-size: 0.9rem;
+  font-weight: 650;
+  cursor: pointer;
+  list-style: none;
+}
+
+.reading-accordion > summary::-webkit-details-marker,
+.liturgy-accordion > summary::-webkit-details-marker {
+  display: none;
+}
+
+.reading-accordion > summary::after,
+.liturgy-accordion > summary::after {
+  position: absolute;
+  right: 1rem;
+  color: #927959;
+  content: '+';
+  font-size: 1.1rem;
+  font-weight: 400;
+}
+
+.reading-accordion[open] > summary::after,
+.liturgy-accordion[open] > summary::after {
+  content: '−';
+}
+
+.reading-accordion > summary:focus-visible,
+.liturgy-accordion > summary:focus-visible {
+  outline: 2px solid #b89561;
+  outline-offset: -3px;
+}
+
+.reading-accordion > .gospel-text,
+.psalm-reading,
+.extra-reading {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  border-top: 1px solid #eee6da;
+}
+
+.reading-accordion > .gospel-text + .gospel-text {
+  border-top: 1px solid #eee6da;
+}
+
+.reading-accordion .gospel-text {
+  font-size: var(--gospel-font-size, 1rem);
+}
+
+.reading-reference {
+  margin: 0;
+  color: #735b3b;
+  font-size: 0.83rem;
+  font-weight: 650;
+  line-height: 1.5;
+}
+
+.psalm-refrain {
+  margin: 0;
+  color: #514b43;
+  font-size: 0.9rem;
+  font-style: italic;
+  line-height: 1.65;
+}
+
+.reading-body {
+  margin: 0;
+  color: #393632;
+  font-size: var(--gospel-font-size, 1rem);
+  line-height: 1.8;
+  white-space: pre-line;
+}
+
+.liturgy-accordion {
+  margin-top: 0.25rem;
+}
+
+.liturgy-texts {
+  display: grid;
+  gap: 0.85rem;
+  padding: 1rem;
+  border-top: 1px solid #eee6da;
+}
+
+.liturgy-texts section + section {
+  padding-top: 0.85rem;
+  border-top: 1px solid #f0e9df;
+}
+
+.liturgy-texts h3 {
+  margin: 0 0 0.4rem;
+  color: #735b3b;
+  font-size: 0.84rem;
+  font-weight: 650;
+}
+
+.liturgy-texts p {
+  margin: 0;
+  color: #514b43;
+  font-size: 0.9rem;
+  line-height: 1.75;
+  white-space: pre-line;
 }
 
 .daily-reveal-enter-active {
@@ -477,7 +677,10 @@ body {
   color: #493d2e;
   background: #faf7f1;
   text-decoration: none;
-  transition: border-color 160ms ease, background 160ms ease, transform 160ms ease;
+  transition:
+    border-color 160ms ease,
+    background 160ms ease,
+    transform 160ms ease;
 }
 
 .video-search-link:hover {
@@ -545,6 +748,25 @@ body {
 
   .date-picker {
     width: 100%;
+  }
+
+  .week-navigator {
+    margin-right: -0.25rem;
+    margin-left: -0.25rem;
+    padding: 0.75rem 0.5rem;
+  }
+
+  .week-days {
+    gap: 0.15rem;
+  }
+
+  .week-days button {
+    min-height: 3.25rem;
+    border-radius: 0.55rem;
+  }
+
+  .week-days button span {
+    font-size: 0.58rem;
   }
 
   .summary-header {

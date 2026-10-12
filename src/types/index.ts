@@ -3,11 +3,39 @@ export interface Gospel {
   text: string
   reference: string
 }
+
+export interface Psalm {
+  refrain: string
+  text: string
+  reference: string
+}
+
+export interface LiturgyExtra {
+  title?: string
+  type?: string
+  reference?: string
+  text: string
+}
+
 export interface Liturgy {
   date: string
   color: string
   liturgy: string
   gospel: Gospel[]
+  firstReadings: Gospel[]
+  secondReadings: Gospel[]
+  psalms: Psalm[]
+  extraReadings: LiturgyExtra[]
+  prayers: {
+    collect: string
+    offerings: string
+    communion: string
+    extras: LiturgyExtra[]
+  }
+  antiphons: {
+    entrance: string
+    communion: string
+  }
 }
 
 export interface LiturgyResponse {
@@ -18,21 +46,36 @@ export interface LiturgyResponse {
     coleta: string
     oferendas: string
     comunhao: string
-    extras: string[]
+    extras: LiturgyExtraResponse[]
   }
   leituras: {
-    primeiraLeitura: { referencia: string; titulo: string; texto: string }[]
-    segundaLeitura: { referencia: string; titulo: string; texto: string }[]
-    salmo: { referencia: string; refrao: string; texto: string }[]
-    evangelho: {
-      referencia: string
-      titulo: string
-      texto: string
-    }[]
-    extras: string[]
+    primeiraLeitura: LiturgyReadingResponse[]
+    segundaLeitura: LiturgyReadingResponse[]
+    salmo: PsalmResponse[]
+    evangelho: LiturgyReadingResponse[]
+    extras: LiturgyExtraResponse[]
   }
   antifonas: {
     entrada: string
     comunhao: string
   }
+}
+
+interface LiturgyReadingResponse {
+  referencia: string
+  titulo: string
+  texto: string
+}
+
+interface PsalmResponse {
+  referencia: string
+  refrao: string
+  texto: string
+}
+
+interface LiturgyExtraResponse {
+  titulo?: string
+  tipo?: string
+  referencia?: string
+  texto: string
 }

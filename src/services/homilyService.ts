@@ -10,3 +10,11 @@ export const getHomilyDiary = async (
 
   return data
 }
+
+export const getHomilyWeek = async (): Promise<LiturgyResponse[]> => {
+  const { data } = await api.get<LiturgyResponse[]>('/', {
+    params: { periodo: 7 }
+  })
+
+  return data
+}
