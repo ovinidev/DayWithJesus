@@ -11,13 +11,14 @@ export default defineConfig({
     tailwindcss(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.ico', 'apple-touch-icon.png'],
+      includeAssets: ['favicon.svg', 'apple-touch-icon.png'],
       manifest: {
         name: 'Homilia Diária',
         short_name: 'Homilia',
         description: 'Leitura do evangelho do dia',
-        theme_color: '#7c3aed',
-        background_color: '#c4b5fd',
+        lang: 'pt-BR',
+        theme_color: '#243b35',
+        background_color: '#243b35',
         display: 'standalone',
         start_url: '/',
         icons: [
