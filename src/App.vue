@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { computed, ref, watch } from 'vue'
+  import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
   import { VueQueryDevtools } from '@tanstack/vue-query-devtools'
   import Title from '@/components/Title.vue'
   import TodayDate from '@/components/TodayDate.vue'
@@ -10,6 +10,59 @@
   import { useGetHomilyWeek } from '@/composables/useGetHomilyWeek'
   import { dayColor } from '@/constants/dayColors'
   import { useGetGospelSummary } from './composables/useGetGospelSummary'
+
+  interface InstallPromptEvent extends Event {
+    prompt: () => Promise<void>
+    userChoice: Promise<{ outcome: 'accepted' | 'dismissed'; platform: string }>
+  }
+
+  const canShowInstallButton = ref(false)
+  const isInstalled = ref(false)
+  const installPrompt = ref<InstallPromptEvent | null>(null)
+  const installHelp = ref('')
+  let mobileQuery: MediaQueryList | undefined
+
+  const updateInstallVisibility = () => {
+    const isStandalone =
+      window.matchMedia('(display-mode: standalone)').matches ||
+      (navigator as Navigator & { standalone?: boolean }).standalone === true
+
+    isInstalled.value = isStandalone
+    canShowInstallButton.value =
+      !isStandalone && Boolean(mobileQuery?.matches)
+  }
+
+  const captureInstallPrompt = (event: Event) => {
+    event.preventDefault()
+    installPrompt.value = event as InstallPromptEvent
+  }
+
+  const showInstallHelp = async () => {
+    if (!installPrompt.value) {
+      installHelp.value = /iPad|iPhone|iPod/.test(navigator.userAgent)
+        ? 'Toque em Compartilhar e escolha “Adicionar à Tela de Início”.'
+        : 'Abra o menu do navegador e escolha “Instalar app” ou “Adicionar à tela inicial”.'
+      return
+    }
+
+    await installPrompt.value.prompt()
+    const choice = await installPrompt.value.userChoice
+    if (choice.outcome === 'accepted') installPrompt.value = null
+  }
+
+  onMounted(() => {
+    mobileQuery = window.matchMedia('(max-width: 768px)')
+    mobileQuery.addEventListener('change', updateInstallVisibility)
+    window.addEventListener('beforeinstallprompt', captureInstallPrompt)
+    window.addEventListener('appinstalled', updateInstallVisibility)
+    updateInstallVisibility()
+  })
+
+  onUnmounted(() => {
+    mobileQuery?.removeEventListener('change', updateInstallVisibility)
+    window.removeEventListener('beforeinstallprompt', captureInstallPrompt)
+    window.removeEventListener('appinstalled', updateInstallVisibility)
+  })
 
   const toDateInputValue = (date: Date) => {
     const year = date.getFullYear()
@@ -104,6 +157,17 @@
       <header class="page-header">
         <span class="eyebrow">PALAVRA DE DEUS</span>
         <Title title="Evangelho do dia" />
+        <button
+          v-if="canShowInstallButton && !isInstalled"
+          class="install-button"
+          type="button"
+          @click="showInstallHelp"
+        >
+          Adicionar à tela inicial
+        </button>
+        <p v-if="installHelp" class="install-help" role="status">
+          {{ installHelp }}
+        </p>
         <span class="header-rule" aria-hidden="true"></span>
         <div class="date-picker">
           <label for="reading-date">Ver leitura de outra data</label>
