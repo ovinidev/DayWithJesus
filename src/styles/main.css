@@ -649,6 +649,48 @@ body {
   display: grid;
   gap: 1rem;
 }
+
+.construction-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: clamp(2rem, 8vw, 3.5rem) 1.5rem;
+  border: 1px solid #e8ded0;
+  border-radius: 1.25rem;
+  background: linear-gradient(145deg, #fffefa 0%, #fbf7ef 100%);
+  text-align: center;
+}
+
+.construction-emblem {
+  display: grid;
+  width: 4rem;
+  height: 4rem;
+  place-items: center;
+  border: 1px solid #e1cfb1;
+  border-radius: 50%;
+  color: #876a42;
+  background: #fffaf0;
+}
+
+.construction-card h2 {
+  margin: 1.1rem 0 0.55rem;
+  color: #39352f;
+  font-size: 1.25rem;
+  font-weight: 650;
+}
+
+.construction-card p {
+  max-width: 27rem;
+  margin: 0;
+  color: #655e55;
+  font-size: 0.94rem;
+  line-height: 1.75;
+}
+
+.construction-sparkle {
+  margin-top: 1.25rem;
+  color: #c3a779;
+}
 .saints-date {
   margin: 0;
   color: #81796e;
