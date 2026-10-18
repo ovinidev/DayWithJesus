@@ -16,6 +16,46 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+.page-title {
+  color: #292723;
+}
+
+.today-date {
+  color: #49443d;
+}
+
+.gospel-reference {
+  color: #443d34;
+}
+
+.gospel-title {
+  color: #63594d;
+}
+
+.gospel-body {
+  color: #393632;
+}
+
+.gospel-stage {
+  color: rgba(0, 0, 0, 0.55);
+}
+
+.gospel-role-narrator {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.gospel-role-reader {
+  color: #7c3aed;
+}
+
+.gospel-role-people {
+  color: #b45309;
+}
+
+.gospel-role-jesus {
+  color: #2563eb;
+}
+
 .app-header {
   position: relative;
   z-index: 10;
@@ -143,6 +183,46 @@ body {
   color: #ead8b6;
 }
 
+.dark-mode .page-title {
+  color: #fff8ee;
+}
+
+.dark-mode .today-date {
+  color: #f0dfc8;
+}
+
+.dark-mode .gospel-reference {
+  color: #f4d59d;
+}
+
+.dark-mode .gospel-title {
+  color: #e5d9c9;
+}
+
+.dark-mode .gospel-body {
+  color: #f2ece3;
+}
+
+.dark-mode .gospel-stage {
+  color: #d4c9bb;
+}
+
+.dark-mode .gospel-role-narrator {
+  color: #e8ded2;
+}
+
+.dark-mode .gospel-role-reader {
+  color: #c4b5fd;
+}
+
+.dark-mode .gospel-role-people {
+  color: #fbbf24;
+}
+
+.dark-mode .gospel-role-jesus {
+  color: #93c5fd;
+}
+
 .dark-mode .main-menu a:hover,
 .dark-mode .main-menu a.router-link-active,
 .dark-mode .menu-button:hover,
@@ -190,6 +270,131 @@ body {
 .dark-mode .reading-accordion > .gospel-text,
 .dark-mode .saint-text-section + .saint-text-section {
   border-color: #51473c;
+}
+
+/* Higher-contrast dark theme */
+.dark-mode body {
+  color: #f5efe6;
+  background: #171411;
+}
+
+.dark-mode .reading-card {
+  border-color: #5b4f42;
+  background: #26211d;
+  box-shadow: 0 18px 55px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .eyebrow,
+.dark-mode .video-kicker,
+.dark-mode .summary-kicker,
+.dark-mode .saint-rank,
+.dark-mode .detail-label,
+.dark-mode .date-picker > label,
+.dark-mode .week-caption,
+.dark-mode .saints-date {
+  color: #e7c68e;
+}
+
+.dark-mode .header-rule,
+.dark-mode .section-divider,
+.dark-mode .construction-sparkle {
+  background-color: #d3ad6e;
+  color: #e7c68e;
+}
+
+.dark-mode .date-picker-controls input,
+.dark-mode .date-picker-controls button,
+.dark-mode .font-controls button,
+.dark-mode .prayer-select {
+  border-color: #68594a;
+  color: #f5efe6;
+  background: #302923;
+}
+
+.dark-mode .date-picker-controls button:hover:not(:disabled),
+.dark-mode .font-controls button:hover:not(:disabled),
+.dark-mode .week-days button:hover {
+  border-color: #d3ad6e;
+  color: #fffaf2;
+  background: #45382d;
+}
+
+.dark-mode .week-navigator,
+.dark-mode .reading-tools,
+.dark-mode .reading-accordion > summary,
+.dark-mode .liturgy-accordion > summary,
+.dark-mode .liturgical-day,
+.dark-mode .saint-prayer,
+.dark-mode .construction-card,
+.dark-mode .prayer-text-card,
+.dark-mode .summary-header {
+  border-color: #5b4f42;
+  color: #f5efe6;
+  background: #332b24;
+}
+
+.dark-mode .reading-accordion,
+.dark-mode .liturgy-accordion,
+.dark-mode .summary-card,
+.dark-mode .saint-profile {
+  border-color: #5b4f42;
+  background: #26211d;
+}
+
+.dark-mode .reading-reference,
+.dark-mode .liturgy-texts h3,
+.dark-mode .summary-section h3,
+.dark-mode .reading-accordion > summary,
+.dark-mode .liturgy-accordion > summary,
+.dark-mode .font-scale {
+  color: #f0d5a5;
+}
+
+.dark-mode .week-days button,
+.dark-mode .day-details,
+.dark-mode .reading-body,
+.dark-mode .psalm-refrain,
+.dark-mode .liturgy-texts p,
+.dark-mode .summary-section p,
+.dark-mode .saint-text-section p,
+.dark-mode .construction-card p,
+.dark-mode .prayer-text-card p,
+.dark-mode .video-search-link,
+.dark-mode .video-search-link small {
+  color: #e6ddd1;
+}
+
+.dark-mode .page-credit {
+  border-color: #5b4f42;
+  color: #cfc2b2;
+}
+
+.dark-mode .page-credit a {
+  color: #f0d5a5;
+}
+
+.dark-mode .video-section,
+.dark-mode .video-search-link,
+.dark-mode .summary-header,
+.dark-mode .summary-section + .summary-section,
+.dark-mode .liturgy-texts,
+.dark-mode .liturgy-texts section + section,
+.dark-mode .saint-text-section + .saint-text-section {
+  border-color: #5b4f42;
+}
+
+.dark-mode .video-search-link {
+  border-color: #5b4f42;
+  background: #332b24;
+}
+
+.dark-mode .summary-emblem,
+.dark-mode .saint-emblem,
+.dark-mode .prayer-emblem,
+.dark-mode .construction-emblem {
+  border-color: #80694d;
+  color: #f0d5a5;
+  background: #3c3127;
 }
 
 .main-menu {

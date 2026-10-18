@@ -10,10 +10,10 @@
   }
 
   const roleColors: Record<string, string> = {
-    N: 'text-black/70',
-    L: 'text-violet-600',
-    P: 'text-amber-600',
-    G: 'text-blue-600'
+    N: 'gospel-role-narrator',
+    L: 'gospel-role-reader',
+    P: 'gospel-role-people',
+    G: 'gospel-role-jesus'
   }
 
   const { gospel } = defineProps<{
@@ -50,31 +50,31 @@
 
 <template>
   <div class="gospel-text flex flex-col gap-3 text-base sm:text-[1.05rem]">
-    <p class="leading-relaxed font-bold text-[#443d34]">
+    <p class="gospel-reference leading-relaxed font-bold">
       {{ gospel.reference }}
     </p>
-    <p class="leading-relaxed text-[#63594d]">{{ gospel.title }}</p>
+    <p class="gospel-title leading-relaxed">{{ gospel.title }}</p>
 
     <div v-if="isDialog" class="flex flex-col gap-2">
       <div v-for="(line, i) in lines" :key="i">
         <p
           v-if="line.type === 'narrative'"
-          class="leading-[1.85] text-[#393632]"
+          class="gospel-body leading-[1.85]"
           v-html="stripVerseNumbers(line.content)"
         />
-        <p v-else-if="line.type === 'stage'" class="text-black/50 italic">
+        <p v-else-if="line.type === 'stage'" class="gospel-stage italic">
           ({{ line.content }})
         </p>
         <div v-else-if="line.type === 'dialog'" class="flex gap-2">
           <span
             class="mt-0.5 shrink-0 font-bold"
-            :class="line.role ? roleColors[line.role] : 'text-black/70'"
+            :class="line.role ? roleColors[line.role] : 'gospel-role-narrator'"
             :title="line.roleFull"
           >
             {{ line.role }}
           </span>
           <p
-          class="leading-[1.85] text-[#393632]"
+            class="gospel-body leading-[1.85]"
             v-html="stripVerseNumbers(line.content)"
           />
         </div>
@@ -83,7 +83,7 @@
 
     <p
       v-else
-      class="mt-1 leading-[1.85] text-[#393632]"
+      class="gospel-body mt-1 leading-[1.85]"
       v-html="stripVerseNumbers(lines.map((l) => l.content).join(' '))"
     />
   </div>

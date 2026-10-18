@@ -19,5 +19,7 @@
 </script>
 
 <template>
-  <p class="text-base font-medium capitalize tracking-wide text-[#49443d]">{{ formatted }}</p>
+  <p class="today-date text-base font-medium tracking-wide capitalize">
+    {{ formatted }}
+  </p>
 </template>
