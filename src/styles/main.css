@@ -78,7 +78,14 @@ body {
   text-decoration: none;
 }
 
-.menu-button {
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.menu-button,
+.theme-button {
   display: grid;
   width: 2.65rem;
   height: 2.65rem;
@@ -90,14 +97,99 @@ body {
   cursor: pointer;
 }
 
-.menu-button:hover {
+.menu-button:hover,
+.theme-button:hover {
   border-color: #c9ab7a;
   background: #f8f3e9;
 }
 .menu-button:focus-visible,
+.theme-button:focus-visible,
 .main-menu a:focus-visible {
   outline: 2px solid #b89561;
   outline-offset: 3px;
+}
+
+.dark-mode body {
+  color: #e5ded4;
+  background: #1d1a17;
+}
+
+.dark-mode .reading-card,
+.dark-mode .menu-button,
+.dark-mode .theme-button,
+.dark-mode .main-menu,
+.dark-mode .date-picker-controls input,
+.dark-mode .date-picker-controls button,
+.dark-mode .font-controls button,
+.dark-mode .reading-accordion,
+.dark-mode .liturgy-accordion,
+.dark-mode .summary-card,
+.dark-mode .saint-profile,
+.dark-mode .prayer-select,
+.dark-mode .pull-indicator {
+  border-color: #51473c;
+  color: #e5ded4;
+  background: #2a2520;
+}
+
+.dark-mode .app-brand,
+.dark-mode .menu-button,
+.dark-mode .theme-button,
+.dark-mode .main-menu a,
+.dark-mode .reading-tools-label,
+.dark-mode .prayer-select-label,
+.dark-mode .saint-text-section h3,
+.dark-mode .construction-card h2 {
+  color: #ead8b6;
+}
+
+.dark-mode .main-menu a:hover,
+.dark-mode .main-menu a.router-link-active,
+.dark-mode .menu-button:hover,
+.dark-mode .theme-button:hover {
+  color: #fffefa;
+  background: #806747;
+}
+
+.dark-mode .week-navigator,
+.dark-mode .reading-tools,
+.dark-mode .reading-accordion > summary,
+.dark-mode .liturgy-accordion > summary,
+.dark-mode .liturgical-day,
+.dark-mode .saint-prayer,
+.dark-mode .construction-card,
+.dark-mode .prayer-text-card {
+  border-color: #51473c;
+  color: #e5ded4;
+  background: #332d27;
+}
+
+.dark-mode .week-days button,
+.dark-mode .day-details,
+.dark-mode .reading-body,
+.dark-mode .psalm-refrain,
+.dark-mode .liturgy-texts p,
+.dark-mode .summary-section p,
+.dark-mode .saint-text-section p,
+.dark-mode .construction-card p,
+.dark-mode .prayer-text-card p {
+  color: #ddd4c8;
+}
+
+.dark-mode .saint-profile-heading h2,
+.dark-mode .saint-item h2,
+.dark-mode .prayer-text-card h2,
+.dark-mode .summary-header h2,
+.dark-mode .video-heading-row h2 {
+  color: #f5eee4;
+}
+
+.dark-mode .section-divider::before,
+.dark-mode .section-divider::after,
+.dark-mode .page-credit,
+.dark-mode .reading-accordion > .gospel-text,
+.dark-mode .saint-text-section + .saint-text-section {
+  border-color: #51473c;
 }
 
 .main-menu {

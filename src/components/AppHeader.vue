@@ -1,12 +1,38 @@
 <script setup lang="ts">
-  import { ref } from 'vue'
-  import { Menu, BookOpenText, Cross, HeartHandshake } from 'lucide-vue-next'
+  import { onMounted, ref } from 'vue'
+  import {
+    Menu,
+    BookOpenText,
+    Cross,
+    HeartHandshake,
+    Moon,
+    Sun
+  } from 'lucide-vue-next'
 
   const isMenuOpen = ref(false)
+  const isDarkMode = ref(false)
 
   const closeMenu = () => {
     isMenuOpen.value = false
   }
+
+  const applyTheme = () => {
+    document.documentElement.classList.toggle('dark-mode', isDarkMode.value)
+    localStorage.setItem('theme', isDarkMode.value ? 'dark' : 'light')
+  }
+
+  const toggleTheme = () => {
+    isDarkMode.value = !isDarkMode.value
+    applyTheme()
+  }
+
+  onMounted(() => {
+    const savedTheme = localStorage.getItem('theme')
+    isDarkMode.value =
+      savedTheme === 'dark' ||
+      (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)
+    applyTheme()
+  })
 </script>
 
 <template>
@@ -16,17 +42,29 @@
       <span>Dia com Jesus</span>
     </RouterLink>
 
-    <button
-      class="menu-button"
-      type="button"
-      :aria-expanded="isMenuOpen"
-      aria-controls="main-menu"
-      aria-label="Abrir menu"
-      @click="isMenuOpen = !isMenuOpen"
-    >
-      <Menu v-if="!isMenuOpen" :size="23" aria-hidden="true" />
-      <Cross v-else :size="23" aria-hidden="true" />
-    </button>
+    <div class="header-actions">
+      <button
+        class="theme-button"
+        type="button"
+        :aria-label="isDarkMode ? 'Ativar modo claro' : 'Ativar modo escuro'"
+        :title="isDarkMode ? 'Ativar modo claro' : 'Ativar modo escuro'"
+        @click="toggleTheme"
+      >
+        <Sun v-if="isDarkMode" :size="20" aria-hidden="true" />
+        <Moon v-else :size="20" aria-hidden="true" />
+      </button>
+      <button
+        class="menu-button"
+        type="button"
+        :aria-expanded="isMenuOpen"
+        aria-controls="main-menu"
+        aria-label="Abrir menu"
+        @click="isMenuOpen = !isMenuOpen"
+      >
+        <Menu v-if="!isMenuOpen" :size="23" aria-hidden="true" />
+        <Cross v-else :size="23" aria-hidden="true" />
+      </button>
+    </div>
 
     <Transition name="menu-reveal">
       <nav
