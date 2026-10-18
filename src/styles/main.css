@@ -1185,6 +1185,226 @@ body {
   white-space: pre-line;
 }
 
+.rosary-content {
+  display: grid;
+  gap: 1rem;
+}
+
+.rosary-select-wrap {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.rosary-select-wrap label {
+  color: #735b3b;
+  font-size: 0.8rem;
+  font-weight: 650;
+}
+
+.rosary-progress {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.4rem 0.75rem;
+  color: #735b3b;
+  font-size: 0.76rem;
+  font-weight: 650;
+}
+
+.rosary-progress-track {
+  grid-column: 1 / -1;
+  height: 0.35rem;
+  overflow: hidden;
+  border-radius: 99px;
+  background: #eee6da;
+}
+
+.rosary-progress-track span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: #b89561;
+  transition: width 220ms ease;
+}
+
+.rosary-beads {
+  display: flex;
+  justify-content: center;
+  gap: 0.65rem;
+}
+
+.rosary-beads span {
+  width: 0.9rem;
+  height: 0.9rem;
+  border: 2px solid #c9ab7a;
+  border-radius: 50%;
+  background: #fffefa;
+  transition:
+    background 180ms ease,
+    transform 180ms ease;
+}
+
+.rosary-beads span.is-current,
+.rosary-beads span.is-complete {
+  border-color: #806747;
+  background: #806747;
+}
+
+.rosary-beads span.is-current {
+  transform: scale(1.25);
+  box-shadow: 0 0 0 4px rgba(184, 149, 97, 0.18);
+}
+
+.rosary-step-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 18rem;
+  padding: clamp(1.5rem, 5vw, 2.5rem);
+  border: 1px solid #e8ded0;
+  border-radius: 1.2rem;
+  background: linear-gradient(145deg, #fffefa 0%, #fbf7ef 100%);
+  text-align: center;
+}
+
+.rosary-step-card.is-mystery {
+  border-color: #dec89f;
+  background: #fdf7ea;
+}
+
+.rosary-step-icon {
+  display: grid;
+  width: 2.7rem;
+  height: 2.7rem;
+  place-items: center;
+  border: 1px solid #e1cfb1;
+  border-radius: 50%;
+  color: #876a42;
+  background: #fffaf0;
+}
+
+.rosary-step-label {
+  margin: 1rem 0 0;
+  color: #927959;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.rosary-step-card h2 {
+  margin: 0.55rem 0 0;
+  color: #39352f;
+  font-size: clamp(1.15rem, 4vw, 1.45rem);
+  font-weight: 650;
+  line-height: 1.4;
+}
+
+.rosary-step-text {
+  max-width: 31rem;
+  margin: 1rem 0 0;
+  color: #514b43;
+  font-size: 0.98rem;
+  line-height: 1.85;
+  white-space: pre-line;
+}
+
+.rosary-actions {
+  display: grid;
+  grid-template-columns: 1fr 1.35fr;
+  gap: 0.7rem;
+}
+
+.rosary-actions button {
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  border-radius: 0.75rem;
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.rosary-secondary-button {
+  border: 1px solid #e6dccd;
+  color: #735b3b;
+  background: #fffefa;
+}
+
+.rosary-secondary-button:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+
+.rosary-next-button {
+  border: 1px solid #806747;
+  color: #fffefa;
+  background: #806747;
+  box-shadow: 0 5px 14px rgba(93, 71, 42, 0.16);
+}
+
+.rosary-next-button:hover {
+  background: #6d573c;
+}
+
+.rosary-actions button:focus-visible {
+  outline: 3px solid #d6bd94;
+  outline-offset: 3px;
+}
+
+.dark-mode .rosary-select-wrap label,
+.dark-mode .rosary-progress,
+.dark-mode .rosary-step-label {
+  color: #f0d5a5;
+}
+
+.dark-mode .rosary-progress-track {
+  background: #504338;
+}
+
+.dark-mode .rosary-progress-track span {
+  background: #e0b86f;
+}
+
+.dark-mode .rosary-beads span {
+  border-color: #b6925c;
+  background: #302923;
+}
+
+.dark-mode .rosary-beads span.is-current,
+.dark-mode .rosary-beads span.is-complete {
+  border-color: #e0b86f;
+  background: #e0b86f;
+}
+
+.dark-mode .rosary-step-card,
+.dark-mode .rosary-step-card.is-mystery {
+  border-color: #5b4f42;
+  background: #302923;
+}
+
+.dark-mode .rosary-step-card h2 {
+  color: #fff8ee;
+}
+
+.dark-mode .rosary-step-text {
+  color: #f2ece3;
+}
+
+.dark-mode .rosary-secondary-button {
+  border-color: #68594a;
+  color: #f5efe6;
+  background: #302923;
+}
+
+@media (max-width: 480px) {
+  .rosary-step-card {
+    min-height: 20rem;
+  }
+}
+
 .error-message {
   color: #b34639;
 }
