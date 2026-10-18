@@ -19,9 +19,11 @@
     "@tanstack/vue-query": "^5.28.0",
     "@tanstack/vue-query-devtools": "^6.1.10",
     "@vercel/analytics": "^2.0.1",
-    "axios": "^1.6.7",
     "flagsmith-vue": "^3.0.0",
-    "vue": "^3.4.19"
+    "axios": "^1.6.7",
+    "lucide-vue-next": "^0.468.0",
+    "vue": "^3.4.19",
+    "vue-router": "^4.5.0"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.2.2",

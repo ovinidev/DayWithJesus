@@ -28,16 +28,22 @@ importers:
         version: 6.1.10(@tanstack/vue-query@5.95.2(vue@3.5.31(typescript@5.9.3)))(vue@3.5.31(typescript@5.9.3))
       '@vercel/analytics':
         specifier: ^2.0.1
-        version: 2.0.1(vue@3.5.31(typescript@5.9.3))
+        version: 2.0.1(vue-router@4.6.4(vue@3.5.31(typescript@5.9.3)))(vue@3.5.31(typescript@5.9.3))
       axios:
         specifier: ^1.6.7
-        version: 1.13.6
+        version: 1.13.6(debug@4.4.3)
       flagsmith-vue:
         specifier: ^3.0.0
         version: 3.0.0(@flagsmith/flagsmith@11.0.0)(vue@3.5.31(typescript@5.9.3))
+      lucide-vue-next:
+        specifier: ^0.468.0
+        version: 0.468.0(vue@3.5.31(typescript@5.9.3))
       vue:
         specifier: ^3.4.19
         version: 3.5.31(typescript@5.9.3)
+      vue-router:
+        specifier: ^4.5.0
+        version: 4.6.4(vue@3.5.31(typescript@5.9.3))
     devDependencies:
       '@tailwindcss/vite':
         specifier: ^4.2.2
@@ -2123,6 +2129,12 @@ packages:
   lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
 
+  lucide-vue-next@0.468.0:
+    resolution: {integrity: sha512-quV/6T8YB1XK0VOEnebg3Byd8Rsan5/m95cvjnuHV4vcS3qEnLAybkrSh0hk3ppavx+V7R1PjNW+mGDvcBdz4A==}
+    deprecated: Package deprecated. Please use @lucide/vue instead.
+    peerDependencies:
+      vue: '>=3.0.1'
+
   magic-string@0.25.9:
     resolution: {integrity: sha512-RmF0AsMzgt25qzqqLc1+MbHmhdx0ojF2Fvs4XnOqz2ZOBXzzkEwc/dJQZCYHAn7v1jbVOjAZfK8msRn4BxO4VQ==}
 
@@ -2831,6 +2843,11 @@ packages:
     peerDependenciesMeta:
       '@vue/composition-api':
         optional: true
+
+  vue-router@4.6.4:
+    resolution: {integrity: sha512-Hz9q5sa33Yhduglwz6g9skT8OBPii+4bFn88w6J+J4MfEo4KRRpmiNG/hHHkdbRFlLBOqxN8y8gf2Fb0MTUgVg==}
+    peerDependencies:
+      vue: ^3.5.0
 
   vue-tsc@2.2.12:
     resolution: {integrity: sha512-P7OP77b2h/Pmk+lZdJ0YWs+5tJ6J2+uOQPo7tlBnY44QqQSPYvS0qVT4wqDJgwrZaLe47etJLLQRFia71GYITw==}
@@ -4070,9 +4087,10 @@ snapshots:
 
   '@types/trusted-types@2.0.7': {}
 
-  '@vercel/analytics@2.0.1(vue@3.5.31(typescript@5.9.3))':
+  '@vercel/analytics@2.0.1(vue-router@4.6.4(vue@3.5.31(typescript@5.9.3)))(vue@3.5.31(typescript@5.9.3))':
     optionalDependencies:
       vue: 3.5.31(typescript@5.9.3)
+      vue-router: 4.6.4(vue@3.5.31(typescript@5.9.3))
 
   '@vitejs/plugin-vue@5.2.4(vite@5.4.21(@types/node@20.19.37)(lightningcss@1.32.0)(terser@5.46.1))(vue@3.5.31(typescript@5.9.3))':
     dependencies:
@@ -4268,9 +4286,9 @@ snapshots:
     dependencies:
       possible-typed-array-names: 1.1.0
 
-  axios@1.13.6:
+  axios@1.13.6(debug@4.4.3):
     dependencies:
-      follow-redirects: 1.15.11
+      follow-redirects: 1.15.11(debug@4.4.3)
       form-data: 4.0.5
       proxy-from-env: 1.1.0
     transitivePeerDependencies:
@@ -4658,7 +4676,9 @@ snapshots:
       '@flagsmith/flagsmith': 11.0.0
       vue: 3.5.31(typescript@5.9.3)
 
-  follow-redirects@1.15.11: {}
+  follow-redirects@1.15.11(debug@4.4.3):
+    optionalDependencies:
+      debug: 4.4.3
 
   for-each@0.3.5:
     dependencies:
@@ -5134,6 +5154,10 @@ snapshots:
   lru-cache@5.1.1:
     dependencies:
       yallist: 3.1.1
+
+  lucide-vue-next@0.468.0(vue@3.5.31(typescript@5.9.3)):
+    dependencies:
+      vue: 3.5.31(typescript@5.9.3)
 
   magic-string@0.25.9:
     dependencies:
@@ -5836,6 +5860,11 @@ snapshots:
 
   vue-demi@0.14.10(vue@3.5.31(typescript@5.9.3)):
     dependencies:
+      vue: 3.5.31(typescript@5.9.3)
+
+  vue-router@4.6.4(vue@3.5.31(typescript@5.9.3)):
+    dependencies:
+      '@vue/devtools-api': 6.6.4
       vue: 3.5.31(typescript@5.9.3)
 
   vue-tsc@2.2.12(typescript@5.9.3):

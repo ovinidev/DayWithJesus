@@ -61,6 +61,18 @@ export interface LiturgyResponse {
   }
 }
 
+export interface SaintOfDay {
+  nome: string
+  imagem: string | null
+  historia: string | null
+  reflexao: string | null
+  oracao: string | null
+}
+
+export interface SaintOfDayResponse {
+  results: SaintOfDay[]
+}
+
 interface LiturgyReadingResponse {
   referencia: string
   titulo: string

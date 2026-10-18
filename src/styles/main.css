@@ -16,6 +16,131 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+.app-header {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  width: min(100%, 42rem);
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+  padding: 0.9rem 1rem 0;
+}
+
+.pull-to-refresh {
+  min-height: calc(100vh - 3.75rem);
+}
+
+.pull-indicator {
+  position: fixed;
+  z-index: 20;
+  top: 0;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid #e1cfb1;
+  border-radius: 999px;
+  color: #735b3b;
+  background: #fffefa;
+  box-shadow: 0 5px 14px rgba(75, 59, 39, 0.1);
+  font-size: 0.72rem;
+  font-weight: 650;
+  pointer-events: none;
+  transition:
+    opacity 120ms ease,
+    transform 120ms ease;
+}
+
+.pull-indicator.is-ready {
+  color: #fffefa;
+  background: #806747;
+}
+
+.is-spinning {
+  animation: refresh-spin 800ms linear infinite;
+}
+
+@keyframes refresh-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.app-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: #5d4b34;
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.menu-button {
+  display: grid;
+  width: 2.65rem;
+  height: 2.65rem;
+  place-items: center;
+  border: 1px solid #e6dccd;
+  border-radius: 0.75rem;
+  color: #5d4b34;
+  background: #fffefa;
+  cursor: pointer;
+}
+
+.menu-button:hover {
+  border-color: #c9ab7a;
+  background: #f8f3e9;
+}
+.menu-button:focus-visible,
+.main-menu a:focus-visible {
+  outline: 2px solid #b89561;
+  outline-offset: 3px;
+}
+
+.main-menu {
+  position: absolute;
+  top: 3.9rem;
+  right: 1rem;
+  display: grid;
+  min-width: 13.5rem;
+  padding: 0.45rem;
+  border: 1px solid #e6dccd;
+  border-radius: 0.9rem;
+  background: #fffefa;
+  box-shadow: 0 14px 30px rgba(75, 59, 39, 0.14);
+}
+
+.main-menu a {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.75rem;
+  border-radius: 0.6rem;
+  color: #594a36;
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.main-menu a:hover,
+.main-menu a.router-link-active {
+  color: #fffefa;
+  background: #806747;
+}
+.menu-reveal-enter-active,
+.menu-reveal-leave-active {
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease;
+}
+.menu-reveal-enter-from,
+.menu-reveal-leave-to {
+  transform: translateY(-0.4rem);
+  opacity: 0;
+}
+
 .page-shell {
   min-height: 100vh;
   padding: clamp(1.25rem, 5vw, 4rem) 1rem;
@@ -518,6 +643,207 @@ body {
   color: #81796e;
   text-align: center;
   font-size: 0.9rem;
+}
+
+.saints-content {
+  display: grid;
+  gap: 1rem;
+}
+.saints-date {
+  margin: 0;
+  color: #81796e;
+  text-align: center;
+  font-size: 0.82rem;
+  text-transform: capitalize;
+}
+.liturgical-day {
+  margin: 0;
+  padding: 0.85rem 1rem;
+  border: 1px solid #e8ded0;
+  border-radius: 0.9rem;
+  color: #594a36;
+  background: #fbf8f2;
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 650;
+}
+.saints-list {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.saint-profile {
+  overflow: hidden;
+  border: 1px solid #e8ded0;
+  border-radius: 1rem;
+  background: #fffefa;
+}
+
+.saint-image {
+  display: block;
+  width: 100%;
+  max-height: 20rem;
+  object-fit: cover;
+  background: #f8f3e9;
+}
+
+.saint-profile-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1.1rem 1.1rem 0.8rem;
+}
+
+.saint-profile-heading h2 {
+  margin: 0;
+  color: #39352f;
+  font-size: 1.2rem;
+  font-weight: 650;
+}
+
+.saint-text-section {
+  padding: 0.95rem 1.1rem;
+}
+
+.saint-text-section + .saint-text-section {
+  border-top: 1px solid #eee6da;
+}
+
+.saint-text-section h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0 0 0.45rem;
+  color: #735b3b;
+  font-size: 0.92rem;
+  font-weight: 650;
+}
+
+.saint-text-section p {
+  margin: 0;
+  color: #514b43;
+  font-size: 0.92rem;
+  line-height: 1.75;
+  white-space: pre-line;
+}
+
+.saint-prayer {
+  background: #fbf8f2;
+}
+.saint-item {
+  display: flex;
+  gap: 0.9rem;
+  padding: 1.1rem;
+  border: 1px solid #e8ded0;
+  border-radius: 1rem;
+  background: #fffefa;
+}
+.saint-emblem {
+  display: grid;
+  width: 2.35rem;
+  height: 2.35rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid #e1cfb1;
+  border-radius: 50%;
+  color: #876a42;
+  background: #fffaf0;
+}
+.saint-rank {
+  margin: 0 0 0.25rem;
+  color: #927959;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.saint-item h2 {
+  margin: 0;
+  color: #39352f;
+  font-size: 1.05rem;
+  font-weight: 650;
+  line-height: 1.45;
+}
+.saint-bio {
+  margin: 0.55rem 0 0;
+  color: #655e55;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  white-space: pre-line;
+}
+.empty-state {
+  margin: 0;
+  padding: 1.5rem 1rem;
+  border: 1px dashed #d9cbb8;
+  border-radius: 0.9rem;
+  color: #81796e;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.prayers-content {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.prayer-select-label {
+  color: #735b3b;
+  font-size: 0.8rem;
+  font-weight: 650;
+}
+
+.prayer-select {
+  width: 100%;
+  padding: 0.75rem 0.85rem;
+  border: 1px solid #e6dccd;
+  border-radius: 0.7rem;
+  color: #49443d;
+  background: #fffefa;
+  font: inherit;
+  font-size: 0.92rem;
+}
+
+.prayer-select:focus-visible {
+  outline: 2px solid #b89561;
+  outline-offset: 2px;
+}
+
+.prayer-text-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 0.65rem;
+  padding: clamp(1.5rem, 5vw, 2.5rem);
+  border: 1px solid #e8ded0;
+  border-radius: 1rem;
+  background: linear-gradient(145deg, #fffefa 0%, #fbf7ef 100%);
+  text-align: center;
+}
+
+.prayer-emblem {
+  display: grid;
+  width: 2.8rem;
+  height: 2.8rem;
+  place-items: center;
+  border: 1px solid #e1cfb1;
+  border-radius: 50%;
+  color: #876a42;
+  background: #fffaf0;
+}
+
+.prayer-text-card h2 {
+  margin: 1rem 0 0.85rem;
+  color: #39352f;
+  font-size: 1.2rem;
+  font-weight: 650;
+}
+
+.prayer-text-card p {
+  margin: 0;
+  color: #514b43;
+  font-size: 1rem;
+  line-height: 1.85;
+  white-space: pre-line;
 }
 
 .error-message {
