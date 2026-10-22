@@ -1,22 +1,25 @@
 <script setup lang="ts">
   import { computed, ref, watch } from 'vue'
-  import {
-    ChevronLeft,
-    ChevronRight,
-    RotateCcw,
-    Sparkles
-  } from 'lucide-vue-next'
+  import { ChevronLeft, ChevronRight, Cross, RotateCcw } from 'lucide-vue-next'
   import Title from '@/components/Title.vue'
   import {
+    buildFullRosarySteps,
     buildRosarySteps,
     rosaryGroupForDate,
     ROSARY_MYSTERY_GROUPS,
     type RosaryMysteryGroupKey
   } from '@/constants/rosary'
 
+  type PrayerMode = 'chaplet' | 'rosary'
+
+  const prayerMode = ref<PrayerMode>('chaplet')
   const selectedGroup = ref<RosaryMysteryGroupKey>(rosaryGroupForDate())
   const currentStepIndex = ref(0)
-  const steps = computed(() => buildRosarySteps(selectedGroup.value))
+  const steps = computed(() =>
+    prayerMode.value === 'rosary'
+      ? buildFullRosarySteps()
+      : buildRosarySteps(selectedGroup.value)
+  )
   const currentStep = computed(() => steps.value[currentStepIndex.value])
   const progress = computed(
     () => ((currentStepIndex.value + 1) / steps.value.length) * 100
@@ -33,6 +36,11 @@
   watch(selectedGroup, () => {
     currentStepIndex.value = 0
   })
+
+  const selectPrayerMode = (mode: PrayerMode) => {
+    prayerMode.value = mode
+    currentStepIndex.value = 0
+  }
 
   const previousStep = () => {
     currentStepIndex.value = Math.max(0, currentStepIndex.value - 1)
@@ -60,9 +68,39 @@
       </header>
 
       <section class="rosary-content" aria-live="polite">
+        <div class="rosary-mode-selector" aria-label="Escolha a oração">
+          <button
+            class="rosary-mode-button"
+            :class="{ 'is-selected': prayerMode === 'chaplet' }"
+            type="button"
+            :aria-pressed="prayerMode === 'chaplet'"
+            @click="selectPrayerMode('chaplet')"
+          >
+            Terço Mariano
+            <span>5 mistérios do dia</span>
+          </button>
+          <button
+            class="rosary-mode-button"
+            :class="{ 'is-selected': prayerMode === 'rosary' }"
+            type="button"
+            :aria-pressed="prayerMode === 'rosary'"
+            @click="selectPrayerMode('rosary')"
+          >
+            Rezar o Rosário
+            <span>20 mistérios completos</span>
+          </button>
+        </div>
+
         <div class="rosary-select-wrap">
-          <label for="mystery-group">Mistérios de hoje</label>
+          <label v-if="prayerMode === 'chaplet'" for="mystery-group">
+            Mistérios de hoje
+          </label>
+          <p v-else>
+            Rosário completo ·
+            {{ ROSARY_MYSTERY_GROUPS[currentStep.group].name }}
+          </p>
           <select
+            v-if="prayerMode === 'chaplet'"
             id="mystery-group"
             v-model="selectedGroup"
             class="prayer-select"
@@ -126,7 +164,7 @@
 
         <article class="rosary-step-card" :class="`is-${currentStep.kind}`">
           <span class="rosary-step-icon"
-            ><Sparkles :size="20" aria-hidden="true"
+            ><Cross :size="20" aria-hidden="true"
           /></span>
           <p class="rosary-step-label">{{ currentStep.label }}</p>
           <h2>{{ currentStep.title }}</h2>

@@ -123,6 +123,13 @@ export const ROSARY_MYSTERY_GROUPS = {
 
 export type RosaryMysteryGroupKey = keyof typeof ROSARY_MYSTERY_GROUPS
 
+export const ROSARY_GROUP_ORDER: RosaryMysteryGroupKey[] = [
+  'joyful',
+  'luminous',
+  'sorrowful',
+  'glorious'
+]
+
 export const rosaryGroupForDate = (
   date = new Date()
 ): RosaryMysteryGroupKey => {
@@ -146,24 +153,37 @@ export interface RosaryStep {
   title: string
   text: string
   mysteryNumber?: number
+  group: RosaryMysteryGroupKey
 }
 
-const signOfCross = 'Em nome do Pai, do Filho e do Espírito Santo. Amém.'
+const signOfCross =
+  'Pelo sinal da Santa Cruz, livrai-nos, Deus, nosso Senhor, dos nossos inimigos.\n\nEm nome do Pai, do Filho e do Espírito Santo. Amém.'
+const offering =
+  'Divino Jesus, nós Vos oferecemos este terço que vamos rezar, meditando nos mistérios da nossa redenção. Concedei-nos, pela intercessão de Maria, Vossa Mãe Santíssima, as virtudes que nos são necessárias para bem rezá-lo e a graça de ganharmos as indulgências desta santa devoção. Amém.'
 const fatimaPrayer =
   'Ó meu Jesus, perdoai-nos, livrai-nos do fogo do inferno, levai as almas todas para o céu e socorrei principalmente as que mais precisarem.'
 const hailHolyQueen =
   'Salve, Rainha, Mãe de misericórdia, vida, doçura e esperança nossa, salve! A vós bradamos os degredados filhos de Eva. A vós suspiramos, gemendo e chorando neste vale de lágrimas. Eia, pois, advogada nossa, esses vossos olhos misericordiosos a nós volvei; e, depois deste desterro, mostrai-nos Jesus, bendito fruto do vosso ventre. Ó clemente, ó piedosa, ó doce sempre Virgem Maria. Rogai por nós, santa Mãe de Deus, para que sejamos dignos das promessas de Cristo. Amém.'
+const finalPrayer =
+  'Oremos: Ó Deus, cujo Filho unigênito, por sua vida, morte e ressurreição, nos alcançou os prêmios da salvação eterna, concedei-nos, nós Vos suplicamos, que, meditando estes mistérios do santíssimo Rosário da Bem-aventurada Virgem Maria, imitemos o que contêm e alcancemos o que prometem. Por Cristo, Senhor nosso. Amém.'
 
 export const buildRosarySteps = (
   group: RosaryMysteryGroupKey
 ): RosaryStep[] => {
-  const steps: RosaryStep[] = [
+  const steps: Omit<RosaryStep, 'group'>[] = [
     {
       id: 'sign-start',
       kind: 'opening',
       label: 'Início',
       title: 'Sinal da Cruz',
       text: signOfCross
+    },
+    {
+      id: 'offering',
+      kind: 'opening',
+      label: 'Oferecimento',
+      title: 'Oferecimento do Terço',
+      text: offering
     },
     {
       id: 'creed',
@@ -252,6 +272,13 @@ export const buildRosarySteps = (
       text: hailHolyQueen
     },
     {
+      id: 'final-prayer',
+      kind: 'closing',
+      label: 'Conclusão',
+      title: 'Oração final',
+      text: finalPrayer
+    },
+    {
       id: 'sign-end',
       kind: 'closing',
       label: 'Conclusão',
@@ -260,5 +287,8 @@ export const buildRosarySteps = (
     }
   )
 
-  return steps
+  return steps.map((step) => ({ ...step, group }))
 }
+
+export const buildFullRosarySteps = (): RosaryStep[] =>
+  ROSARY_GROUP_ORDER.flatMap((group) => buildRosarySteps(group))

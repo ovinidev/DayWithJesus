@@ -7,6 +7,10 @@
   --font-sans: 'Montserrat', sans-serif;
 }
 
+:root {
+  --app-header-height: 4rem;
+}
+
 body {
   @apply min-h-screen font-sans;
   margin: 0;
@@ -60,15 +64,17 @@ body {
   position: relative;
   z-index: 10;
   display: flex;
+  box-sizing: border-box;
   width: min(100%, 42rem);
+  height: var(--app-header-height);
   align-items: center;
   justify-content: space-between;
   margin: 0 auto;
-  padding: 0.9rem 1rem 0;
+  padding: 0.5rem 1rem;
 }
 
 .pull-to-refresh {
-  min-height: calc(100vh - 3.75rem);
+  min-height: calc(100vh - var(--app-header-height));
 }
 
 .pull-indicator {
@@ -135,6 +141,7 @@ body {
   color: #5d4b34;
   background: #fffefa;
   cursor: pointer;
+  touch-action: manipulation;
 }
 
 .menu-button:hover,
@@ -399,7 +406,7 @@ body {
 
 .main-menu {
   position: absolute;
-  top: 3.9rem;
+  top: calc(var(--app-header-height) - 0.1rem);
   right: 1rem;
   display: grid;
   min-width: 13.5rem;
@@ -1190,12 +1197,63 @@ body {
   gap: 1rem;
 }
 
+.rosary-mode-selector {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.rosary-mode-button {
+  display: grid;
+  gap: 0.2rem;
+  min-height: 4.75rem;
+  padding: 0.75rem;
+  border: 1px solid #e6dccd;
+  border-radius: 0.8rem;
+  color: #5d4b34;
+  background: #fffefa;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+
+.rosary-mode-button span {
+  color: #927959;
+  font-size: 0.68rem;
+  font-weight: 600;
+}
+
+.rosary-mode-button.is-selected {
+  border-color: #806747;
+  color: #fffefa;
+  background: #806747;
+  box-shadow: 0 5px 14px rgba(93, 71, 42, 0.14);
+}
+
+.rosary-mode-button.is-selected span {
+  color: #fff5e6;
+}
+
+.rosary-mode-button:focus-visible {
+  outline: 3px solid #d6bd94;
+  outline-offset: 3px;
+}
+
 .rosary-select-wrap {
   display: grid;
   gap: 0.4rem;
 }
 
 .rosary-select-wrap label {
+  color: #735b3b;
+  font-size: 0.8rem;
+  font-weight: 650;
+}
+
+.rosary-select-wrap p {
+  margin: 0;
   color: #735b3b;
   font-size: 0.8rem;
   font-weight: 650;
@@ -1355,9 +1413,30 @@ body {
 }
 
 .dark-mode .rosary-select-wrap label,
+.dark-mode .rosary-select-wrap p,
 .dark-mode .rosary-progress,
 .dark-mode .rosary-step-label {
   color: #f0d5a5;
+}
+
+.dark-mode .rosary-mode-button {
+  border-color: #68594a;
+  color: #f5efe6;
+  background: #302923;
+}
+
+.dark-mode .rosary-mode-button span {
+  color: #e0b86f;
+}
+
+.dark-mode .rosary-mode-button.is-selected {
+  border-color: #e0b86f;
+  color: #302923;
+  background: #e0b86f;
+}
+
+.dark-mode .rosary-mode-button.is-selected span {
+  color: #4a3624;
 }
 
 .dark-mode .rosary-progress-track {
