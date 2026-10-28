@@ -1,76 +1,367 @@
 @import 'tailwindcss';
 
+@property --bg {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #efeae2;
+}
+
+@property --bg-glow {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #e5f0e8;
+}
+
+@property --surface {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #fffcf8;
+}
+
+@property --surface-muted {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #f6f1e8;
+}
+
+@property --ink {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #1c1917;
+}
+
+@property --ink-soft {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #44403c;
+}
+
+@property --muted {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #5f574e;
+}
+
+@property --line {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #e6dfd4;
+}
+
+@property --line-strong {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #d5cdc0;
+}
+
+@property --accent {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #1b4332;
+}
+
+@property --accent-strong {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #133226;
+}
+
+@property --accent-soft {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #e7f3ec;
+}
+
+@property --accent-text {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #143528;
+}
+
+@property --on-accent {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #f4fbf6;
+}
+
+@property --danger {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #9f2d2d;
+}
+
+@property --danger-soft {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #fdecec;
+}
+
+@property --focus {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #1b4332;
+}
+
 @theme {
-  --color-primary: #fff;
-  --color-lilac: #c4b5fd;
-  --color-lilac-light: #faf9f7;
-  --font-sans: 'Montserrat', sans-serif;
+  --font-sans: 'Outfit', sans-serif;
+  --font-serif: 'Source Serif 4', Georgia, serif;
+  --font-display: 'Fraunces', Georgia, serif;
 }
 
 :root {
-  --app-header-height: 4rem;
+  --bg: #efeae2;
+  --bg-glow: #e5f0e8;
+  --surface: #fffcf8;
+  --surface-muted: #f6f1e8;
+  --ink: #1c1917;
+  --ink-soft: #44403c;
+  --muted: #5f574e;
+  --line: #e6dfd4;
+  --line-strong: #d5cdc0;
+  --accent: #1b4332;
+  --accent-strong: #133226;
+  --accent-soft: #e7f3ec;
+  --accent-text: #143528;
+  --on-accent: #f4fbf6;
+  --gold: #8a6232;
+  --danger: #9f2d2d;
+  --danger-soft: #fdecec;
+  --shadow:
+    0 1px 2px rgba(28, 25, 23, 0.04), 0 16px 40px rgba(68, 48, 28, 0.07);
+  --radius: 1.25rem;
+  --app-header-height: 4.35rem;
+  --focus: #1b4332;
+  color-scheme: light;
+}
+
+.dark-mode {
+  --bg: #12110f;
+  --bg-glow: #1b2822;
+  --surface: #1c1a17;
+  --surface-muted: #26221d;
+  --ink: #f6f1e8;
+  --ink-soft: #e7e0d4;
+  --muted: #cbbba6;
+  --line: #3a342c;
+  --line-strong: #4a4136;
+  --accent: #e4c48a;
+  --accent-strong: #c9a15e;
+  --accent-soft: #2a241c;
+  --accent-text: #f0d7ae;
+  --on-accent: #1c140c;
+  --gold: #e4c48a;
+  --danger: #ffb4a8;
+  --danger-soft: #3a2422;
+  --shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  --focus: #e4c48a;
+  color-scheme: dark;
+}
+
+html {
+  transition:
+    --bg 320ms ease,
+    --bg-glow 320ms ease,
+    --surface 320ms ease,
+    --surface-muted 320ms ease,
+    --ink 320ms ease,
+    --ink-soft 320ms ease,
+    --muted 320ms ease,
+    --line 320ms ease,
+    --line-strong 320ms ease,
+    --accent 320ms ease,
+    --accent-strong 320ms ease,
+    --accent-soft 320ms ease,
+    --accent-text 320ms ease,
+    --on-accent 320ms ease,
+    --danger 320ms ease,
+    --danger-soft 320ms ease,
+    --focus 320ms ease;
 }
 
 body {
-  @apply min-h-screen font-sans;
   margin: 0;
-  color: #33312f;
-  background: #f4f1eb;
+  min-height: 100vh;
+  color: var(--ink);
+  background:
+    radial-gradient(900px 420px at 50% -120px, var(--bg-glow), transparent 68%),
+    var(--bg);
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
-.page-title {
-  color: #292723;
+button,
+input,
+select {
+  font: inherit;
 }
 
-.today-date {
-  color: #49443d;
-}
-
-.gospel-reference {
-  color: #443d34;
-}
-
-.gospel-title {
-  color: #63594d;
-}
-
-.gospel-body {
-  color: #393632;
-}
-
-.gospel-stage {
-  color: rgba(0, 0, 0, 0.55);
-}
-
-.gospel-role-narrator {
-  color: rgba(0, 0, 0, 0.7);
-}
-
-.gospel-role-reader {
-  color: #7c3aed;
-}
-
-.gospel-role-people {
-  color: #b45309;
-}
-
-.gospel-role-jesus {
-  color: #2563eb;
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
 }
 
 .app-header {
-  position: relative;
-  z-index: 10;
+  position: sticky;
+  z-index: 30;
+  top: 0;
   display: flex;
   box-sizing: border-box;
-  width: min(100%, 42rem);
-  height: var(--app-header-height);
+  width: 100%;
+  min-height: var(--app-header-height);
   align-items: center;
   justify-content: space-between;
-  margin: 0 auto;
-  padding: 0.5rem 1rem;
+  gap: 0.75rem;
+  padding: 0.55rem clamp(0.85rem, 3vw, 1.4rem);
+  border-bottom: 1px solid var(--line);
+  background: color-mix(in srgb, var(--surface) 84%, transparent);
+  backdrop-filter: blur(18px);
+}
+
+.app-brand {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.7rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.brand-mark {
+  display: grid;
+  width: 2.25rem;
+  height: 2.25rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 0.7rem;
+  color: var(--on-accent);
+  background: var(--accent);
+}
+
+.brand-copy {
+  display: grid;
+  min-width: 0;
+  gap: 0.05rem;
+}
+
+.brand-name {
+  color: var(--ink);
+  font-size: 0.98rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.brand-meta {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.brand-meta-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+.header-actions {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.menu-button,
+.theme-button {
+  display: grid;
+  width: 2.5rem;
+  height: 2.5rem;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 0.8rem;
+  color: var(--ink-soft);
+  background: var(--surface);
+  cursor: pointer;
+  touch-action: manipulation;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    transform 160ms ease;
+}
+
+.menu-button:hover,
+.theme-button:hover {
+  border-color: var(--line-strong);
+  background: var(--surface-muted);
+}
+
+.main-menu {
+  position: absolute;
+  z-index: 40;
+  top: calc(100% + 0.35rem);
+  right: clamp(0.85rem, 3vw, 1.4rem);
+  display: grid;
+  min-width: 14rem;
+  padding: 0.4rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.main-menu a {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.72rem 0.75rem;
+  border-radius: 0.7rem;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    background 150ms ease,
+    color 150ms ease;
+  animation: card-in 240ms cubic-bezier(0.2, 0.75, 0.25, 1) backwards;
+}
+
+.main-menu a:hover,
+.main-menu a.router-link-active {
+  color: var(--on-accent);
+  background: var(--accent);
+}
+
+.menu-reveal-enter-active,
+.menu-reveal-leave-active {
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease;
+}
+
+.menu-reveal-enter-from,
+.menu-reveal-leave-to {
+  transform: translateY(-0.4rem) scale(0.98);
+  opacity: 0;
+}
+
+.main-menu a:nth-child(1) {
+  animation-delay: 20ms;
+}
+
+.main-menu a:nth-child(2) {
+  animation-delay: 55ms;
+}
+
+.main-menu a:nth-child(3) {
+  animation-delay: 90ms;
+}
+
+.main-menu a:nth-child(4) {
+  animation-delay: 125ms;
 }
 
 .pull-to-refresh {
@@ -80,17 +371,17 @@ body {
 .pull-indicator {
   position: fixed;
   z-index: 20;
-  top: 0;
+  top: 0.45rem;
   left: 50%;
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  padding: 0.45rem 0.7rem;
-  border: 1px solid #e1cfb1;
+  padding: 0.45rem 0.75rem;
+  border: 1px solid var(--line);
   border-radius: 999px;
-  color: #735b3b;
-  background: #fffefa;
-  box-shadow: 0 5px 14px rgba(75, 59, 39, 0.1);
+  color: var(--accent-text);
+  background: var(--surface);
+  box-shadow: var(--shadow);
   font-size: 0.72rem;
   font-weight: 650;
   pointer-events: none;
@@ -100,8 +391,8 @@ body {
 }
 
 .pull-indicator.is-ready {
-  color: #fffefa;
-  background: #806747;
+  color: var(--on-accent);
+  background: var(--accent);
 }
 
 .is-spinning {
@@ -114,526 +405,238 @@ body {
   }
 }
 
-.app-brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  color: #5d4b34;
-  font-size: 0.88rem;
-  font-weight: 700;
-  text-decoration: none;
-}
-
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 0.45rem;
-}
-
-.menu-button,
-.theme-button {
-  display: grid;
-  width: 2.65rem;
-  height: 2.65rem;
-  place-items: center;
-  border: 1px solid #e6dccd;
-  border-radius: 0.75rem;
-  color: #5d4b34;
-  background: #fffefa;
-  cursor: pointer;
-  touch-action: manipulation;
-}
-
-.menu-button:hover,
-.theme-button:hover {
-  border-color: #c9ab7a;
-  background: #f8f3e9;
-}
-.menu-button:focus-visible,
-.theme-button:focus-visible,
-.main-menu a:focus-visible {
-  outline: 2px solid #b89561;
-  outline-offset: 3px;
-}
-
-.dark-mode body {
-  color: #e5ded4;
-  background: #1d1a17;
-}
-
-.dark-mode .reading-card,
-.dark-mode .menu-button,
-.dark-mode .theme-button,
-.dark-mode .main-menu,
-.dark-mode .date-picker-controls input,
-.dark-mode .date-picker-controls button,
-.dark-mode .font-controls button,
-.dark-mode .reading-accordion,
-.dark-mode .liturgy-accordion,
-.dark-mode .summary-card,
-.dark-mode .saint-profile,
-.dark-mode .prayer-select,
-.dark-mode .pull-indicator {
-  border-color: #51473c;
-  color: #e5ded4;
-  background: #2a2520;
-}
-
-.dark-mode .app-brand,
-.dark-mode .menu-button,
-.dark-mode .theme-button,
-.dark-mode .main-menu a,
-.dark-mode .reading-tools-label,
-.dark-mode .prayer-select-label,
-.dark-mode .saint-text-section h3,
-.dark-mode .construction-card h2 {
-  color: #ead8b6;
-}
-
-.dark-mode .page-title {
-  color: #fff8ee;
-}
-
-.dark-mode .today-date {
-  color: #f0dfc8;
-}
-
-.dark-mode .gospel-reference {
-  color: #f4d59d;
-}
-
-.dark-mode .gospel-title {
-  color: #e5d9c9;
-}
-
-.dark-mode .gospel-body {
-  color: #f2ece3;
-}
-
-.dark-mode .gospel-stage {
-  color: #d4c9bb;
-}
-
-.dark-mode .gospel-role-narrator {
-  color: #e8ded2;
-}
-
-.dark-mode .gospel-role-reader {
-  color: #c4b5fd;
-}
-
-.dark-mode .gospel-role-people {
-  color: #fbbf24;
-}
-
-.dark-mode .gospel-role-jesus {
-  color: #93c5fd;
-}
-
-.dark-mode .main-menu a:hover,
-.dark-mode .main-menu a.router-link-active,
-.dark-mode .menu-button:hover,
-.dark-mode .theme-button:hover {
-  color: #fffefa;
-  background: #806747;
-}
-
-.dark-mode .week-navigator,
-.dark-mode .reading-tools,
-.dark-mode .reading-accordion > summary,
-.dark-mode .liturgy-accordion > summary,
-.dark-mode .liturgical-day,
-.dark-mode .saint-prayer,
-.dark-mode .construction-card,
-.dark-mode .prayer-text-card {
-  border-color: #51473c;
-  color: #e5ded4;
-  background: #332d27;
-}
-
-.dark-mode .week-days button,
-.dark-mode .day-details,
-.dark-mode .reading-body,
-.dark-mode .psalm-refrain,
-.dark-mode .liturgy-texts p,
-.dark-mode .summary-section p,
-.dark-mode .saint-text-section p,
-.dark-mode .construction-card p,
-.dark-mode .prayer-text-card p {
-  color: #ddd4c8;
-}
-
-.dark-mode .saint-profile-heading h2,
-.dark-mode .saint-item h2,
-.dark-mode .prayer-text-card h2,
-.dark-mode .summary-header h2,
-.dark-mode .video-heading-row h2 {
-  color: #f5eee4;
-}
-
-.dark-mode .section-divider::before,
-.dark-mode .section-divider::after,
-.dark-mode .page-credit,
-.dark-mode .reading-accordion > .gospel-text,
-.dark-mode .saint-text-section + .saint-text-section {
-  border-color: #51473c;
-}
-
-/* Higher-contrast dark theme */
-.dark-mode body {
-  color: #f5efe6;
-  background: #171411;
-}
-
-.dark-mode .reading-card {
-  border-color: #5b4f42;
-  background: #26211d;
-  box-shadow: 0 18px 55px rgba(0, 0, 0, 0.3);
-}
-
-.dark-mode .eyebrow,
-.dark-mode .video-kicker,
-.dark-mode .summary-kicker,
-.dark-mode .saint-rank,
-.dark-mode .detail-label,
-.dark-mode .date-picker > label,
-.dark-mode .week-caption,
-.dark-mode .saints-date {
-  color: #e7c68e;
-}
-
-.dark-mode .header-rule,
-.dark-mode .section-divider,
-.dark-mode .construction-sparkle {
-  background-color: #d3ad6e;
-  color: #e7c68e;
-}
-
-.dark-mode .date-picker-controls input,
-.dark-mode .date-picker-controls button,
-.dark-mode .font-controls button,
-.dark-mode .prayer-select {
-  border-color: #68594a;
-  color: #f5efe6;
-  background: #302923;
-}
-
-.dark-mode .date-picker-controls button:hover:not(:disabled),
-.dark-mode .font-controls button:hover:not(:disabled),
-.dark-mode .week-days button:hover {
-  border-color: #d3ad6e;
-  color: #fffaf2;
-  background: #45382d;
-}
-
-.dark-mode .week-navigator,
-.dark-mode .reading-tools,
-.dark-mode .reading-accordion > summary,
-.dark-mode .liturgy-accordion > summary,
-.dark-mode .liturgical-day,
-.dark-mode .saint-prayer,
-.dark-mode .construction-card,
-.dark-mode .prayer-text-card,
-.dark-mode .summary-header {
-  border-color: #5b4f42;
-  color: #f5efe6;
-  background: #332b24;
-}
-
-.dark-mode .reading-accordion,
-.dark-mode .liturgy-accordion,
-.dark-mode .summary-card,
-.dark-mode .saint-profile {
-  border-color: #5b4f42;
-  background: #26211d;
-}
-
-.dark-mode .reading-reference,
-.dark-mode .liturgy-texts h3,
-.dark-mode .summary-section h3,
-.dark-mode .reading-accordion > summary,
-.dark-mode .liturgy-accordion > summary,
-.dark-mode .font-scale {
-  color: #f0d5a5;
-}
-
-.dark-mode .week-days button,
-.dark-mode .day-details,
-.dark-mode .reading-body,
-.dark-mode .psalm-refrain,
-.dark-mode .liturgy-texts p,
-.dark-mode .summary-section p,
-.dark-mode .saint-text-section p,
-.dark-mode .construction-card p,
-.dark-mode .prayer-text-card p,
-.dark-mode .video-search-link,
-.dark-mode .video-search-link small {
-  color: #e6ddd1;
-}
-
-.dark-mode .page-credit {
-  border-color: #5b4f42;
-  color: #cfc2b2;
-}
-
-.dark-mode .page-credit a {
-  color: #f0d5a5;
-}
-
-.dark-mode .video-section,
-.dark-mode .video-search-link,
-.dark-mode .summary-header,
-.dark-mode .summary-section + .summary-section,
-.dark-mode .liturgy-texts,
-.dark-mode .liturgy-texts section + section,
-.dark-mode .saint-text-section + .saint-text-section {
-  border-color: #5b4f42;
-}
-
-.dark-mode .video-search-link {
-  border-color: #5b4f42;
-  background: #332b24;
-}
-
-.dark-mode .homily-frame,
-.dark-mode .homily-poster {
-  border-color: #5b4f42;
-}
-
-.dark-mode .homily-caption,
-.dark-mode .homily-note {
-  color: #e6ddd1;
-}
-
-.dark-mode .homily-note {
-  background: #332b24;
-}
-
-.dark-mode .homily-play {
-  color: #2a2118;
-  background: #e7c68e;
-}
-
-.dark-mode .homily-status {
-  color: #e7c68e;
-  background: #332b24;
-}
-
-.dark-mode .homily-status.is-error {
-  color: #ffb1a8;
-  background: #3a2422;
-}
-
-.dark-mode .summary-emblem,
-.dark-mode .saint-emblem,
-.dark-mode .prayer-emblem,
-.dark-mode .construction-emblem {
-  border-color: #80694d;
-  color: #f0d5a5;
-  background: #3c3127;
-}
-
-.main-menu {
-  position: absolute;
-  top: calc(var(--app-header-height) - 0.1rem);
-  right: 1rem;
-  display: grid;
-  min-width: 13.5rem;
-  padding: 0.45rem;
-  border: 1px solid #e6dccd;
-  border-radius: 0.9rem;
-  background: #fffefa;
-  box-shadow: 0 14px 30px rgba(75, 59, 39, 0.14);
-}
-
-.main-menu a {
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
-  padding: 0.75rem;
-  border-radius: 0.6rem;
-  color: #594a36;
-  font-size: 0.88rem;
-  font-weight: 600;
-  text-decoration: none;
-}
-.main-menu a:hover,
-.main-menu a.router-link-active {
-  color: #fffefa;
-  background: #806747;
-}
-.menu-reveal-enter-active,
-.menu-reveal-leave-active {
-  transition:
-    opacity 160ms ease,
-    transform 160ms ease;
-}
-.menu-reveal-enter-from,
-.menu-reveal-leave-to {
-  transform: translateY(-0.4rem);
-  opacity: 0;
-}
-
 .page-shell {
-  min-height: 100vh;
-  padding: clamp(1.25rem, 5vw, 4rem) 1rem;
+  width: min(100% - 1.25rem, 44rem);
+  margin: 0 auto;
+  padding: 1rem 0 3.5rem;
 }
 
 .reading-card {
-  width: min(100%, 42rem);
-  margin: 0 auto;
-  padding: clamp(1.5rem, 5vw, 3.5rem);
-  border: 1px solid rgba(93, 75, 55, 0.09);
-  border-radius: 1.5rem;
-  background: #fffefa;
-  box-shadow: 0 18px 55px rgba(75, 59, 39, 0.07);
+  display: grid;
+  width: 100%;
+  gap: 0.85rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
 }
 
 .page-header {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
+  margin: 0;
+  padding: 1.3rem 1.25rem 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: 1.35rem;
+  background:
+    radial-gradient(
+      420px 180px at 100% 0%,
+      var(--accent-soft),
+      transparent 70%
+    ),
+    var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.hero-top {
+  display: flex;
+  width: 100%;
   align-items: center;
-  margin-bottom: 2rem;
+  justify-content: space-between;
+  gap: 0.75rem;
 }
 
-.page-credit {
-  margin-top: 2.5rem;
-  padding-top: 1rem;
-  border-top: 1px solid #eee6da;
-  color: #938a7e;
-  text-align: center;
-  font-size: 0.72rem;
-  letter-spacing: 0.025em;
-}
-
-.page-credit a {
-  color: #735b3b;
-  font-weight: 650;
-  text-decoration: none;
-}
-
-.page-credit a:hover {
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-
-.page-credit a:focus-visible {
-  border-radius: 2px;
-  outline: 2px solid #b89561;
-  outline-offset: 2px;
-}
-
-.eyebrow {
-  color: #927959;
-  font-size: 0.73rem;
+.eyebrow,
+.video-kicker,
+.summary-kicker,
+.saint-rank,
+.rosary-step-label {
+  color: var(--accent-text);
+  font-size: 0.7rem;
   font-weight: 700;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.page-title {
+  margin: 0.35rem 0 0;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: clamp(1.85rem, 4.4vw, 2.45rem);
+  font-weight: 560;
+  letter-spacing: -0.035em;
+  line-height: 1.08;
 }
 
 .header-rule {
-  width: 2.5rem;
-  height: 2px;
-  margin-top: 1rem;
-  border-radius: 2px;
-  background: #c9ab7a;
+  width: 2.6rem;
+  height: 3px;
+  margin: 0.7rem 0 0.15rem;
+  border-radius: 99px;
+  background: var(--accent);
 }
 
 .install-button {
-  margin-top: 1rem;
-  padding: 0.65rem 1rem;
-  border: 1px solid #806747;
-  border-radius: 0.75rem;
-  color: #fffefa;
-  background: #806747;
-  font: inherit;
-  font-size: 0.82rem;
-  font-weight: 600;
+  padding: 0.5rem 0.8rem;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  color: var(--on-accent);
+  background: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 650;
   cursor: pointer;
 }
 
-.install-button:focus-visible {
-  outline: 2px solid #b89561;
-  outline-offset: 3px;
-}
-
 .install-help {
-  max-width: 20rem;
-  margin: 0.65rem 0 0;
-  color: #735b3b;
-  text-align: center;
+  max-width: 24rem;
+  margin: 0.45rem 0 0;
+  color: var(--muted);
   font-size: 0.78rem;
   line-height: 1.5;
 }
 
-.date-picker {
+.liturgy-banner {
   display: grid;
-  gap: 0.45rem;
-  width: min(100%, 20rem);
-  margin-top: 1.25rem;
+  width: 100%;
+  gap: 0.55rem;
+  margin-top: 0.85rem;
 }
 
-.date-picker > label {
-  color: #81796e;
-  font-size: 0.76rem;
-  font-weight: 600;
-  text-align: center;
+.today-date {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 2.5vw, 1.4rem);
+  font-weight: 560;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  text-transform: capitalize;
+}
+
+.liturgy-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+}
+
+.color-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.28rem 0.65rem 0.28rem 0.4rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink-soft);
+  background: var(--surface-muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.color-swatch {
+  display: inline-block;
+  width: 0.7rem;
+  height: 0.7rem;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ink) 22%, transparent);
+  transition: background-color 280ms ease;
+}
+
+.brand-meta .color-swatch {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+.liturgy-name {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  font-weight: 550;
+  line-height: 1.45;
+}
+
+.date-picker {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.55rem 1rem;
+  margin-top: 0.95rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--line);
+}
+
+.date-picker > label,
+.prayer-select-label,
+.rosary-select-wrap label,
+.rosary-select-wrap p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 650;
 }
 
 .date-picker-controls {
   display: flex;
-  justify-content: center;
-  gap: 0.5rem;
+  gap: 0.45rem;
 }
 
-.date-picker-controls input {
+.date-picker-controls input,
+.prayer-select,
+.rosary-select-wrap select {
   min-width: 0;
-  padding: 0.55rem 0.65rem;
-  border: 1px solid #e6dccd;
-  border-radius: 0.65rem;
-  color: #49443d;
-  background: #fffefa;
-  font: inherit;
-  font-size: 0.82rem;
-}
-
-.date-picker-controls input:focus-visible,
-.date-picker-controls button:focus-visible {
-  outline: 2px solid #b89561;
-  outline-offset: 2px;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 0.75rem;
+  color: var(--ink);
+  background: var(--surface);
 }
 
 .date-picker-controls button {
-  padding: 0.5rem 0.8rem;
-  border: 1px solid #e6dccd;
-  border-radius: 0.65rem;
-  color: #5d4b34;
-  background: #f8f3e9;
+  padding: 0.5rem 0.9rem;
+  border: 0;
+  border-radius: 999px;
+  color: var(--on-accent);
+  background: var(--accent);
   font-size: 0.8rem;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   transition:
-    background 150ms ease,
-    border-color 150ms ease;
+    filter 150ms ease,
+    transform 150ms ease;
 }
 
 .date-picker-controls button:hover:not(:disabled) {
-  border-color: #c9ab7a;
-  background: #f1e8d9;
+  filter: brightness(1.08);
 }
 
 .date-picker-controls button:disabled {
   cursor: default;
-  opacity: 0.5;
+  opacity: 0.4;
+}
+
+.week-navigator,
+.reading-tools,
+.video-section,
+.prayer-text-card,
+.construction-card,
+.rosary-step-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
 }
 
 .week-navigator {
   display: grid;
-  gap: 0.75rem;
-  margin: -0.5rem 0 1.5rem;
-  padding: 1rem;
-  border: 1px solid #eee6da;
-  border-radius: 1rem;
-  background: #fbf8f2;
+  gap: 0.7rem;
+  margin: 0;
+  padding: 0.9rem;
 }
 
 .week-heading {
@@ -641,78 +644,77 @@ body {
   align-items: baseline;
   justify-content: space-between;
   gap: 0.5rem;
+  padding: 0 0.2rem;
 }
 
 .week-caption {
-  color: #81796e;
-  font-size: 0.74rem;
+  color: var(--muted);
+  font-size: 0.75rem;
 }
 
 .week-days {
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
-  gap: 0.4rem;
+  gap: 0.35rem;
 }
 
 .week-days button {
   display: grid;
   min-width: 0;
-  min-height: 3.6rem;
+  min-height: 3.5rem;
   place-content: center;
-  gap: 0.2rem;
+  gap: 0.12rem;
   border: 1px solid transparent;
-  border-radius: 0.7rem;
-  color: #746a5c;
+  border-radius: 0.8rem;
+  color: var(--muted);
   background: transparent;
   cursor: pointer;
   transition:
-    border-color 150ms ease,
-    background 150ms ease,
-    color 150ms ease;
+    background 160ms ease,
+    color 160ms ease,
+    border-color 160ms ease,
+    transform 160ms ease;
 }
 
 .week-days button span {
-  font-size: 0.67rem;
+  font-size: 0.66rem;
+  font-weight: 600;
   text-transform: capitalize;
 }
 
 .week-days button strong {
-  font-size: 0.9rem;
+  color: var(--ink);
+  font-size: 0.95rem;
   font-weight: 650;
 }
 
 .week-days button:hover {
-  border-color: #e6dccd;
-  background: #fffefa;
+  border-color: var(--line);
+  background: var(--surface-muted);
+}
+
+.week-days button.is-selected,
+.week-days button.is-selected strong,
+.week-days button.is-selected span {
+  color: var(--on-accent);
 }
 
 .week-days button.is-selected {
-  border-color: #806747;
-  color: #fffefa;
-  background: #806747;
-  box-shadow: 0 4px 10px rgba(93, 71, 42, 0.15);
-}
-
-.week-days button:focus-visible {
-  outline: 2px solid #b89561;
-  outline-offset: 2px;
+  border-color: transparent;
+  background: var(--accent);
+  box-shadow: 0 6px 16px color-mix(in srgb, var(--accent) 28%, transparent);
 }
 
 .reading-content {
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 0.85rem;
 }
 
 .gospel-reading {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
-}
-
-.gospel-reading .gospel-text {
-  font-size: var(--gospel-font-size, 1rem);
-  transition: font-size 180ms ease;
+  gap: 0.75rem;
 }
 
 .reading-tools {
@@ -720,16 +722,14 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
-  padding: 0.65rem 0.75rem;
-  border: 1px solid #eee6da;
-  border-radius: 0.85rem;
-  background: #fbf8f2;
+  padding: 0.7rem 0.8rem;
+  box-shadow: none;
 }
 
 .reading-tools-label {
-  color: #735b3b;
-  font-size: 0.8rem;
-  font-weight: 600;
+  color: var(--ink);
+  font-size: 0.84rem;
+  font-weight: 650;
 }
 
 .font-controls {
@@ -742,12 +742,12 @@ body {
   min-width: 2rem;
   min-height: 2rem;
   padding: 0.25rem 0.45rem;
-  border: 1px solid #e6dccd;
-  border-radius: 0.55rem;
-  color: #5d4b34;
-  background: #fffefa;
+  border: 1px solid var(--line);
+  border-radius: 0.6rem;
+  color: var(--ink-soft);
+  background: var(--surface-muted);
   font-size: 0.78rem;
-  font-weight: 650;
+  font-weight: 700;
   cursor: pointer;
   transition:
     background 150ms ease,
@@ -755,58 +755,60 @@ body {
 }
 
 .font-controls button:hover:not(:disabled) {
-  border-color: #c9ab7a;
-  background: #f5efe4;
-}
-
-.font-controls button:focus-visible {
-  outline: 2px solid #b89561;
-  outline-offset: 2px;
+  border-color: var(--line-strong);
+  background: var(--surface);
 }
 
 .font-controls button:disabled {
   cursor: default;
-  opacity: 0.45;
+  opacity: 0.4;
 }
 
 .font-controls .font-reset {
   width: auto;
-  margin-left: 0.2rem;
-  font-size: 0.7rem;
-  font-weight: 500;
+  margin-left: 0.15rem;
+  font-size: 0.72rem;
+  font-weight: 600;
 }
 
 .font-scale {
   min-width: 2.7rem;
-  color: #81796e;
+  color: var(--muted);
   text-align: center;
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   font-variant-numeric: tabular-nums;
 }
 
 .reading-accordions {
   display: grid;
-  gap: 0.7rem;
+  gap: 0.65rem;
 }
 
 .reading-accordion,
 .liturgy-accordion {
   overflow: hidden;
-  border: 1px solid #e8ded0;
-  border-radius: 0.9rem;
-  background: #fffefa;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: var(--surface);
+  box-shadow: 0 1px 2px rgba(28, 25, 23, 0.03);
+}
+
+.reading-accordion[open],
+.liturgy-accordion[open] {
+  border-color: color-mix(in srgb, var(--accent) 42%, var(--line));
 }
 
 .reading-accordion > summary,
 .liturgy-accordion > summary {
   position: relative;
-  padding: 0.9rem 2.7rem 0.9rem 1rem;
-  color: #594a36;
-  background: #fbf8f2;
-  font-size: 0.9rem;
+  padding: 0.95rem 2.6rem 0.95rem 1rem;
+  color: var(--ink);
+  background: var(--surface-muted);
+  font-size: 0.92rem;
   font-weight: 650;
   cursor: pointer;
   list-style: none;
+  transition: background 160ms ease;
 }
 
 .reading-accordion > summary::-webkit-details-marker,
@@ -817,937 +819,244 @@ body {
 .reading-accordion > summary::after,
 .liturgy-accordion > summary::after {
   position: absolute;
-  right: 1rem;
-  color: #927959;
-  content: '+';
-  font-size: 1.1rem;
-  font-weight: 400;
+  top: 50%;
+  right: 1.15rem;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-right: 2px solid var(--muted);
+  border-bottom: 2px solid var(--muted);
+  content: '';
+  transform: translateY(-70%) rotate(45deg);
+  transition: transform 180ms ease;
 }
 
 .reading-accordion[open] > summary::after,
 .liturgy-accordion[open] > summary::after {
-  content: '−';
-}
-
-.reading-accordion > summary:focus-visible,
-.liturgy-accordion > summary:focus-visible {
-  outline: 2px solid #b89561;
-  outline-offset: -3px;
+  transform: translateY(-30%) rotate(225deg);
 }
 
 .reading-accordion > .gospel-text,
 .psalm-reading,
-.extra-reading {
+.extra-reading,
+.liturgy-texts {
+  padding: 1rem 1.05rem 1.15rem;
+  border-top: 1px solid var(--line);
+  animation: reading-rise 280ms ease;
+}
+
+.gospel-text {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  padding: 1rem;
-  border-top: 1px solid #eee6da;
+  gap: 0.45rem;
 }
 
-.reading-accordion > .gospel-text + .gospel-text {
-  border-top: 1px solid #eee6da;
+.gospel-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-top: 0.35rem;
 }
 
-.reading-accordion .gospel-text {
-  font-size: var(--gospel-font-size, 1rem);
-}
-
+.gospel-reference,
 .reading-reference {
   margin: 0;
-  color: #735b3b;
-  font-size: 0.83rem;
-  font-weight: 650;
-  line-height: 1.5;
+  color: var(--accent-text);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.45;
+  text-transform: uppercase;
 }
 
-.psalm-refrain {
+.gospel-title {
   margin: 0;
-  color: #514b43;
-  font-size: 0.9rem;
-  font-style: italic;
-  line-height: 1.65;
+  color: var(--ink-soft);
+  font-family: var(--font-serif);
+  font-size: 1.02rem;
+  font-weight: 600;
+  line-height: 1.45;
 }
 
-.reading-body {
-  margin: 0;
-  color: #393632;
-  font-size: var(--gospel-font-size, 1rem);
+.gospel-body,
+.reading-body,
+.psalm-refrain,
+.liturgy-texts p,
+.summary-section p,
+.saint-text-section p,
+.prayer-text-card p,
+.rosary-step-text {
+  color: var(--ink);
+  font-family: var(--font-serif);
+  font-size: calc(var(--gospel-font-size, 1rem) * 1.0625);
   line-height: 1.8;
+}
+
+.gospel-body,
+.reading-body,
+.psalm-refrain,
+.liturgy-texts p {
+  max-width: 65ch;
+  margin: 0;
+  transition: font-size 180ms ease;
+}
+
+.reading-body,
+.liturgy-texts p,
+.saint-text-section p,
+.prayer-text-card p,
+.rosary-step-text {
   white-space: pre-line;
 }
 
-.liturgy-accordion {
-  margin-top: 0.25rem;
+.gospel-stage {
+  margin: 0;
+  color: var(--muted);
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  font-style: italic;
+}
+
+.gospel-dialog {
+  display: flex;
+  gap: 0.55rem;
+}
+
+.gospel-role {
+  margin-top: 0.2rem;
+  font-size: 0.82rem;
+  font-weight: 750;
+}
+
+.gospel-role-narrator {
+  color: var(--muted);
+}
+
+.gospel-role-reader {
+  color: #1b4332;
+}
+
+.gospel-role-people {
+  color: #9a3412;
+}
+
+.gospel-role-jesus {
+  color: #1d4ed8;
+}
+
+.psalm-refrain {
+  color: var(--ink-soft);
+  font-style: italic;
 }
 
 .liturgy-texts {
   display: grid;
-  gap: 0.85rem;
-  padding: 1rem;
-  border-top: 1px solid #eee6da;
-}
-
-.liturgy-texts section + section {
-  padding-top: 0.85rem;
-  border-top: 1px solid #f0e9df;
-}
-
-.liturgy-texts h3 {
-  margin: 0 0 0.4rem;
-  color: #735b3b;
-  font-size: 0.84rem;
-  font-weight: 650;
-}
-
-.liturgy-texts p {
-  margin: 0;
-  color: #514b43;
-  font-size: 0.9rem;
-  line-height: 1.75;
-  white-space: pre-line;
-}
-
-.daily-reveal-enter-active {
-  transition:
-    opacity 500ms ease,
-    transform 620ms cubic-bezier(0.2, 0.75, 0.25, 1);
-}
-
-.daily-reveal-enter-from {
-  transform: translateY(0.85rem);
-  opacity: 0;
-}
-
-.daily-reveal-enter-to {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-.day-details {
-  display: flex;
-  flex-direction: column;
-  gap: 0.55rem;
-  color: #655e55;
-  font-size: 0.96rem;
-  line-height: 1.65;
-}
-
-.detail-row {
-  display: flex;
-  align-items: baseline;
-  gap: 0.5rem;
-}
-
-.detail-label {
-  color: #8b8174;
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.025em;
-}
-
-.color-value {
-  font-weight: 700;
-}
-
-.liturgy {
-  display: grid;
-  gap: 0.12rem;
-}
-
-.section-divider {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  color: #c3a779;
-  font-size: 0.75rem;
-}
-
-.section-divider::before,
-.section-divider::after {
-  height: 1px;
-  flex: 1;
-  background: #e9e1d5;
-  content: '';
-}
-
-.status-message {
-  padding: 2rem 0;
-  color: #81796e;
-  text-align: center;
-  font-size: 0.9rem;
-}
-
-.saints-content {
-  display: grid;
-  gap: 1rem;
-}
-
-.construction-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: clamp(2rem, 8vw, 3.5rem) 1.5rem;
-  border: 1px solid #e8ded0;
-  border-radius: 1.25rem;
-  background: linear-gradient(145deg, #fffefa 0%, #fbf7ef 100%);
-  text-align: center;
-}
-
-.construction-emblem {
-  display: grid;
-  width: 4rem;
-  height: 4rem;
-  place-items: center;
-  border: 1px solid #e1cfb1;
-  border-radius: 50%;
-  color: #876a42;
-  background: #fffaf0;
-}
-
-.construction-card h2 {
-  margin: 1.1rem 0 0.55rem;
-  color: #39352f;
-  font-size: 1.25rem;
-  font-weight: 650;
-}
-
-.construction-card p {
-  max-width: 27rem;
-  margin: 0;
-  color: #655e55;
-  font-size: 0.94rem;
-  line-height: 1.75;
-}
-
-.construction-sparkle {
-  margin-top: 1.25rem;
-  color: #c3a779;
-}
-.saints-date {
-  margin: 0;
-  color: #81796e;
-  text-align: center;
-  font-size: 0.82rem;
-  text-transform: capitalize;
-}
-.liturgical-day {
-  margin: 0;
-  padding: 0.85rem 1rem;
-  border: 1px solid #e8ded0;
-  border-radius: 0.9rem;
-  color: #594a36;
-  background: #fbf8f2;
-  text-align: center;
-  font-size: 0.95rem;
-  font-weight: 650;
-}
-.saints-list {
-  display: grid;
-  gap: 0.75rem;
-}
-
-.saint-profile {
-  overflow: hidden;
-  border: 1px solid #e8ded0;
-  border-radius: 1rem;
-  background: #fffefa;
-}
-
-.saint-image {
-  display: block;
-  width: 100%;
-  max-height: 20rem;
-  object-fit: cover;
-  background: #f8f3e9;
-}
-
-.saint-profile-heading {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  padding: 1.1rem 1.1rem 0.8rem;
-}
-
-.saint-profile-heading h2 {
-  margin: 0;
-  color: #39352f;
-  font-size: 1.2rem;
-  font-weight: 650;
-}
-
-.saint-text-section {
-  padding: 0.95rem 1.1rem;
-}
-
-.saint-text-section + .saint-text-section {
-  border-top: 1px solid #eee6da;
-}
-
-.saint-text-section h3 {
-  display: flex;
-  align-items: center;
-  gap: 0.45rem;
-  margin: 0 0 0.45rem;
-  color: #735b3b;
-  font-size: 0.92rem;
-  font-weight: 650;
-}
-
-.saint-text-section p {
-  margin: 0;
-  color: #514b43;
-  font-size: 0.92rem;
-  line-height: 1.75;
-  white-space: pre-line;
-}
-
-.saint-prayer {
-  background: #fbf8f2;
-}
-.saint-item {
-  display: flex;
   gap: 0.9rem;
-  padding: 1.1rem;
-  border: 1px solid #e8ded0;
-  border-radius: 1rem;
-  background: #fffefa;
-}
-.saint-emblem {
-  display: grid;
-  width: 2.35rem;
-  height: 2.35rem;
-  flex: 0 0 auto;
-  place-items: center;
-  border: 1px solid #e1cfb1;
-  border-radius: 50%;
-  color: #876a42;
-  background: #fffaf0;
-}
-.saint-rank {
-  margin: 0 0 0.25rem;
-  color: #927959;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-.saint-item h2 {
-  margin: 0;
-  color: #39352f;
-  font-size: 1.05rem;
-  font-weight: 650;
-  line-height: 1.45;
-}
-.saint-bio {
-  margin: 0.55rem 0 0;
-  color: #655e55;
-  font-size: 0.9rem;
-  line-height: 1.7;
-  white-space: pre-line;
-}
-.empty-state {
-  margin: 0;
-  padding: 1.5rem 1rem;
-  border: 1px dashed #d9cbb8;
-  border-radius: 0.9rem;
-  color: #81796e;
-  text-align: center;
-  font-size: 0.9rem;
 }
 
-.prayers-content {
-  display: grid;
-  gap: 0.75rem;
+.liturgy-texts section + section,
+.summary-section + .summary-section,
+.saint-text-section + .saint-text-section {
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--line);
 }
 
-.prayer-select-label {
-  color: #735b3b;
-  font-size: 0.8rem;
-  font-weight: 650;
-}
-
-.prayer-select {
-  width: 100%;
-  padding: 0.75rem 0.85rem;
-  border: 1px solid #e6dccd;
-  border-radius: 0.7rem;
-  color: #49443d;
-  background: #fffefa;
-  font: inherit;
+.liturgy-texts h3,
+.summary-section h3,
+.saint-text-section h3 {
+  margin: 0 0 0.35rem;
+  color: var(--accent-text);
   font-size: 0.92rem;
-}
-
-.prayer-select:focus-visible {
-  outline: 2px solid #b89561;
-  outline-offset: 2px;
-}
-
-.prayer-text-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 0.65rem;
-  padding: clamp(1.5rem, 5vw, 2.5rem);
-  border: 1px solid #e8ded0;
-  border-radius: 1rem;
-  background: linear-gradient(145deg, #fffefa 0%, #fbf7ef 100%);
-  text-align: center;
-}
-
-.prayer-emblem {
-  display: grid;
-  width: 2.8rem;
-  height: 2.8rem;
-  place-items: center;
-  border: 1px solid #e1cfb1;
-  border-radius: 50%;
-  color: #876a42;
-  background: #fffaf0;
-}
-
-.prayer-text-card h2 {
-  margin: 1rem 0 0.85rem;
-  color: #39352f;
-  font-size: 1.2rem;
-  font-weight: 650;
-}
-
-.prayer-text-card p {
-  margin: 0;
-  color: #514b43;
-  font-size: 1rem;
-  line-height: 1.85;
-  white-space: pre-line;
-}
-
-.rosary-content {
-  display: grid;
-  gap: 1rem;
-}
-
-.rosary-mode-selector {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.7rem;
-}
-
-.rosary-mode-button {
-  display: grid;
-  gap: 0.2rem;
-  min-height: 4.75rem;
-  padding: 0.75rem;
-  border: 1px solid #e6dccd;
-  border-radius: 0.8rem;
-  color: #5d4b34;
-  background: #fffefa;
-  font: inherit;
-  font-size: 0.82rem;
   font-weight: 700;
-  text-align: left;
-  cursor: pointer;
-}
-
-.rosary-mode-button span {
-  color: #927959;
-  font-size: 0.68rem;
-  font-weight: 600;
-}
-
-.rosary-mode-button.is-selected {
-  border-color: #806747;
-  color: #fffefa;
-  background: #806747;
-  box-shadow: 0 5px 14px rgba(93, 71, 42, 0.14);
-}
-
-.rosary-mode-button.is-selected span {
-  color: #fff5e6;
-}
-
-.rosary-mode-button:focus-visible {
-  outline: 3px solid #d6bd94;
-  outline-offset: 3px;
-}
-
-.rosary-select-wrap {
-  display: grid;
-  gap: 0.4rem;
-}
-
-.rosary-select-wrap label {
-  color: #735b3b;
-  font-size: 0.8rem;
-  font-weight: 650;
-}
-
-.rosary-select-wrap p {
-  margin: 0;
-  color: #735b3b;
-  font-size: 0.8rem;
-  font-weight: 650;
-}
-
-.rosary-progress {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 0.4rem 0.75rem;
-  color: #735b3b;
-  font-size: 0.76rem;
-  font-weight: 650;
-}
-
-.rosary-progress-track {
-  grid-column: 1 / -1;
-  height: 0.35rem;
-  overflow: hidden;
-  border-radius: 99px;
-  background: #eee6da;
-}
-
-.rosary-progress-track span {
-  display: block;
-  height: 100%;
-  border-radius: inherit;
-  background: #b89561;
-  transition: width 220ms ease;
-}
-
-.rosary-beads {
-  display: flex;
-  justify-content: center;
-  gap: 0.65rem;
-}
-
-.rosary-beads span {
-  width: 0.9rem;
-  height: 0.9rem;
-  border: 2px solid #c9ab7a;
-  border-radius: 50%;
-  background: #fffefa;
-  transition:
-    background 180ms ease,
-    transform 180ms ease;
-}
-
-.rosary-beads span.is-current,
-.rosary-beads span.is-complete {
-  border-color: #806747;
-  background: #806747;
-}
-
-.rosary-beads span.is-current {
-  transform: scale(1.25);
-  box-shadow: 0 0 0 4px rgba(184, 149, 97, 0.18);
-}
-
-.rosary-step-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 18rem;
-  padding: clamp(1.5rem, 5vw, 2.5rem);
-  border: 1px solid #e8ded0;
-  border-radius: 1.2rem;
-  background: linear-gradient(145deg, #fffefa 0%, #fbf7ef 100%);
-  text-align: center;
-}
-
-.rosary-step-card.is-mystery {
-  border-color: #dec89f;
-  background: #fdf7ea;
-}
-
-.rosary-step-icon {
-  display: grid;
-  width: 2.7rem;
-  height: 2.7rem;
-  place-items: center;
-  border: 1px solid #e1cfb1;
-  border-radius: 50%;
-  color: #876a42;
-  background: #fffaf0;
-}
-
-.rosary-step-label {
-  margin: 1rem 0 0;
-  color: #927959;
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.rosary-step-card h2 {
-  margin: 0.55rem 0 0;
-  color: #39352f;
-  font-size: clamp(1.15rem, 4vw, 1.45rem);
-  font-weight: 650;
-  line-height: 1.4;
-}
-
-.rosary-step-text {
-  max-width: 31rem;
-  margin: 1rem 0 0;
-  color: #514b43;
-  font-size: 0.98rem;
-  line-height: 1.85;
-  white-space: pre-line;
-}
-
-.rosary-actions {
-  display: grid;
-  grid-template-columns: 1fr 1.35fr;
-  gap: 0.7rem;
-}
-
-.rosary-actions button {
-  display: inline-flex;
-  min-height: 3rem;
-  align-items: center;
-  justify-content: center;
-  gap: 0.35rem;
-  border-radius: 0.75rem;
-  font: inherit;
-  font-size: 0.88rem;
-  font-weight: 650;
-  cursor: pointer;
-}
-
-.rosary-secondary-button {
-  border: 1px solid #e6dccd;
-  color: #735b3b;
-  background: #fffefa;
-}
-
-.rosary-secondary-button:disabled {
-  cursor: default;
-  opacity: 0.45;
-}
-
-.rosary-next-button {
-  border: 1px solid #806747;
-  color: #fffefa;
-  background: #806747;
-  box-shadow: 0 5px 14px rgba(93, 71, 42, 0.16);
-}
-
-.rosary-next-button:hover {
-  background: #6d573c;
-}
-
-.rosary-actions button:focus-visible {
-  outline: 3px solid #d6bd94;
-  outline-offset: 3px;
-}
-
-.dark-mode .rosary-select-wrap label,
-.dark-mode .rosary-select-wrap p,
-.dark-mode .rosary-progress,
-.dark-mode .rosary-step-label {
-  color: #f0d5a5;
-}
-
-.dark-mode .rosary-mode-button {
-  border-color: #68594a;
-  color: #f5efe6;
-  background: #302923;
-}
-
-.dark-mode .rosary-mode-button span {
-  color: #e0b86f;
-}
-
-.dark-mode .rosary-mode-button.is-selected {
-  border-color: #e0b86f;
-  color: #302923;
-  background: #e0b86f;
-}
-
-.dark-mode .rosary-mode-button.is-selected span {
-  color: #4a3624;
-}
-
-.dark-mode .rosary-progress-track {
-  background: #504338;
-}
-
-.dark-mode .rosary-progress-track span {
-  background: #e0b86f;
-}
-
-.dark-mode .rosary-beads span {
-  border-color: #b6925c;
-  background: #302923;
-}
-
-.dark-mode .rosary-beads span.is-current,
-.dark-mode .rosary-beads span.is-complete {
-  border-color: #e0b86f;
-  background: #e0b86f;
-}
-
-.dark-mode .rosary-step-card,
-.dark-mode .rosary-step-card.is-mystery {
-  border-color: #5b4f42;
-  background: #302923;
-}
-
-.dark-mode .rosary-step-card h2 {
-  color: #fff8ee;
-}
-
-.dark-mode .rosary-step-text {
-  color: #f2ece3;
-}
-
-.dark-mode .rosary-secondary-button {
-  border-color: #68594a;
-  color: #f5efe6;
-  background: #302923;
-}
-
-@media (max-width: 480px) {
-  .rosary-step-card {
-    min-height: 20rem;
-  }
-}
-
-.error-message {
-  color: #b34639;
-}
-
-.summary-button {
-  min-height: 3rem;
-  color: #fffdf8;
-  background: #806747;
-  box-shadow: 0 5px 14px rgba(93, 71, 42, 0.16);
-}
-
-.summary-button:hover {
-  background: #6d573c;
-  box-shadow: 0 7px 18px rgba(93, 71, 42, 0.22);
-}
-
-.summary-button:focus-visible {
-  outline: 3px solid #d6bd94;
-  outline-offset: 3px;
-}
-
-.summary-card {
-  overflow: hidden;
-  border: 1px solid #e8ded0;
-  border-radius: 1.25rem;
-  background: linear-gradient(145deg, #fffefa 0%, #fbf7ef 100%);
-  box-shadow: 0 10px 28px rgba(75, 59, 39, 0.07);
-}
-
-.summary-reveal-enter-active {
-  transition:
-    opacity 420ms ease,
-    transform 520ms cubic-bezier(0.2, 0.75, 0.25, 1);
-}
-
-.summary-reveal-enter-from {
-  transform: translateY(1rem) scale(0.985);
-  opacity: 0;
-}
-
-.summary-reveal-enter-to {
-  transform: translateY(0) scale(1);
-  opacity: 1;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .summary-reveal-enter-active,
-  .daily-reveal-enter-active {
-    transition-duration: 1ms;
-  }
-}
-
-.summary-header {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  padding: 1.1rem 1.25rem;
-  border-bottom: 1px solid #eee6da;
-  background: rgba(238, 229, 214, 0.35);
-}
-
-.summary-emblem {
-  display: grid;
-  width: 2.4rem;
-  height: 2.4rem;
-  flex: 0 0 auto;
-  place-items: center;
-  border: 1px solid #e1cfb1;
-  border-radius: 50%;
-  color: #876a42;
-  background: #fffaf0;
-  font-size: 0.9rem;
-}
-
-.summary-kicker {
-  color: #927959;
-  font-size: 0.62rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-}
-
-.summary-header h2 {
-  margin: 0.15rem 0 0;
-  color: #39352f;
-  font-size: 1rem;
-  font-weight: 650;
-}
-
-.summary-sections {
-  display: grid;
-  gap: 1.15rem;
-  padding: 1.2rem 1.25rem 1.4rem;
-}
-
-.summary-section + .summary-section {
-  padding-top: 1rem;
-  border-top: 1px solid #eee6da;
-}
-
-.summary-section h3 {
-  margin: 0 0 0.45rem;
-  color: #735b3b;
-  font-size: 0.94rem;
-  font-weight: 650;
-  line-height: 1.45;
-}
-
-.summary-section p {
-  margin: 0;
-  color: #514b43;
-  font-size: var(--gospel-font-size, 1rem);
-  line-height: 1.8;
-  overflow-wrap: anywhere;
-  transition: font-size 180ms ease;
-}
-
-.summary-section p + p {
-  margin-top: 0.65rem;
-}
-
-.summary-loading,
-.summary-error {
-  margin: 0.25rem 0;
-  padding: 0.85rem 1rem;
-  border-radius: 0.9rem;
-  text-align: center;
-  font-size: 0.88rem;
-}
-
-.summary-loading {
-  color: #806747;
-  background: #faf5eb;
-}
-
-.loading-mark {
-  margin-right: 0.4rem;
-  color: #bb9a67;
-}
-
-.summary-error {
-  color: #a43e33;
-  background: #fff1ee;
 }
 
 .video-section {
   display: flex;
   flex-direction: column;
-  gap: 0.9rem;
-  margin-top: 0.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid #e9e1d5;
+  gap: 0.8rem;
+  margin: 0;
+  padding: 1.05rem 1.1rem 1.15rem;
 }
 
 .video-heading-row {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.35rem;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
 }
 
-.video-kicker {
-  color: #927959;
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
+.video-heading-row h2,
+.summary-header h2,
+.prayer-text-card h2,
+.construction-card h2,
+.rosary-step-card h2,
+.saint-profile-heading h2,
+.saint-item h2 {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-weight: 560;
+  letter-spacing: -0.02em;
 }
 
 .video-heading-row h2 {
-  margin: 0;
-  color: #39352f;
-  font-size: 1.45rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
+  font-size: 1.2rem;
 }
 
 .video-search-link {
   display: flex;
   align-items: center;
-  gap: 0.9rem;
-  padding: 1rem;
-  border: 1px solid #e9e1d5;
+  gap: 0.85rem;
+  padding: 0.9rem;
+  border: 1px solid var(--line);
   border-radius: 1rem;
-  color: #493d2e;
-  background: #faf7f1;
+  color: var(--ink);
+  background: var(--surface-muted);
   text-decoration: none;
   transition:
+    transform 160ms ease,
     border-color 160ms ease,
-    background 160ms ease,
-    transform 160ms ease;
+    background 160ms ease;
 }
 
 .video-search-link:hover {
   transform: translateY(-1px);
-  border-color: #c9ab7a;
-  background: #f5efe4;
-}
-
-.video-search-link:focus-visible {
-  outline: 3px solid #d6bd94;
-  outline-offset: 3px;
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+  background: var(--surface);
 }
 
 .video-search-link > span:nth-child(2) {
   display: grid;
-  gap: 0.25rem;
+  gap: 0.2rem;
 }
 
 .video-search-link strong {
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   font-weight: 650;
 }
 
 .video-search-link small {
-  color: #81796e;
+  color: var(--muted);
   font-size: 0.76rem;
   line-height: 1.45;
 }
 
 .play-icon {
   display: grid;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2.45rem;
+  height: 2.45rem;
   flex: 0 0 auto;
   place-items: center;
   padding-left: 2px;
   border-radius: 50%;
-  color: white;
-  background: #9b4f3d;
-  font-size: 0.75rem;
+  color: var(--on-accent);
+  background: var(--accent);
+  font-size: 0.72rem;
 }
 
 .external-icon {
   margin-left: auto;
-  color: #927959;
-  font-size: 1.1rem;
+  color: var(--muted);
+  font-size: 1.05rem;
 }
 
 .homily-player {
@@ -1760,9 +1069,12 @@ body {
   overflow: hidden;
   width: 100%;
   aspect-ratio: 16 / 9;
-  border: 1px solid #e9e1d5;
+  border: 1px solid var(--line);
   border-radius: 1rem;
-  background: #1c1814;
+  background: #141210;
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease;
 }
 
 .homily-frame iframe,
@@ -1778,7 +1090,7 @@ body {
 .homily-poster {
   padding: 0;
   cursor: pointer;
-  background: #1c1814;
+  background: #141210;
 }
 
 .homily-poster img {
@@ -1788,10 +1100,11 @@ body {
 .homily-frame:has(.homily-poster:hover),
 .homily-frame:has(.homily-poster:focus-visible) {
   transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
 }
 
 .homily-poster:focus-visible {
-  outline: 3px solid #d6bd94;
+  outline: 2px solid var(--focus);
   outline-offset: 3px;
 }
 
@@ -1800,15 +1113,15 @@ body {
   top: 50%;
   left: 50%;
   display: grid;
-  width: 4.5rem;
-  height: 4.5rem;
+  width: 4.25rem;
+  height: 4.25rem;
   place-items: center;
-  padding-left: 4px;
+  padding-left: 3px;
   border-radius: 50%;
-  color: #2a2118;
-  background: #e7d7b1;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
-  font-size: 1.15rem;
+  color: var(--on-accent);
+  background: var(--accent);
+  box-shadow: 0 10px 24px color-mix(in srgb, var(--accent) 35%, transparent);
+  font-size: 1.05rem;
   transform: translate(-50%, -50%);
   transition: transform 160ms ease;
 }
@@ -1820,9 +1133,10 @@ body {
 
 .homily-caption {
   margin: 0;
-  color: #493d2e;
-  font-size: 0.95rem;
-  font-weight: 650;
+  color: var(--ink);
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 600;
   line-height: 1.45;
 }
 
@@ -1830,107 +1144,1357 @@ body {
 .homily-status {
   margin: 0;
   padding: 0.85rem 1rem;
+  border: 1px solid var(--line);
   border-radius: 0.9rem;
   text-align: center;
   font-size: 0.88rem;
 }
 
-.homily-note {
-  color: #6d6458;
-  background: #faf7f1;
-}
-
+.homily-note,
 .homily-status {
-  color: #806747;
-  background: #faf5eb;
+  color: var(--muted);
+  background: var(--surface-muted);
 }
 
 .homily-status.is-error {
-  color: #a43e33;
-  background: #fff1ee;
+  color: var(--danger);
+  background: var(--danger-soft);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .homily-play,
-  .homily-poster,
-  .homily-frame {
-    transition: none;
+.ai-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.ai-button {
+  display: flex;
+  width: 100%;
+  min-height: 4.6rem;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.9rem 1rem;
+  border: 0;
+  border-radius: 1.15rem;
+  color: var(--on-accent);
+  background:
+    radial-gradient(
+      120% 140% at 0% 0%,
+      color-mix(in srgb, white 20%, transparent),
+      transparent 46%
+    ),
+    linear-gradient(135deg, var(--accent) 0%, var(--accent-strong) 100%);
+  box-shadow: 0 12px 28px color-mix(in srgb, var(--accent) 30%, transparent);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    transform 160ms ease,
+    filter 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.ai-button:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.06);
+}
+
+.ai-button:active {
+  transform: translateY(0) scale(0.99);
+}
+
+.ai-button-icon {
+  display: grid;
+  width: 2.5rem;
+  height: 2.5rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 0.8rem;
+  background: color-mix(in srgb, white 18%, transparent);
+}
+
+.ai-button-copy {
+  display: grid;
+  flex: 1;
+  gap: 0.12rem;
+  min-width: 0;
+}
+
+.ai-button-copy strong {
+  font-size: 1.02rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.ai-button-copy small {
+  color: color-mix(in srgb, var(--on-accent) 82%, transparent);
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
+.ai-button-arrow {
+  flex: 0 0 auto;
+  opacity: 0.9;
+}
+
+.summary-loading,
+.summary-error {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0.95rem 1rem;
+  border-radius: 1.05rem;
+  font-size: 0.9rem;
+}
+
+.summary-loading {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--accent) 28%, var(--line));
+  color: var(--accent-text);
+  background: var(--accent-soft);
+}
+
+.summary-loading::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    transparent 15%,
+    color-mix(in srgb, white 55%, transparent) 50%,
+    transparent 85%
+  );
+  content: '';
+  pointer-events: none;
+  transform: translateX(-120%);
+  animation: ai-shimmer 1.25s ease-in-out infinite;
+}
+
+.ai-button-icon {
+  animation: icon-breathe 2.2s ease-in-out infinite;
+}
+
+.summary-loading span {
+  display: grid;
+  gap: 0.1rem;
+}
+
+.summary-loading strong {
+  font-size: 0.92rem;
+}
+
+.summary-error {
+  flex-wrap: wrap;
+  justify-content: space-between;
+  border: 1px solid color-mix(in srgb, var(--danger) 35%, var(--line));
+  color: var(--danger);
+  background: var(--danger-soft);
+}
+
+.summary-error p {
+  margin: 0;
+}
+
+.summary-retry {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.45rem 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--danger) 40%, transparent);
+  border-radius: 999px;
+  color: var(--danger);
+  background: var(--surface);
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.summary-card {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 1.2rem;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.summary-reveal-enter-active {
+  transition:
+    opacity 320ms ease,
+    transform 360ms cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+
+.summary-reveal-enter-from {
+  transform: translateY(0.55rem);
+  opacity: 0;
+}
+
+.summary-section {
+  animation: card-in 340ms cubic-bezier(0.2, 0.75, 0.25, 1) backwards;
+}
+
+.summary-section:nth-child(2) {
+  animation-delay: 55ms;
+}
+
+.summary-section:nth-child(3) {
+  animation-delay: 100ms;
+}
+
+.summary-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.15rem;
+  border-bottom: 1px solid var(--line);
+  background: var(--accent-soft);
+}
+
+.summary-emblem,
+.prayer-emblem,
+.saint-emblem,
+.construction-emblem,
+.rosary-step-icon {
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--accent-text);
+  background: var(--surface);
+}
+
+.summary-emblem {
+  width: 2.3rem;
+  height: 2.3rem;
+  flex: 0 0 auto;
+}
+
+.summary-header h2 {
+  margin-top: 0.1rem;
+  font-size: 1.15rem;
+}
+
+.summary-sections {
+  display: grid;
+  gap: 1rem;
+  padding: 1.1rem 1.15rem 1.3rem;
+}
+
+.summary-section p + p {
+  margin-top: 0.65rem;
+}
+
+.page-credit {
+  margin: 0.4rem 0 0;
+  padding-top: 0.4rem;
+  color: var(--muted);
+  text-align: center;
+  font-size: 0.75rem;
+}
+
+.page-credit a {
+  color: var(--accent-text);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.page-credit a:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.status-message {
+  width: 100%;
+  margin: 0.7rem 0 0;
+  padding: 0.35rem 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.error-message {
+  color: var(--danger);
+}
+
+.prayers-content,
+.rosary-content,
+.saints-content {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.prayer-select,
+.rosary-select-wrap select {
+  width: 100%;
+}
+
+.prayer-text-card,
+.construction-card,
+.rosary-step-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: clamp(1.4rem, 4vw, 2.2rem);
+  text-align: center;
+}
+
+.prayer-emblem,
+.rosary-step-icon {
+  width: 2.7rem;
+  height: 2.7rem;
+}
+
+.construction-emblem {
+  width: 3.6rem;
+  height: 3.6rem;
+}
+
+.prayer-text-card h2,
+.construction-card h2,
+.rosary-step-card h2 {
+  margin-top: 0.8rem;
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+}
+
+.construction-card p {
+  max-width: 28rem;
+  margin: 0.55rem 0 0;
+  color: var(--ink-soft);
+  font-size: 0.98rem;
+  line-height: 1.7;
+}
+
+.construction-sparkle {
+  margin-top: 1rem;
+  color: var(--accent-text);
+}
+
+.rosary-mode-selector {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.rosary-mode-button {
+  display: grid;
+  min-height: 4.6rem;
+  gap: 0.15rem;
+  padding: 0.8rem 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  color: var(--ink);
+  background: var(--surface);
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(28, 25, 23, 0.03);
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.rosary-mode-button span {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.rosary-mode-button.is-selected {
+  border-color: transparent;
+  color: var(--on-accent);
+  background: var(--accent);
+  box-shadow: 0 8px 18px color-mix(in srgb, var(--accent) 28%, transparent);
+}
+
+.rosary-mode-button.is-selected span {
+  color: color-mix(in srgb, var(--on-accent) 80%, transparent);
+}
+
+.rosary-progress {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.35rem 0.75rem;
+  color: var(--accent-text);
+  font-size: 0.78rem;
+  font-weight: 650;
+}
+
+.rosary-progress-track {
+  grid-column: 1 / -1;
+  height: 0.35rem;
+  overflow: hidden;
+  border-radius: 99px;
+  background: var(--line);
+}
+
+.rosary-progress-track span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--accent);
+  transition: width 220ms ease;
+}
+
+.rosary-beads {
+  display: flex;
+  justify-content: center;
+  gap: 0.65rem;
+}
+
+.rosary-beads span {
+  width: 0.85rem;
+  height: 0.85rem;
+  border: 2px solid color-mix(in srgb, var(--accent) 55%, var(--line));
+  border-radius: 50%;
+  background: var(--surface);
+  transition:
+    background 180ms ease,
+    transform 180ms ease;
+}
+
+.rosary-beads span.is-current,
+.rosary-beads span.is-complete {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+
+.rosary-beads span.is-current {
+  transform: scale(1.25);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+.rosary-step-card {
+  min-height: 16rem;
+}
+
+.rosary-step-card.is-mystery {
+  background:
+    radial-gradient(380px 160px at 50% 0%, var(--accent-soft), transparent 70%),
+    var(--surface);
+}
+
+.rosary-actions {
+  display: grid;
+  grid-template-columns: 1fr 1.35fr;
+  gap: 0.65rem;
+}
+
+.rosary-actions button {
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  border-radius: 0.85rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform 150ms ease,
+    background 150ms ease,
+    filter 150ms ease;
+}
+
+.rosary-secondary-button {
+  border: 1px solid var(--line-strong);
+  color: var(--ink-soft);
+  background: var(--surface);
+}
+
+.rosary-secondary-button:disabled {
+  cursor: default;
+  opacity: 0.4;
+}
+
+.rosary-next-button {
+  border: 0;
+  color: var(--on-accent);
+  background: var(--accent);
+  box-shadow: 0 8px 18px color-mix(in srgb, var(--accent) 26%, transparent);
+}
+
+.rosary-next-button:hover {
+  filter: brightness(1.06);
+}
+
+.saints-date,
+.empty-state,
+.detail-label {
+  color: var(--muted);
+}
+
+.empty-state {
+  margin: 0;
+  padding: 1.4rem 1rem;
+  border: 1px dashed var(--line-strong);
+  border-radius: 1rem;
+  text-align: center;
+}
+
+.saint-profile,
+.saint-item,
+.liturgical-day,
+.saint-prayer {
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: var(--surface);
+}
+
+.saint-profile {
+  overflow: hidden;
+}
+
+.saint-image {
+  display: block;
+  width: 100%;
+  max-height: 22rem;
+  object-fit: contain;
+  object-position: center top;
+  background: var(--surface-muted);
+}
+
+.saints-list {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.saints-date {
+  margin: 0;
+}
+
+.saint-text-section h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.saint-facts p + p {
+  margin-top: 0.35rem;
+}
+
+.saint-source {
+  margin: 0;
+  padding: 0 1.05rem 1rem;
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+.saint-source a {
+  color: var(--accent-text);
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.saint-source a:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.saint-profile-heading,
+.saint-item,
+.saint-text-section {
+  padding: 1rem 1.05rem;
+}
+
+.saint-profile-heading,
+.saint-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.saint-emblem {
+  width: 2.3rem;
+  height: 2.3rem;
+  flex: 0 0 auto;
+}
+
+.saint-prayer {
+  background: var(--surface-muted);
+}
+
+.liturgical-day {
+  margin: 0;
+  padding: 0.85rem 1rem;
+  color: var(--ink);
+  text-align: center;
+  font-weight: 650;
+}
+
+.day-details,
+.detail-row,
+.liturgy,
+.color-value,
+.section-divider {
+  color: var(--ink-soft);
+}
+
+@keyframes reading-rise {
+  from {
+    transform: translateY(4px);
+    opacity: 0;
   }
 
-  .homily-frame:has(.homily-poster:hover),
-  .homily-frame:has(.homily-poster:focus-visible),
-  .homily-poster:hover .homily-play,
-  .homily-poster:focus-visible .homily-play {
+  to {
     transform: none;
-  }
-
-  .homily-play {
-    transform: translate(-50%, -50%);
+    opacity: 1;
   }
 }
 
-@media (max-width: 480px) {
+@keyframes card-in {
+  from {
+    transform: translateY(8px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes ai-shimmer {
+  to {
+    transform: translateX(120%);
+  }
+}
+
+@keyframes icon-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.06);
+  }
+}
+
+.reading-card > * {
+  animation: card-in 420ms cubic-bezier(0.2, 0.75, 0.25, 1) backwards;
+}
+
+.reading-card > *:nth-child(2) {
+  animation-delay: 45ms;
+}
+
+.reading-card > *:nth-child(3) {
+  animation-delay: 90ms;
+}
+
+.reading-card > *:nth-child(4) {
+  animation-delay: 130ms;
+}
+
+.reading-content > * {
+  animation: card-in 380ms cubic-bezier(0.2, 0.75, 0.25, 1) backwards;
+}
+
+.reading-content > *:nth-child(2) {
+  animation-delay: 40ms;
+}
+
+.reading-content > *:nth-child(3) {
+  animation-delay: 75ms;
+}
+
+.reading-content > *:nth-child(4) {
+  animation-delay: 110ms;
+}
+
+.page-fade-enter-active,
+.day-swap-enter-active,
+.soft-swap-enter-active,
+.ai-state-enter-active,
+.meta-swap-enter-active {
+  transition:
+    opacity 220ms ease,
+    transform 240ms cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+
+.page-fade-leave-active,
+.day-swap-leave-active,
+.soft-swap-leave-active,
+.ai-state-leave-active,
+.meta-swap-leave-active {
+  transition:
+    opacity 140ms ease,
+    transform 140ms ease;
+}
+
+.page-fade-enter-from,
+.day-swap-enter-from,
+.soft-swap-enter-from,
+.ai-state-enter-from {
+  transform: translateY(8px);
+  opacity: 0;
+}
+
+.page-fade-leave-to,
+.day-swap-leave-to,
+.soft-swap-leave-to,
+.ai-state-leave-to {
+  transform: translateY(-6px);
+  opacity: 0;
+}
+
+.meta-swap-enter-from,
+.meta-swap-leave-to {
+  opacity: 0;
+}
+
+.menu-button:active,
+.theme-button:active,
+.font-controls button:active:not(:disabled),
+.date-picker-controls button:active:not(:disabled),
+.install-button:active,
+.summary-retry:active,
+.rosary-mode-button:active,
+.prayer-filter:active,
+.prayer-option:active,
+.rosary-actions button:active:not(:disabled),
+.mass-timeline button:active,
+.mass-nav button:active:not(:disabled),
+.mass-quiz button:active,
+.mass-result-actions button:active,
+.week-days button:active,
+.video-search-link:active {
+  transform: scale(0.97);
+}
+
+.dark-mode .gospel-role-reader {
+  color: #b7e4c7;
+}
+
+.dark-mode .gospel-role-people {
+  color: #fdba74;
+}
+
+.dark-mode .gospel-role-jesus {
+  color: #93c5fd;
+}
+
+@media (max-width: 640px) {
+  .brand-meta {
+    max-width: 46vw;
+  }
+
   .page-shell {
-    padding: 0;
+    width: min(100% - 1rem, 44rem);
+    padding-top: 0.75rem;
   }
 
-  .reading-card {
-    min-height: 100vh;
-    padding: 1.5rem 1.25rem 2.5rem;
-    border: 0;
-    border-radius: 0;
-    box-shadow: none;
+  .page-header,
+  .week-navigator,
+  .video-section,
+  .summary-card {
+    border-radius: 1.05rem;
   }
 
-  .page-header {
-    margin-bottom: 1.5rem;
+  .reading-tools,
+  .date-picker,
+  .video-heading-row {
+    align-items: flex-start;
+    flex-direction: column;
   }
 
-  .date-picker {
+  .font-controls,
+  .date-picker-controls {
     width: 100%;
   }
 
-  .week-navigator {
-    margin-right: -0.25rem;
-    margin-left: -0.25rem;
-    padding: 0.75rem 0.5rem;
+  .date-picker-controls input {
+    flex: 1;
+  }
+
+  .font-controls .font-reset {
+    margin-left: auto;
   }
 
   .week-days {
-    gap: 0.15rem;
+    gap: 0.2rem;
   }
 
   .week-days button {
-    min-height: 3.25rem;
-    border-radius: 0.55rem;
+    min-height: 3.15rem;
+    border-radius: 0.65rem;
   }
 
   .week-days button span {
     font-size: 0.58rem;
   }
 
-  .summary-header {
-    padding: 1rem;
-  }
-
-  .summary-sections {
-    padding: 1rem 1rem 1.2rem;
-  }
-
-  .summary-section p {
-    line-height: 1.75;
-  }
-
-  .reading-tools {
+  .ai-button {
     align-items: flex-start;
-    flex-direction: column;
   }
 
-  .font-controls {
-    width: 100%;
+  .rosary-mode-selector,
+  .rosary-actions {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 1ms !important;
+  }
+}
+
+.prayer-search {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.prayer-search-field {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0 0.85rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 0.85rem;
+  color: var(--muted);
+  background: var(--surface);
+  box-shadow: 0 1px 2px rgba(28, 25, 23, 0.03);
+}
+
+.prayer-search-field:focus-within {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.prayer-search-field input {
+  width: 100%;
+  min-width: 0;
+  padding: 0.72rem 0;
+  border: 0;
+  color: var(--ink);
+  background: transparent;
+  font: inherit;
+  font-size: 0.92rem;
+  outline: none;
+}
+
+.prayer-search-field input::placeholder {
+  color: var(--muted);
+  opacity: 1;
+}
+
+.prayer-search-field input::-webkit-search-cancel-button {
+  cursor: pointer;
+}
+
+.prayer-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.prayer-filter,
+.prayer-option {
+  border: 1px solid var(--line);
+  color: var(--ink);
+  background: var(--surface);
+  cursor: pointer;
+  touch-action: manipulation;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.prayer-filter {
+  min-height: 2.75rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.prayer-filter.is-selected,
+.prayer-option.is-selected {
+  border-color: transparent;
+  color: var(--on-accent);
+  background: var(--accent);
+  box-shadow: 0 8px 18px color-mix(in srgb, var(--accent) 28%, transparent);
+}
+
+.prayer-catalog {
+  display: grid;
+  max-height: 16rem;
+  gap: 0.85rem;
+  overflow: auto;
+  padding: 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.prayer-catalog section {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.prayer-catalog ul {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.prayer-group-label {
+  margin: 0;
+  color: var(--accent-text);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.prayer-option {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: 0.8rem;
+  font-size: 0.9rem;
+  font-weight: 650;
+  text-align: left;
+}
+
+.prayer-empty {
+  margin: 0;
+  padding: 1.25rem 0.75rem;
+  color: var(--muted);
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.prayer-text-card .prayer-kicker {
+  margin: 0.85rem 0 0;
+  color: var(--accent-text);
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.prayer-text-card h2 {
+  margin-top: 0.35rem;
+}
+
+@media (max-width: 640px) {
+  .prayer-catalog {
+    max-height: 14rem;
+  }
+}
+
+.mass-intro,
+.mass-part-summary,
+.mass-faithful,
+.mass-step p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.mass-intro {
+  max-width: 36rem;
+  margin-top: 0.85rem;
+}
+
+.mass-timeline {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.45rem;
+}
+
+.mass-timeline button {
+  display: grid;
+  min-height: 3.35rem;
+  justify-items: center;
+  gap: 0.15rem;
+  padding: 0.4rem 0.2rem;
+  border: 1px solid var(--line);
+  border-radius: 0.9rem;
+  color: var(--ink);
+  background: var(--surface);
+  font-size: 0.68rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(28, 25, 23, 0.03);
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.mass-timeline-index {
+  display: grid;
+  width: 1.3rem;
+  height: 1.3rem;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--accent-text);
+  background: var(--accent-soft);
+  font-size: 0.68rem;
+}
+
+.mass-timeline button.is-current {
+  border-color: transparent;
+  color: var(--on-accent);
+  background: var(--accent);
+  box-shadow: 0 8px 18px color-mix(in srgb, var(--accent) 28%, transparent);
+}
+
+.mass-timeline button.is-current .mass-timeline-index {
+  color: var(--accent);
+  background: var(--on-accent);
+}
+
+.mass-progress {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.35rem 0.75rem;
+  color: var(--accent-text);
+  font-size: 0.78rem;
+  font-weight: 650;
+}
+
+.mass-progress-track {
+  grid-column: 1 / -1;
+  height: 0.35rem;
+  overflow: hidden;
+  border-radius: 99px;
+  background: var(--line);
+}
+
+.mass-progress-track span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--accent);
+  transition: width 220ms ease;
+}
+
+.mass-part-summary {
+  margin-top: 0.15rem;
+}
+
+.mass-step {
+  display: grid;
+  gap: 0.35rem;
+  padding: 1.15rem 1.15rem 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.mass-step h3 {
+  margin: 0.7rem 0 0;
+  color: var(--accent-text);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.mass-kicker {
+  margin: 0;
+  color: var(--accent-text);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.mass-step-title {
+  margin: 0.15rem 0 0;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: clamp(1.45rem, 4vw, 1.85rem);
+  font-weight: 560;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  outline: none;
+}
+
+.mass-posture {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  width: fit-content;
+  margin-top: 0.45rem;
+  padding: 0.28rem 0.7rem 0.28rem 0.4rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--accent-text);
+  background: var(--accent-soft);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.mass-posture-icon {
+  display: block;
+}
+
+.mass-faithful {
+  margin-top: 0.35rem;
+}
+
+.mass-reveals {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 0.65rem;
+}
+
+.mass-reveal-button {
+  display: flex;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 0.85rem;
+  color: var(--ink);
+  background: var(--surface-muted);
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+
+.mass-reveal-button svg {
+  flex: 0 0 auto;
+  transition: transform 180ms ease;
+}
+
+.mass-reveal-button[aria-expanded='true'] svg {
+  transform: rotate(180deg);
+}
+
+.mass-reveal-panel {
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 0.85rem;
+  background: var(--surface-muted);
+}
+
+.mass-reveal-panel p {
+  margin: 0;
+}
+
+.mass-reveal-panel.is-response {
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--line));
+  background: var(--accent-soft);
+}
+
+.mass-reveal-panel.is-response p {
+  color: var(--ink);
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  line-height: 1.65;
+}
+
+.mass-citation {
+  margin-top: 0.75rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.mass-citation span {
+  display: block;
+  margin-bottom: 0.15rem;
+  color: var(--accent-text);
+  font-weight: 700;
+}
+
+.mass-nav,
+.mass-result-actions {
+  display: grid;
+  grid-template-columns: 1fr 1.35fr;
+  gap: 0.65rem;
+}
+
+.mass-nav {
+  position: sticky;
+  bottom: 0.75rem;
+  z-index: 2;
+  padding: 0.65rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  box-shadow: var(--shadow);
+}
+
+.mass-nav button,
+.mass-quiz button,
+.mass-result-actions button {
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  border-radius: 0.85rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform 150ms ease,
+    background 150ms ease,
+    filter 150ms ease;
+}
+
+.mass-secondary-button {
+  border: 1px solid var(--line-strong);
+  color: var(--ink-soft);
+  background: var(--surface);
+}
+
+.mass-secondary-button:disabled {
+  cursor: default;
+  opacity: 0.4;
+}
+
+.mass-next-button {
+  border: 0;
+  color: var(--on-accent);
+  background: var(--accent);
+  box-shadow: 0 8px 18px color-mix(in srgb, var(--accent) 26%, transparent);
+}
+
+.mass-next-button:hover {
+  filter: brightness(1.06);
+}
+
+.mass-quiz {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 0.35rem;
+}
+
+.mass-quiz fieldset {
+  margin: 0;
+  padding: 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: 0.9rem;
+  background: var(--surface-muted);
+}
+
+.mass-quiz legend {
+  padding: 0 0.25rem;
+  color: var(--ink);
+  font-size: 0.92rem;
+  font-weight: 650;
+}
+
+.mass-quiz label {
+  display: flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.35rem;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+  line-height: 1.4;
+}
+
+.mass-quiz input {
+  width: 1.05rem;
+  height: 1.05rem;
+  accent-color: var(--accent);
+}
+
+.mass-quiz-notice {
+  margin: 0;
+  color: var(--danger);
+  font-size: 0.88rem;
+  font-weight: 650;
+}
+
+.mass-result-list {
+  display: grid;
+  gap: 0.65rem;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mass-result-list li {
+  padding: 0.8rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 0.85rem;
+  background: var(--surface-muted);
+}
+
+.mass-result-list p {
+  margin: 0;
+}
+
+.mass-result-list .is-correct {
+  margin-top: 0.3rem;
+  color: var(--accent-text);
+  font-weight: 700;
+}
+
+.mass-result-list .is-review {
+  margin-top: 0.3rem;
+  color: var(--gold);
+  font-weight: 650;
+}
+
+.mass-forward-enter-active,
+.mass-forward-leave-active,
+.mass-back-enter-active,
+.mass-back-leave-active {
+  transition:
+    opacity 280ms ease,
+    transform 280ms ease;
+}
+
+.mass-forward-enter-from,
+.mass-back-leave-to {
+  transform: translateX(1rem);
+  opacity: 0;
+}
+
+.mass-forward-leave-to,
+.mass-back-enter-from {
+  transform: translateX(-1rem);
+  opacity: 0;
+}
+
+@media (max-width: 640px) {
+  .mass-timeline {
+    display: flex;
+    overflow-x: auto;
+    padding-bottom: 0.15rem;
+    scroll-snap-type: x proximity;
   }
 
-  .font-controls .font-reset {
-    margin-left: auto;
+  .mass-timeline button {
+    flex: 0 0 5.1rem;
+    scroll-snap-align: start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mass-forward-enter-from,
+  .mass-forward-leave-to,
+  .mass-back-enter-from,
+  .mass-back-leave-to {
+    transform: none;
   }
 }
