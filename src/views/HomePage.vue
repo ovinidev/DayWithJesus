@@ -10,6 +10,7 @@
   import { useGetHomilyWeek } from '@/composables/useGetHomilyWeek'
   import { dayColor } from '@/constants/dayColors'
   import { useGetGospelSummary } from '@/composables/useGetGospelSummary'
+  import DailyHomily from '@/components/DailyHomily.vue'
 
   interface InstallPromptEvent extends Event {
     prompt: () => Promise<void>
@@ -126,17 +127,6 @@
 
   const gospel = computed(() => data.value?.gospel)
   const gospelDay = computed(() => data.value?.date ?? '')
-  const homilySearchUrl = computed(() => {
-    const [day, month, year] = gospelDay.value.split('/')
-    const date = day && month && year ? `${day}-${month}-${year}` : ''
-    const query = ['Padre Adriano Zandoná', 'homilia diária', date]
-      .filter(Boolean)
-      .join(' ')
-    return `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`
-  })
-  const selectedDateLabel = computed(() =>
-    new Date(`${selectedDate.value}T12:00:00`).toLocaleDateString('pt-BR')
-  )
   const gospelText = computed(
     () => gospel.value?.map((g) => `${g.title}\n${g.text}`).join('\n\n') ?? ''
   )
@@ -326,31 +316,7 @@
             </div>
           </section>
 
-          <section class="video-section" aria-labelledby="video-heading">
-            <div class="video-heading-row">
-              <span class="video-kicker">ASSISTA</span>
-              <h2 id="video-heading">Homilia diária</h2>
-            </div>
-            <a
-              class="video-search-link"
-              :href="homilySearchUrl"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span class="play-icon" aria-hidden="true">▶</span>
-              <span>
-                <strong
-                  >Buscar a homilia de {{ selectedDateLabel }} do Padre
-                  Adriano</strong
-                >
-                <small
-                  >Resultados do canal do Padre Adriano Zandoná no
-                  YouTube</small
-                >
-              </span>
-              <span class="external-icon" aria-hidden="true">↗</span>
-            </a>
-          </section>
+          <DailyHomily :date="selectedDate" />
 
           <details class="liturgy-accordion">
             <summary>Orações e antífonas</summary>

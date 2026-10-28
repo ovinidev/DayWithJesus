@@ -395,6 +395,35 @@ body {
   background: #332b24;
 }
 
+.dark-mode .homily-frame,
+.dark-mode .homily-poster {
+  border-color: #5b4f42;
+}
+
+.dark-mode .homily-caption,
+.dark-mode .homily-note {
+  color: #e6ddd1;
+}
+
+.dark-mode .homily-note {
+  background: #332b24;
+}
+
+.dark-mode .homily-play {
+  color: #2a2118;
+  background: #e7c68e;
+}
+
+.dark-mode .homily-status {
+  color: #e7c68e;
+  background: #332b24;
+}
+
+.dark-mode .homily-status.is-error {
+  color: #ffb1a8;
+  background: #3a2422;
+}
+
 .dark-mode .summary-emblem,
 .dark-mode .saint-emblem,
 .dark-mode .prayer-emblem,
@@ -1639,9 +1668,9 @@ body {
 
 .video-heading-row {
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 1rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
 }
 
 .video-kicker {
@@ -1654,8 +1683,9 @@ body {
 .video-heading-row h2 {
   margin: 0;
   color: #39352f;
-  font-size: 1.05rem;
+  font-size: 1.45rem;
   font-weight: 600;
+  letter-spacing: -0.02em;
 }
 
 .video-search-link {
@@ -1718,6 +1748,125 @@ body {
   margin-left: auto;
   color: #927959;
   font-size: 1.1rem;
+}
+
+.homily-player {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.homily-frame {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 1px solid #e9e1d5;
+  border-radius: 1rem;
+  background: #1c1814;
+}
+
+.homily-frame iframe,
+.homily-poster,
+.homily-poster img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.homily-poster {
+  padding: 0;
+  cursor: pointer;
+  background: #1c1814;
+}
+
+.homily-poster img {
+  object-fit: cover;
+}
+
+.homily-frame:has(.homily-poster:hover),
+.homily-frame:has(.homily-poster:focus-visible) {
+  transform: translateY(-1px);
+}
+
+.homily-poster:focus-visible {
+  outline: 3px solid #d6bd94;
+  outline-offset: 3px;
+}
+
+.homily-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  width: 4.5rem;
+  height: 4.5rem;
+  place-items: center;
+  padding-left: 4px;
+  border-radius: 50%;
+  color: #2a2118;
+  background: #e7d7b1;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
+  font-size: 1.15rem;
+  transform: translate(-50%, -50%);
+  transition: transform 160ms ease;
+}
+
+.homily-poster:hover .homily-play,
+.homily-poster:focus-visible .homily-play {
+  transform: translate(-50%, -50%) scale(1.06);
+}
+
+.homily-caption {
+  margin: 0;
+  color: #493d2e;
+  font-size: 0.95rem;
+  font-weight: 650;
+  line-height: 1.45;
+}
+
+.homily-note,
+.homily-status {
+  margin: 0;
+  padding: 0.85rem 1rem;
+  border-radius: 0.9rem;
+  text-align: center;
+  font-size: 0.88rem;
+}
+
+.homily-note {
+  color: #6d6458;
+  background: #faf7f1;
+}
+
+.homily-status {
+  color: #806747;
+  background: #faf5eb;
+}
+
+.homily-status.is-error {
+  color: #a43e33;
+  background: #fff1ee;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .homily-play,
+  .homily-poster,
+  .homily-frame {
+    transition: none;
+  }
+
+  .homily-frame:has(.homily-poster:hover),
+  .homily-frame:has(.homily-poster:focus-visible),
+  .homily-poster:hover .homily-play,
+  .homily-poster:focus-visible .homily-play {
+    transform: none;
+  }
+
+  .homily-play {
+    transform: translate(-50%, -50%);
+  }
 }
 
 @media (max-width: 480px) {
