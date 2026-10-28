@@ -19,7 +19,7 @@
 </script>
 
 <template>
-  <p class="today-date text-base font-medium tracking-wide capitalize">
+  <p class="today-date">
     {{ formatted }}
   </p>
 </template>

@@ -91,8 +91,8 @@ export default defineConfig({
         short_name: 'Homilia',
         description: 'Leitura do evangelho do dia',
         lang: 'pt-BR',
-        theme_color: '#243b35',
-        background_color: '#243b35',
+        theme_color: '#1b4332',
+        background_color: '#efeae2',
         display: 'standalone',
         start_url: '/',
         icons: [

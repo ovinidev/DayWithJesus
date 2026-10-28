@@ -71,7 +71,7 @@
         Não foi possível carregar o santo do dia.
       </p>
 
-      <Transition v-else-if="data" name="daily-reveal">
+      <Transition v-else-if="data" name="day-swap" mode="out-in">
         <section class="saints-content" aria-live="polite">
           <p class="saints-date">{{ selectedDateLabel }}</p>
           <p v-if="showLiturgicalDay" class="liturgical-day">{{ liturgia }}</p>

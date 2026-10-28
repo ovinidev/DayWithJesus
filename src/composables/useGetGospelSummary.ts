@@ -60,7 +60,12 @@ export const useGetGospelSummary = (
   })
 
   const generate = () => {
-    if (cachedSummary.value?.date === gospelDay.value || query.data.value) return
+    if (cachedSummary.value?.date === gospelDay.value || query.data.value)
+      return
+    if (enabled.value) {
+      void query.refetch()
+      return
+    }
     enabled.value = true
   }
 
