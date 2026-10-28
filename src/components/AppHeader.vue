@@ -7,7 +7,8 @@
     HeartHandshake,
     Moon,
     Sun,
-    CircleDot
+    CircleDot,
+    Church
   } from 'lucide-vue-next'
 
   const isMenuOpen = ref(false)
@@ -89,6 +90,10 @@
         <RouterLink to="/terco" @click="closeMenu">
           <CircleDot :size="19" aria-hidden="true" />
           Reze o Terço
+        </RouterLink>
+        <RouterLink to="/missa" @click="closeMenu">
+          <Church :size="19" aria-hidden="true" />
+          Missa dominical
         </RouterLink>
       </nav>
     </Transition>
