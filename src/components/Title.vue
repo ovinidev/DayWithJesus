@@ -11,10 +11,7 @@
 </script>
 
 <template>
-  <h1
-    class="page-title mt-2 text-center text-2xl font-semibold tracking-tight md:text-3xl"
-    @click="openYoutubeSearch"
-  >
+  <h1 class="page-title" @click="openYoutubeSearch">
     {{ title }}
   </h1>
 </template>

@@ -49,41 +49,38 @@
 </script>
 
 <template>
-  <div class="gospel-text flex flex-col gap-3 text-base sm:text-[1.05rem]">
-    <p class="gospel-reference leading-relaxed font-bold">
+  <div class="gospel-text">
+    <p class="gospel-reference">
       {{ gospel.reference }}
     </p>
-    <p class="gospel-title leading-relaxed">{{ gospel.title }}</p>
+    <p class="gospel-title">{{ gospel.title }}</p>
 
-    <div v-if="isDialog" class="flex flex-col gap-2">
+    <div v-if="isDialog" class="gospel-lines">
       <div v-for="(line, i) in lines" :key="i">
         <p
           v-if="line.type === 'narrative'"
-          class="gospel-body leading-[1.85]"
+          class="gospel-body"
           v-html="stripVerseNumbers(line.content)"
         />
-        <p v-else-if="line.type === 'stage'" class="gospel-stage italic">
+        <p v-else-if="line.type === 'stage'" class="gospel-stage">
           ({{ line.content }})
         </p>
-        <div v-else-if="line.type === 'dialog'" class="flex gap-2">
+        <div v-else-if="line.type === 'dialog'" class="gospel-dialog">
           <span
-            class="mt-0.5 shrink-0 font-bold"
+            class="gospel-role"
             :class="line.role ? roleColors[line.role] : 'gospel-role-narrator'"
             :title="line.roleFull"
           >
             {{ line.role }}
           </span>
-          <p
-            class="gospel-body leading-[1.85]"
-            v-html="stripVerseNumbers(line.content)"
-          />
+          <p class="gospel-body" v-html="stripVerseNumbers(line.content)" />
         </div>
       </div>
     </div>
 
     <p
       v-else
-      class="gospel-body mt-1 leading-[1.85]"
+      class="gospel-body"
       v-html="stripVerseNumbers(lines.map((l) => l.content).join(' '))"
     />
   </div>
