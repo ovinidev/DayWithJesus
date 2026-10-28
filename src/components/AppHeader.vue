@@ -8,6 +8,7 @@
     Moon,
     Sun,
     CircleDot,
+    Church,
     X
   } from 'lucide-vue-next'
   import { useLiturgyHeader } from '@/composables/useLiturgyHeader'
@@ -119,6 +120,10 @@
         <RouterLink to="/terco" @click="closeMenu">
           <CircleDot :size="18" aria-hidden="true" />
           Reze o Terço
+        </RouterLink>
+        <RouterLink to="/missa" @click="closeMenu">
+          <Church :size="18" aria-hidden="true" />
+          Missa dominical
         </RouterLink>
       </nav>
     </Transition>
