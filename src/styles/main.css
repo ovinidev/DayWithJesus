@@ -1711,6 +1711,8 @@ select {
 .install-button:active,
 .summary-retry:active,
 .rosary-mode-button:active,
+.prayer-filter:active,
+.prayer-option:active,
 .rosary-actions button:active:not(:disabled),
 .week-days button:active,
 .video-search-link:active {
@@ -1797,5 +1799,157 @@ select {
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 1ms !important;
+  }
+}
+
+.prayer-search {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.prayer-search-field {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0 0.85rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 0.85rem;
+  color: var(--muted);
+  background: var(--surface);
+  box-shadow: 0 1px 2px rgba(28, 25, 23, 0.03);
+}
+
+.prayer-search-field:focus-within {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.prayer-search-field input {
+  width: 100%;
+  min-width: 0;
+  padding: 0.72rem 0;
+  border: 0;
+  color: var(--ink);
+  background: transparent;
+  font: inherit;
+  font-size: 0.92rem;
+  outline: none;
+}
+
+.prayer-search-field input::placeholder {
+  color: var(--muted);
+  opacity: 1;
+}
+
+.prayer-search-field input::-webkit-search-cancel-button {
+  cursor: pointer;
+}
+
+.prayer-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.prayer-filter,
+.prayer-option {
+  border: 1px solid var(--line);
+  color: var(--ink);
+  background: var(--surface);
+  cursor: pointer;
+  touch-action: manipulation;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.prayer-filter {
+  min-height: 2.75rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.prayer-filter.is-selected,
+.prayer-option.is-selected {
+  border-color: transparent;
+  color: var(--on-accent);
+  background: var(--accent);
+  box-shadow: 0 8px 18px color-mix(in srgb, var(--accent) 28%, transparent);
+}
+
+.prayer-catalog {
+  display: grid;
+  max-height: 16rem;
+  gap: 0.85rem;
+  overflow: auto;
+  padding: 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.prayer-catalog section {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.prayer-catalog ul {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.prayer-group-label {
+  margin: 0;
+  color: var(--accent-text);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.prayer-option {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: 0.8rem;
+  font-size: 0.9rem;
+  font-weight: 650;
+  text-align: left;
+}
+
+.prayer-empty {
+  margin: 0;
+  padding: 1.25rem 0.75rem;
+  color: var(--muted);
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.prayer-text-card .prayer-kicker {
+  margin: 0.85rem 0 0;
+  color: var(--accent-text);
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.prayer-text-card h2 {
+  margin-top: 0.35rem;
+}
+
+@media (max-width: 640px) {
+  .prayer-catalog {
+    max-height: 14rem;
   }
 }
