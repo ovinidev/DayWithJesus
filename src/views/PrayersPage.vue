@@ -149,7 +149,7 @@
         </div>
 
         <div class="prayer-reading" aria-live="polite">
-          <Transition name="prayer-reveal" mode="out-in">
+          <Transition name="soft-swap" mode="out-in">
             <article
               :key="selectedPrayerKey"
               ref="prayerCard"
