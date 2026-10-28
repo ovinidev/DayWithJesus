@@ -8,6 +8,7 @@
   import WeekNavigator from '@/components/WeekNavigator.vue'
   import { useGetHomilyDiary } from '@/composables/useGetHomilyDiary'
   import { useGetHomilyWeek } from '@/composables/useGetHomilyWeek'
+  import { useLiturgyHeader } from '@/composables/useLiturgyHeader'
   import { dayColor } from '@/constants/dayColors'
   import { useGetGospelSummary } from '@/composables/useGetGospelSummary'
 
@@ -57,10 +58,13 @@
     updateInstallVisibility()
   })
 
+  const { setLiturgyHeader, clearLiturgyHeader } = useLiturgyHeader()
+
   onUnmounted(() => {
     mobileQuery?.removeEventListener('change', updateInstallVisibility)
     window.removeEventListener('beforeinstallprompt', captureInstallPrompt)
     window.removeEventListener('appinstalled', updateInstallVisibility)
+    clearLiturgyHeader()
   })
 
   const toDateInputValue = (date: Date) => {
@@ -79,6 +83,30 @@
 
   const { data, isLoading, isError } = useGetHomilyDiary(selectedDate)
   const { days: weekDays } = useGetHomilyWeek()
+
+  watch(
+    data,
+    (value) => {
+      if (!value?.date) {
+        setLiturgyHeader({ line: '', color: '' })
+        return
+      }
+
+      const [day, month, year] = value.date.split('/')
+      const parsed = new Date(Number(year), Number(month) - 1, Number(day))
+      const label = parsed.toLocaleDateString('pt-BR', {
+        weekday: 'short',
+        day: 'numeric',
+        month: 'short'
+      })
+
+      setLiturgyHeader({
+        line: `${label} · ${value.color} · ${value.liturgy}`,
+        color: dayColor[value.color] ?? ''
+      })
+    },
+    { immediate: true }
+  )
 
   const selectWeekDate = (date: string) => {
     selectedDate.value = date
@@ -144,6 +172,7 @@
   const {
     data: gospelSummary,
     isLoading: isGospelLoading,
+    isFetching: isGospelFetching,
     isError: isGospelError,
     errorMessage: gospelErrorMessage,
     generate
@@ -154,20 +183,45 @@
   <main class="page-shell">
     <article class="reading-card">
       <header class="page-header">
-        <span class="eyebrow">PALAVRA DE DEUS</span>
+        <div class="hero-top">
+          <span class="eyebrow">Palavra do dia</span>
+          <button
+            v-if="canShowInstallButton && !isInstalled"
+            class="install-button"
+            type="button"
+            @click="showInstallHelp"
+          >
+            Adicionar à tela inicial
+          </button>
+        </div>
         <Title title="Evangelho do dia" />
-        <button
-          v-if="canShowInstallButton && !isInstalled"
-          class="install-button"
-          type="button"
-          @click="showInstallHelp"
-        >
-          Adicionar à tela inicial
-        </button>
         <p v-if="installHelp" class="install-help" role="status">
           {{ installHelp }}
         </p>
         <span class="header-rule" aria-hidden="true"></span>
+
+        <section
+          v-if="data"
+          class="liturgy-banner"
+          aria-label="Informações do dia"
+        >
+          <TodayDate :date-str="data.date" />
+          <div class="liturgy-meta">
+            <span class="color-chip">
+              <span
+                class="color-swatch"
+                :style="{ background: dayColor[data.color] }"
+              ></span>
+              {{ data.color }}
+            </span>
+            <p class="liturgy-name">{{ data.liturgy }}</p>
+          </div>
+        </section>
+        <p v-else-if="isLoading" class="status-message">Carregando...</p>
+        <p v-else-if="isError" class="status-message error-message">
+          Erro ao carregar o evangelho.
+        </p>
+
         <div class="date-picker">
           <label for="reading-date">Ver leitura de outra data</label>
           <div class="date-picker-controls">
@@ -189,37 +243,14 @@
         @select="selectWeekDate"
       />
 
-      <p v-if="isLoading" class="status-message">Carregando...</p>
-
-      <p v-else-if="isError" class="status-message error-message">
-        Erro ao carregar o evangelho.
-      </p>
-
       <Transition name="daily-reveal">
         <div v-if="data" class="reading-content">
-          <section class="day-details" aria-label="Informações do dia">
-            <TodayDate :date-str="data.date" />
-            <div class="detail-row">
-              <span class="detail-label">Cor litúrgica</span>
-              <span
-                class="color-value"
-                :style="{ color: dayColor[data.color] }"
-                >{{ data?.color }}</span
-              >
-            </div>
-            <p class="liturgy">
-              <span class="detail-label">Liturgia</span>{{ data.liturgy }}
-            </p>
-          </section>
-
-          <div class="section-divider" aria-hidden="true"><span>✦</span></div>
-
           <section
             class="gospel-reading"
             :style="{ '--gospel-font-size': `${gospelFontScale}rem` }"
           >
             <div class="reading-tools">
-              <span class="reading-tools-label">Texto do Evangelho</span>
+              <span class="reading-tools-label">Leituras</span>
               <div
                 class="font-controls"
                 role="group"
@@ -326,6 +357,16 @@
             </div>
           </section>
 
+          <GospelSummary
+            v-if="gospel"
+            :summary="gospelSummary"
+            :font-scale="summaryFontScale"
+            :is-loading="isGospelLoading || isGospelFetching"
+            :is-error="isGospelError"
+            :error-message="gospelErrorMessage"
+            :generate="generate"
+          />
+
           <section class="video-section" aria-labelledby="video-heading">
             <div class="video-heading-row">
               <span class="video-kicker">ASSISTA</span>
@@ -384,16 +425,6 @@
               </section>
             </div>
           </details>
-
-          <GospelSummary
-            v-if="gospel"
-            :summary="gospelSummary"
-            :font-scale="summaryFontScale"
-            :is-loading="isGospelLoading"
-            :is-error="isGospelError"
-            :error-message="gospelErrorMessage"
-            :generate="generate"
-          />
         </div>
       </Transition>
 
