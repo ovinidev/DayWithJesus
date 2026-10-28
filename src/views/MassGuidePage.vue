@@ -196,11 +196,7 @@
     <article class="reading-card mass-card">
       <header class="page-header">
         <span class="eyebrow">MISSAL ROMANO</span>
-        <h1
-          class="page-title mt-2 text-center text-2xl font-semibold tracking-tight md:text-3xl"
-        >
-          Missa dominical
-        </h1>
+        <h1 class="page-title">Missa dominical</h1>
         <span class="header-rule" aria-hidden="true"></span>
         <p class="mass-intro">
           Um passo de cada vez, como a Missa de domingo é celebrada no Brasil.
