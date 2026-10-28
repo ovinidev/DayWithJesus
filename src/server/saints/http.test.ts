@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest'
+import handler from '../../../api/saints'
 import { cacheControlFor, parseWikipediaSummary } from './loadSaints'
 import { saintsResponseForQuery } from './http'
 
@@ -13,6 +14,29 @@ describe('saints HTTP boundary', () => {
     expect(response.status).toBe(400)
     expect(response.headers.get('Cache-Control')).toBe('no-store')
     expect(await response.json()).toEqual({
+      error: 'Informe uma data válida com dia, mês e ano.'
+    })
+  })
+
+  it('writes that rejection through the Node.js handler Vercel invokes', async () => {
+    const sent: { status?: number; body?: string } = {}
+    await handler(
+      { query: { dia: '31', mes: '2', ano: '2026' } },
+      {
+        setHeader() {},
+        status(code) {
+          sent.status = code
+          return {
+            send(body) {
+              sent.body = body
+            }
+          }
+        }
+      }
+    )
+
+    expect(sent.status).toBe(400)
+    expect(JSON.parse(sent.body ?? '')).toEqual({
       error: 'Informe uma data válida com dia, mês e ano.'
     })
   })

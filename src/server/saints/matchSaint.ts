@@ -1,4 +1,4 @@
-import type { SanctoralCelebration } from './calendar'
+import type { SanctoralCelebration } from './calendar.js'
 
 export interface SaintLookup {
   nome: string

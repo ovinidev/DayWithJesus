@@ -1,6 +1,6 @@
 import { Romcal } from 'romcal'
 import { Brazil_PtBr } from '@romcal/calendar.brazil'
-import type { IsoDate } from '../../utils/liturgicalDate'
+import type { IsoDate } from '../../utils/liturgicalDate.js'
 
 export interface SanctoralCelebration {
   id: string
