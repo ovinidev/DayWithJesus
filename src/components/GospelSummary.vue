@@ -58,37 +58,50 @@
 
 <template>
   <div class="ai-panel">
-    <button
-      v-if="showButton"
-      class="summary-button ai-button"
-      type="button"
-      @click="props.generate()"
-    >
-      <span class="ai-button-icon" aria-hidden="true">
-        <Sparkles :size="18" />
-      </span>
-      <span class="ai-button-copy">
-        <strong>Entender com IA</strong>
-        <small>Uma explicação clara das leituras de hoje</small>
-      </span>
-      <ArrowRight class="ai-button-arrow" :size="18" aria-hidden="true" />
-    </button>
-
-    <p v-if="props.isLoading" class="summary-loading" role="status">
-      <LoaderCircle class="is-spinning" :size="18" aria-hidden="true" />
-      <span>
-        <strong>Preparando a explicação</strong>
-        Lendo as leituras e organizando os ensinamentos
-      </span>
-    </p>
-
-    <div v-else-if="props.isError" class="summary-error" role="alert">
-      <p>{{ props.errorMessage }}</p>
-      <button class="summary-retry" type="button" @click="props.generate()">
-        <RotateCcw :size="15" aria-hidden="true" />
-        Tentar novamente
+    <Transition name="ai-state" mode="out-in">
+      <button
+        v-if="showButton"
+        key="ask"
+        class="summary-button ai-button"
+        type="button"
+        @click="props.generate()"
+      >
+        <span class="ai-button-icon" aria-hidden="true">
+          <Sparkles :size="18" />
+        </span>
+        <span class="ai-button-copy">
+          <strong>Entender com IA</strong>
+          <small>Uma explicação clara das leituras de hoje</small>
+        </span>
+        <ArrowRight class="ai-button-arrow" :size="18" aria-hidden="true" />
       </button>
-    </div>
+
+      <p
+        v-else-if="props.isLoading"
+        key="loading"
+        class="summary-loading"
+        role="status"
+      >
+        <LoaderCircle class="is-spinning" :size="18" aria-hidden="true" />
+        <span>
+          <strong>Preparando a explicação</strong>
+          Lendo as leituras e organizando os ensinamentos
+        </span>
+      </p>
+
+      <div
+        v-else-if="props.isError"
+        key="error"
+        class="summary-error"
+        role="alert"
+      >
+        <p>{{ props.errorMessage }}</p>
+        <button class="summary-retry" type="button" @click="props.generate()">
+          <RotateCcw :size="15" aria-hidden="true" />
+          Tentar novamente
+        </button>
+      </div>
+    </Transition>
 
     <Transition name="summary-reveal">
       <section

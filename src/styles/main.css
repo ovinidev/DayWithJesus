@@ -1,5 +1,107 @@
 @import 'tailwindcss';
 
+@property --bg {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #efeae2;
+}
+
+@property --bg-glow {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #e5f0e8;
+}
+
+@property --surface {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #fffcf8;
+}
+
+@property --surface-muted {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #f6f1e8;
+}
+
+@property --ink {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #1c1917;
+}
+
+@property --ink-soft {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #44403c;
+}
+
+@property --muted {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #5f574e;
+}
+
+@property --line {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #e6dfd4;
+}
+
+@property --line-strong {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #d5cdc0;
+}
+
+@property --accent {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #1b4332;
+}
+
+@property --accent-strong {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #133226;
+}
+
+@property --accent-soft {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #e7f3ec;
+}
+
+@property --accent-text {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #143528;
+}
+
+@property --on-accent {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #f4fbf6;
+}
+
+@property --danger {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #9f2d2d;
+}
+
+@property --danger-soft {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #fdecec;
+}
+
+@property --focus {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #1b4332;
+}
+
 @theme {
   --font-sans: 'Outfit', sans-serif;
   --font-serif: 'Source Serif 4', Georgia, serif;
@@ -53,6 +155,27 @@
   --shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
   --focus: #e4c48a;
   color-scheme: dark;
+}
+
+html {
+  transition:
+    --bg 320ms ease,
+    --bg-glow 320ms ease,
+    --surface 320ms ease,
+    --surface-muted 320ms ease,
+    --ink 320ms ease,
+    --ink-soft 320ms ease,
+    --muted 320ms ease,
+    --line 320ms ease,
+    --line-strong 320ms ease,
+    --accent 320ms ease,
+    --accent-strong 320ms ease,
+    --accent-soft 320ms ease,
+    --accent-text 320ms ease,
+    --on-accent 320ms ease,
+    --danger 320ms ease,
+    --danger-soft 320ms ease,
+    --focus 320ms ease;
 }
 
 body {
@@ -203,6 +326,7 @@ select {
   transition:
     background 150ms ease,
     color 150ms ease;
+  animation: card-in 240ms cubic-bezier(0.2, 0.75, 0.25, 1) backwards;
 }
 
 .main-menu a:hover,
@@ -220,8 +344,24 @@ select {
 
 .menu-reveal-enter-from,
 .menu-reveal-leave-to {
-  transform: translateY(-0.35rem);
+  transform: translateY(-0.4rem) scale(0.98);
   opacity: 0;
+}
+
+.main-menu a:nth-child(1) {
+  animation-delay: 20ms;
+}
+
+.main-menu a:nth-child(2) {
+  animation-delay: 55ms;
+}
+
+.main-menu a:nth-child(3) {
+  animation-delay: 90ms;
+}
+
+.main-menu a:nth-child(4) {
+  animation-delay: 125ms;
 }
 
 .pull-to-refresh {
@@ -403,6 +543,7 @@ select {
   flex: 0 0 auto;
   border-radius: 50%;
   box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ink) 22%, transparent);
+  transition: background-color 280ms ease;
 }
 
 .brand-meta .color-swatch {
@@ -1005,9 +1146,30 @@ select {
 }
 
 .summary-loading {
+  position: relative;
+  overflow: hidden;
   border: 1px solid color-mix(in srgb, var(--accent) 28%, var(--line));
   color: var(--accent-text);
   background: var(--accent-soft);
+}
+
+.summary-loading::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    transparent 15%,
+    color-mix(in srgb, white 55%, transparent) 50%,
+    transparent 85%
+  );
+  content: '';
+  pointer-events: none;
+  transform: translateX(-120%);
+  animation: ai-shimmer 1.25s ease-in-out infinite;
+}
+
+.ai-button-icon {
+  animation: icon-breathe 2.2s ease-in-out infinite;
 }
 
 .summary-loading span {
@@ -1053,17 +1215,27 @@ select {
   box-shadow: var(--shadow);
 }
 
-.summary-reveal-enter-active,
-.daily-reveal-enter-active {
+.summary-reveal-enter-active {
   transition:
-    opacity 420ms ease,
-    transform 520ms cubic-bezier(0.2, 0.75, 0.25, 1);
+    opacity 320ms ease,
+    transform 360ms cubic-bezier(0.2, 0.75, 0.25, 1);
 }
 
-.summary-reveal-enter-from,
-.daily-reveal-enter-from {
-  transform: translateY(0.7rem);
+.summary-reveal-enter-from {
+  transform: translateY(0.55rem);
   opacity: 0;
+}
+
+.summary-section {
+  animation: card-in 340ms cubic-bezier(0.2, 0.75, 0.25, 1) backwards;
+}
+
+.summary-section:nth-child(2) {
+  animation-delay: 55ms;
+}
+
+.summary-section:nth-child(3) {
+  animation-delay: 100ms;
 }
 
 .summary-header {
@@ -1428,6 +1600,121 @@ select {
     transform: none;
     opacity: 1;
   }
+}
+
+@keyframes card-in {
+  from {
+    transform: translateY(8px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes ai-shimmer {
+  to {
+    transform: translateX(120%);
+  }
+}
+
+@keyframes icon-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.06);
+  }
+}
+
+.reading-card > * {
+  animation: card-in 420ms cubic-bezier(0.2, 0.75, 0.25, 1) backwards;
+}
+
+.reading-card > *:nth-child(2) {
+  animation-delay: 45ms;
+}
+
+.reading-card > *:nth-child(3) {
+  animation-delay: 90ms;
+}
+
+.reading-card > *:nth-child(4) {
+  animation-delay: 130ms;
+}
+
+.reading-content > * {
+  animation: card-in 380ms cubic-bezier(0.2, 0.75, 0.25, 1) backwards;
+}
+
+.reading-content > *:nth-child(2) {
+  animation-delay: 40ms;
+}
+
+.reading-content > *:nth-child(3) {
+  animation-delay: 75ms;
+}
+
+.reading-content > *:nth-child(4) {
+  animation-delay: 110ms;
+}
+
+.page-fade-enter-active,
+.day-swap-enter-active,
+.soft-swap-enter-active,
+.ai-state-enter-active,
+.meta-swap-enter-active {
+  transition:
+    opacity 220ms ease,
+    transform 240ms cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+
+.page-fade-leave-active,
+.day-swap-leave-active,
+.soft-swap-leave-active,
+.ai-state-leave-active,
+.meta-swap-leave-active {
+  transition:
+    opacity 140ms ease,
+    transform 140ms ease;
+}
+
+.page-fade-enter-from,
+.day-swap-enter-from,
+.soft-swap-enter-from,
+.ai-state-enter-from {
+  transform: translateY(8px);
+  opacity: 0;
+}
+
+.page-fade-leave-to,
+.day-swap-leave-to,
+.soft-swap-leave-to,
+.ai-state-leave-to {
+  transform: translateY(-6px);
+  opacity: 0;
+}
+
+.meta-swap-enter-from,
+.meta-swap-leave-to {
+  opacity: 0;
+}
+
+.menu-button:active,
+.theme-button:active,
+.font-controls button:active:not(:disabled),
+.date-picker-controls button:active:not(:disabled),
+.install-button:active,
+.summary-retry:active,
+.rosary-mode-button:active,
+.rosary-actions button:active:not(:disabled),
+.week-days button:active,
+.video-search-link:active {
+  transform: scale(0.97);
 }
 
 .dark-mode .gospel-role-reader {

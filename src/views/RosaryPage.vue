@@ -162,14 +162,20 @@
           </button>
         </div>
 
-        <article class="rosary-step-card" :class="`is-${currentStep.kind}`">
-          <span class="rosary-step-icon"
-            ><Cross :size="20" aria-hidden="true"
-          /></span>
-          <p class="rosary-step-label">{{ currentStep.label }}</p>
-          <h2>{{ currentStep.title }}</h2>
-          <p class="rosary-step-text">{{ currentStep.text }}</p>
-        </article>
+        <Transition name="soft-swap" mode="out-in">
+          <article
+            :key="currentStepIndex"
+            class="rosary-step-card"
+            :class="`is-${currentStep.kind}`"
+          >
+            <span class="rosary-step-icon"
+              ><Cross :size="20" aria-hidden="true"
+            /></span>
+            <p class="rosary-step-label">{{ currentStep.label }}</p>
+            <h2>{{ currentStep.title }}</h2>
+            <p class="rosary-step-text">{{ currentStep.text }}</p>
+          </article>
+        </Transition>
       </section>
     </article>
   </main>

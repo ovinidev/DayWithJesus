@@ -39,13 +39,15 @@
           </option>
         </select>
 
-        <article class="prayer-text-card">
-          <span class="prayer-emblem"
-            ><HeartHandshake :size="21" aria-hidden="true"
-          /></span>
-          <h2>{{ selectedPrayer.name }}</h2>
-          <p>{{ selectedPrayer.text }}</p>
-        </article>
+        <Transition name="soft-swap" mode="out-in">
+          <article :key="selectedPrayerKey" class="prayer-text-card">
+            <span class="prayer-emblem"
+              ><HeartHandshake :size="21" aria-hidden="true"
+            /></span>
+            <h2>{{ selectedPrayer.name }}</h2>
+            <p>{{ selectedPrayer.text }}</p>
+          </article>
+        </Transition>
       </section>
     </article>
   </main>

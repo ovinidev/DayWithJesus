@@ -200,27 +200,36 @@
         </p>
         <span class="header-rule" aria-hidden="true"></span>
 
-        <section
-          v-if="data"
-          class="liturgy-banner"
-          aria-label="Informações do dia"
-        >
-          <TodayDate :date-str="data.date" />
-          <div class="liturgy-meta">
-            <span class="color-chip">
-              <span
-                class="color-swatch"
-                :style="{ background: dayColor[data.color] }"
-              ></span>
-              {{ data.color }}
-            </span>
-            <p class="liturgy-name">{{ data.liturgy }}</p>
-          </div>
-        </section>
-        <p v-else-if="isLoading" class="status-message">Carregando...</p>
-        <p v-else-if="isError" class="status-message error-message">
-          Erro ao carregar o evangelho.
-        </p>
+        <Transition name="soft-swap" mode="out-in">
+          <section
+            v-if="data"
+            :key="data.date"
+            class="liturgy-banner"
+            aria-label="Informações do dia"
+          >
+            <TodayDate :date-str="data.date" />
+            <div class="liturgy-meta">
+              <span class="color-chip">
+                <span
+                  class="color-swatch"
+                  :style="{ background: dayColor[data.color] }"
+                ></span>
+                {{ data.color }}
+              </span>
+              <p class="liturgy-name">{{ data.liturgy }}</p>
+            </div>
+          </section>
+          <p v-else-if="isLoading" key="loading" class="status-message">
+            Carregando...
+          </p>
+          <p
+            v-else-if="isError"
+            key="error"
+            class="status-message error-message"
+          >
+            Erro ao carregar o evangelho.
+          </p>
+        </Transition>
 
         <div class="date-picker">
           <label for="reading-date">Ver leitura de outra data</label>
@@ -243,8 +252,8 @@
         @select="selectWeekDate"
       />
 
-      <Transition name="daily-reveal">
-        <div v-if="data" class="reading-content">
+      <Transition name="day-swap" mode="out-in">
+        <div v-if="data" :key="data.date" class="reading-content">
           <section
             class="gospel-reading"
             :style="{ '--gospel-font-size': `${gospelFontScale}rem` }"

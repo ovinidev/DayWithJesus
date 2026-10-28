@@ -62,9 +62,13 @@
             :style="{ background: liturgyHeader.color }"
             aria-hidden="true"
           ></span>
-          <span class="brand-meta-text">{{
-            liturgyHeader.line || todayLabel
-          }}</span>
+          <Transition name="meta-swap" mode="out-in">
+            <span
+              :key="liturgyHeader.line || todayLabel"
+              class="brand-meta-text"
+              >{{ liturgyHeader.line || todayLabel }}</span
+            >
+          </Transition>
         </span>
       </span>
     </RouterLink>
