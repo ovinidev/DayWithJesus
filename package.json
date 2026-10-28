@@ -14,14 +14,16 @@
   "dependencies": {
     "@flagsmith/flagsmith": "^11.0.0",
     "@google/genai": "^1.48.0",
+    "@romcal/calendar.brazil": "3.0.0-dev.143",
     "@tailwindcss/oxide-darwin-arm64": "^4.2.2",
     "@tailwindcss/postcss": "^4.2.2",
     "@tanstack/vue-query": "^5.28.0",
     "@tanstack/vue-query-devtools": "^6.1.10",
     "@vercel/analytics": "^2.0.1",
-    "flagsmith-vue": "^3.0.0",
     "axios": "^1.6.7",
+    "flagsmith-vue": "^3.0.0",
     "lucide-vue-next": "^0.468.0",
+    "romcal": "3.0.0-dev.143",
     "vue": "^3.4.19",
     "vue-router": "^4.5.0"
   },

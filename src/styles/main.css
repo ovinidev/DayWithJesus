@@ -404,6 +404,18 @@ body {
   background: #3c3127;
 }
 
+.dark-mode .saint-image {
+  background: #3c3127;
+}
+
+.dark-mode .saint-source {
+  color: #cfc2b2;
+}
+
+.dark-mode .saint-source a {
+  color: #f0d5a5;
+}
+
 .main-menu {
   position: absolute;
   top: calc(var(--app-header-height) - 0.1rem);
@@ -1000,7 +1012,6 @@ body {
   color: #81796e;
   text-align: center;
   font-size: 0.82rem;
-  text-transform: capitalize;
 }
 .liturgical-day {
   margin: 0;
@@ -1028,8 +1039,9 @@ body {
 .saint-image {
   display: block;
   width: 100%;
-  max-height: 20rem;
-  object-fit: cover;
+  max-height: 22rem;
+  object-fit: contain;
+  object-position: center top;
   background: #f8f3e9;
 }
 
@@ -1116,6 +1128,34 @@ body {
   font-size: 0.9rem;
   line-height: 1.7;
   white-space: pre-line;
+}
+
+.saint-facts p + p {
+  margin-top: 0.4rem;
+}
+
+.saint-source {
+  margin: 0;
+  padding: 0 1.1rem 1.05rem;
+  color: #938a7e;
+  font-size: 0.75rem;
+}
+
+.saint-source a {
+  color: #735b3b;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.saint-source a:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.saint-source a:focus-visible {
+  border-radius: 2px;
+  outline: 2px solid #b89561;
+  outline-offset: 2px;
 }
 .empty-state {
   margin: 0;
