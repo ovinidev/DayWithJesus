@@ -1,5 +1,6 @@
-import { fetchYoutube } from '../src/server/fetchYoutube'
-import { respondToHomilyRequest } from '../src/server/respondToHomilyRequest'
+// Keep the .js suffix. Vercel emits these files as ESM, and Node cannot resolve extensionless imports.
+import { fetchYoutube } from '../src/server/fetchYoutube.js'
+import { respondToHomilyRequest } from '../src/server/respondToHomilyRequest.js'
 
 interface HomilyRequest {
   query?: Record<string, unknown>

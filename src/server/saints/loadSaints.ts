@@ -1,6 +1,6 @@
-import type { SaintOfDay, SaintOfDayResponse } from '../../types'
-import type { IsoDate } from '../../utils/liturgicalDate'
-import { saintsOn } from './calendar'
+import type { SaintOfDay, SaintOfDayResponse } from '../../types/index.js'
+import type { IsoDate } from '../../utils/liturgicalDate.js'
+import { saintsOn } from './calendar.js'
 import {
   chooseWikipediaPage,
   formatPatrons,
@@ -10,7 +10,7 @@ import {
   stripRoleSuffix,
   type SaintLookup,
   type WikiPageCandidate
-} from './matchSaint'
+} from './matchSaint.js'
 
 const USER_AGENT =
   'DayWithJesus/1.0 (https://day-with-jesus.vercel.app; santo-do-dia)'

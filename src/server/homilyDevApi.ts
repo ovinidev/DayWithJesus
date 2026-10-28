@@ -1,6 +1,6 @@
 import type { Plugin } from 'vite'
-import { fetchYoutube } from './fetchYoutube'
-import { respondToHomilyRequest } from './respondToHomilyRequest'
+import { fetchYoutube } from './fetchYoutube.js'
+import { respondToHomilyRequest } from './respondToHomilyRequest.js'
 
 export const homilyVideoDevApi = (): Plugin => ({
   name: 'homily-video-dev-api',

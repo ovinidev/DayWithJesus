@@ -1,5 +1,5 @@
-import { isoDateFromParts } from '../../utils/liturgicalDate'
-import { buildSaintsResponse } from './loadSaints'
+import { isoDateFromParts } from '../../utils/liturgicalDate.js'
+import { buildSaintsResponse } from './loadSaints.js'
 
 export interface DateQuery {
   dia: string | null

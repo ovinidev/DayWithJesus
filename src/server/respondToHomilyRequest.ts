@@ -8,7 +8,7 @@ import {
   parseYoutubeFeed,
   type FeedEntry,
   type HomilyLookup
-} from '../utils/homilyFeed'
+} from '../utils/homilyFeed.js'
 
 export interface FeedResponse {
   status: number
