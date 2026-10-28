@@ -1059,6 +1059,108 @@ select {
   font-size: 1.05rem;
 }
 
+.homily-player {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.homily-frame {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: #141210;
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease;
+}
+
+.homily-frame iframe,
+.homily-poster,
+.homily-poster img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.homily-poster {
+  padding: 0;
+  cursor: pointer;
+  background: #141210;
+}
+
+.homily-poster img {
+  object-fit: cover;
+}
+
+.homily-frame:has(.homily-poster:hover),
+.homily-frame:has(.homily-poster:focus-visible) {
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+}
+
+.homily-poster:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.homily-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  width: 4.25rem;
+  height: 4.25rem;
+  place-items: center;
+  padding-left: 3px;
+  border-radius: 50%;
+  color: var(--on-accent);
+  background: var(--accent);
+  box-shadow: 0 10px 24px color-mix(in srgb, var(--accent) 35%, transparent);
+  font-size: 1.05rem;
+  transform: translate(-50%, -50%);
+  transition: transform 160ms ease;
+}
+
+.homily-poster:hover .homily-play,
+.homily-poster:focus-visible .homily-play {
+  transform: translate(-50%, -50%) scale(1.06);
+}
+
+.homily-caption {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.homily-note,
+.homily-status {
+  margin: 0;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 0.9rem;
+  text-align: center;
+  font-size: 0.88rem;
+}
+
+.homily-note,
+.homily-status {
+  color: var(--muted);
+  background: var(--surface-muted);
+}
+
+.homily-status.is-error {
+  color: var(--danger);
+  background: var(--danger-soft);
+}
+
 .ai-panel {
   display: flex;
   flex-direction: column;

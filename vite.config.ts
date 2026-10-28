@@ -4,6 +4,7 @@ import vue from '@vitejs/plugin-vue'
 import tailwindcss from '@tailwindcss/vite'
 import { VitePWA } from 'vite-plugin-pwa'
 import { resolve } from 'path'
+import { homilyVideoDevApi } from './src/server/homilyDevApi'
 
 interface SaintsQuery {
   dia: string | null
@@ -82,6 +83,7 @@ export default defineConfig({
   plugins: [
     vue(),
     tailwindcss(),
+    homilyVideoDevApi(),
     saintsDevApi(),
     VitePWA({
       registerType: 'autoUpdate',
