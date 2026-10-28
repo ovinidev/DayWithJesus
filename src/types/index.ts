@@ -67,10 +67,17 @@ export interface SaintOfDay {
   historia: string | null
   reflexao: string | null
   oracao: string | null
+  wikipediaUrl: string | null
+  nascimento: string | null
+  morte: string | null
+  padroeiro: string | null
+  grau: string | null
 }
 
 export interface SaintOfDayResponse {
   results: SaintOfDay[]
+  liturgia: string
+  completo: boolean
 }
 
 interface LiturgyReadingResponse {

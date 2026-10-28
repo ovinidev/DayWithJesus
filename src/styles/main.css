@@ -1546,9 +1546,47 @@ select {
 .saint-image {
   display: block;
   width: 100%;
-  max-height: 20rem;
-  object-fit: cover;
+  max-height: 22rem;
+  object-fit: contain;
+  object-position: center top;
   background: var(--surface-muted);
+}
+
+.saints-list {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.saints-date {
+  margin: 0;
+}
+
+.saint-text-section h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.saint-facts p + p {
+  margin-top: 0.35rem;
+}
+
+.saint-source {
+  margin: 0;
+  padding: 0 1.05rem 1rem;
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+.saint-source a {
+  color: var(--accent-text);
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.saint-source a:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 .saint-profile-heading,
